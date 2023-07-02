@@ -25,7 +25,7 @@
       <span class="top-banner-title-font">Test results</span>
       <button id="button" class="button">Switch Retro Theme</button> <!-- button -->
       <br/>
-      <span class="top-banner-font-1">1 suite</span>
+      <span class="top-banner-font-1">1 suite, 2 failed tests</span>
     </div> <!-- top-banner-root -->
     <div class="navigator-root">
       <div class="navigator-suite-header">
@@ -39,7 +39,7 @@
         <div class="rounded-window">
           <div class="suite-header light-rounded-window-top">
             <a href="#" panel-name="suite-Default_suite" class="navigator-link">
-              <span class="suite-name border-passed">Default suite</span>
+              <span class="suite-name border-failed">Default suite</span>
             </a> <!-- navigator-link -->
           </div> <!-- suite-header light-rounded-window-top -->
           <div class="navigator-suite-content">
@@ -50,7 +50,7 @@
               <ul>
                 <li>
                   <a href="#" panel-name="test-xml-Default_suite" class="navigator-link ">
-                    <span>C:\Users\penum\AppData\Local\Temp\testng-eclipse-105942371\testng-customsuite.xml</span>
+                    <span>C:\Users\penum\AppData\Local\Temp\testng-eclipse-955826387\testng-customsuite.xml</span>
                   </a> <!-- navigator-link  -->
                 </li>
                 <li>
@@ -92,7 +92,26 @@
               <div class="suite-section-content">
                 <ul>
                   <li>
-                    <span class="method-stats">8 methods,   8 passed</span>
+                    <span class="method-stats">12 methods, 2 failed,   10 passed</span>
+                  </li>
+                  <li>
+                    <span class="method-list-title failed">Failed methods</span>
+                    <span class="show-or-hide-methods failed">
+                      <a href="#" panel-name="suite-Default_suite" class="hide-methods failed suite-Default_suite"> (hide)</a> <!-- hide-methods failed suite-Default_suite -->
+                      <a href="#" panel-name="suite-Default_suite" class="show-methods failed suite-Default_suite"> (show)</a> <!-- show-methods failed suite-Default_suite -->
+                    </span>
+                    <div class="method-list-content failed suite-Default_suite">
+                      <span>
+                        <img src="failed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Default_suite" title="test.PayRollServiceImplTest" class="method navigator-link" hash-for-method="testCalculateNetPay">testCalculateNetPay</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="failed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Default_suite" title="test.PayRollServiceImplTest" class="method navigator-link" hash-for-method="testCalculateTotalPay">testCalculateTotalPay</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                    </div> <!-- method-list-content failed suite-Default_suite -->
                   </li>
                   <li>
                     <span class="method-list-title passed">Passed methods</span>
@@ -103,42 +122,52 @@
                     <div class="method-list-content passed suite-Default_suite">
                       <span>
                         <img src="passed.png" width="3%"/>
-                        <a href="#" panel-name="suite-Default_suite" title="test.EmployeeAttendanceServiceTest" class="method navigator-link" hash-for-method="testCalculateAttendance">testCalculateAttendance</a> <!-- method navigator-link -->
+                        <a href="#" panel-name="suite-Default_suite" title="test.PayRollServiceImplTest" class="method navigator-link" hash-for-method="testCalculateAdditions">testCalculateAdditions</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                       <span>
                         <img src="passed.png" width="3%"/>
-                        <a href="#" panel-name="suite-Default_suite" title="test.EmployeeAttendanceServiceTest" class="method navigator-link" hash-for-method="testConvertToDateTime_WhenCellContainsDateTime_ReturnsDateTimeValue">testConvertToDateTime_WhenCellContainsDateTime_ReturnsDateTimeValue</a> <!-- method navigator-link -->
+                        <a href="#" panel-name="suite-Default_suite" title="test.PayRollServiceImplTest" class="method navigator-link" hash-for-method="testCalculateBasicPay">testCalculateBasicPay</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                       <span>
                         <img src="passed.png" width="3%"/>
-                        <a href="#" panel-name="suite-Default_suite" title="test.EmployeeAttendanceServiceTest" class="method navigator-link" hash-for-method="testConvertToDateTime_WhenCellDoesNotContainDateTime_ReturnsNull">testConvertToDateTime_WhenCellDoesNotContainDateTime_ReturnsNull</a> <!-- method navigator-link -->
+                        <a href="#" panel-name="suite-Default_suite" title="test.PayRollServiceImplTest" class="method navigator-link" hash-for-method="testCalculateDA">testCalculateDA</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                       <span>
                         <img src="passed.png" width="3%"/>
-                        <a href="#" panel-name="suite-Default_suite" title="test.EmployeeAttendanceServiceTest" class="method navigator-link" hash-for-method="testGetAvgPunchInAndOut_WithNoPunchData_ReturnsEmptyList">testGetAvgPunchInAndOut_WithNoPunchData_ReturnsEmptyList</a> <!-- method navigator-link -->
+                        <a href="#" panel-name="suite-Default_suite" title="test.PayRollServiceImplTest" class="method navigator-link" hash-for-method="testCalculateDeductions">testCalculateDeductions</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                       <span>
                         <img src="passed.png" width="3%"/>
-                        <a href="#" panel-name="suite-Default_suite" title="test.EmployeeAttendanceServiceTest" class="method navigator-link" hash-for-method="testGetAvgPunchInAndOut_WithValidData_ReturnsAveragePunchInAndOutTimes">testGetAvgPunchInAndOut_WithValidData_ReturnsAveragePunchInAndOutTimes</a> <!-- method navigator-link -->
+                        <a href="#" panel-name="suite-Default_suite" title="test.PayRollServiceImplTest" class="method navigator-link" hash-for-method="testCalculateESI">testCalculateESI</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                       <span>
                         <img src="passed.png" width="3%"/>
-                        <a href="#" panel-name="suite-Default_suite" title="test.EmployeeAttendanceServiceTest" class="method navigator-link" hash-for-method="testGetYears">testGetYears</a> <!-- method navigator-link -->
+                        <a href="#" panel-name="suite-Default_suite" title="test.PayRollServiceImplTest" class="method navigator-link" hash-for-method="testCalculateGratuity">testCalculateGratuity</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                       <span>
                         <img src="passed.png" width="3%"/>
-                        <a href="#" panel-name="suite-Default_suite" title="test.EmployeeAttendanceServiceTest" class="method navigator-link" hash-for-method="testGetYesterdayPunchData">testGetYesterdayPunchData</a> <!-- method navigator-link -->
+                        <a href="#" panel-name="suite-Default_suite" title="test.PayRollServiceImplTest" class="method navigator-link" hash-for-method="testCalculateHRA">testCalculateHRA</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                       <span>
                         <img src="passed.png" width="3%"/>
-                        <a href="#" panel-name="suite-Default_suite" title="test.EmployeeAttendanceServiceTest" class="method navigator-link" hash-for-method="testInsertEmployeeAttendance">testInsertEmployeeAttendance</a> <!-- method navigator-link -->
+                        <a href="#" panel-name="suite-Default_suite" title="test.PayRollServiceImplTest" class="method navigator-link" hash-for-method="testCalculatePF">testCalculatePF</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Default_suite" title="test.PayRollServiceImplTest" class="method navigator-link" hash-for-method="testCalculateTA">testCalculateTA</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Default_suite" title="test.PayRollServiceImplTest" class="method navigator-link" hash-for-method="testCalculateTax">testCalculateTax</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                     </div> <!-- method-list-content passed suite-Default_suite -->
@@ -153,66 +182,170 @@
     <div class="wrapper">
       <div class="main-panel-root">
         <div panel-name="suite-Default_suite" class="panel Default_suite">
-          <div class="suite-Default_suite-class-passed">
+          <div class="suite-Default_suite-class-failed">
             <div class="main-panel-header rounded-window-top">
-              <img src="passed.png"/>
-              <span class="class-name">test.EmployeeAttendanceServiceTest</span>
+              <img src="failed.png"/>
+              <span class="class-name">test.PayRollServiceImplTest</span>
             </div> <!-- main-panel-header rounded-window-top -->
             <div class="main-panel-content rounded-window-bottom">
               <div class="method">
                 <div class="method-content">
-                  <a name="testCalculateAttendance">
-                  </a> <!-- testCalculateAttendance -->
-                  <span class="method-name">testCalculateAttendance</span>
+                  <a name="testCalculateNetPay">
+                  </a> <!-- testCalculateNetPay -->
+                  <span class="method-name">testCalculateNetPay</span>
+                  <div class="stack-trace">java.lang.AssertionError: expected [70616.66666666667] but found [75116.66666666667]
+	at org.testng.Assert.fail(Assert.java:111)
+	at org.testng.Assert.failNotEquals(Assert.java:1578)
+	at org.testng.Assert.assertEquals(Assert.java:728)
+	at org.testng.Assert.assertEquals(Assert.java:775)
+	at test.PayRollServiceImplTest.testCalculateNetPay(PayRollServiceImplTest.java:118)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:664)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:227)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:957)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:200)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:848)
+	at org.testng.TestRunner.run(TestRunner.java:621)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:443)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:336)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1280)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1200)
+	at org.testng.TestNG.runSuites(TestNG.java:1114)
+	at org.testng.TestNG.run(TestNG.java:1082)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+
+</div> <!-- stack-trace -->
                 </div> <!-- method-content -->
               </div> <!-- method -->
               <div class="method">
                 <div class="method-content">
-                  <a name="testConvertToDateTime_WhenCellContainsDateTime_ReturnsDateTimeValue">
-                  </a> <!-- testConvertToDateTime_WhenCellContainsDateTime_ReturnsDateTimeValue -->
-                  <span class="method-name">testConvertToDateTime_WhenCellContainsDateTime_ReturnsDateTimeValue</span>
+                  <a name="testCalculateTotalPay">
+                  </a> <!-- testCalculateTotalPay -->
+                  <span class="method-name">testCalculateTotalPay</span>
+                  <div class="stack-trace">java.lang.AssertionError: expected [45000.0] but found [40500.0]
+	at org.testng.Assert.fail(Assert.java:111)
+	at org.testng.Assert.failNotEquals(Assert.java:1578)
+	at org.testng.Assert.assertEquals(Assert.java:728)
+	at org.testng.Assert.assertEquals(Assert.java:775)
+	at test.PayRollServiceImplTest.testCalculateTotalPay(PayRollServiceImplTest.java:105)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:664)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:227)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:957)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:200)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:848)
+	at org.testng.TestRunner.run(TestRunner.java:621)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:443)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:336)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1280)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1200)
+	at org.testng.TestNG.runSuites(TestNG.java:1114)
+	at org.testng.TestNG.run(TestNG.java:1082)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+
+</div> <!-- stack-trace -->
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- suite-Default_suite-class-failed -->
+          <div class="suite-Default_suite-class-passed">
+            <div class="main-panel-header rounded-window-top">
+              <img src="passed.png"/>
+              <span class="class-name">test.PayRollServiceImplTest</span>
+            </div> <!-- main-panel-header rounded-window-top -->
+            <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="testCalculateAdditions">
+                  </a> <!-- testCalculateAdditions -->
+                  <span class="method-name">testCalculateAdditions</span>
                 </div> <!-- method-content -->
               </div> <!-- method -->
               <div class="method">
                 <div class="method-content">
-                  <a name="testConvertToDateTime_WhenCellDoesNotContainDateTime_ReturnsNull">
-                  </a> <!-- testConvertToDateTime_WhenCellDoesNotContainDateTime_ReturnsNull -->
-                  <span class="method-name">testConvertToDateTime_WhenCellDoesNotContainDateTime_ReturnsNull</span>
+                  <a name="testCalculateBasicPay">
+                  </a> <!-- testCalculateBasicPay -->
+                  <span class="method-name">testCalculateBasicPay</span>
                 </div> <!-- method-content -->
               </div> <!-- method -->
               <div class="method">
                 <div class="method-content">
-                  <a name="testGetAvgPunchInAndOut_WithNoPunchData_ReturnsEmptyList">
-                  </a> <!-- testGetAvgPunchInAndOut_WithNoPunchData_ReturnsEmptyList -->
-                  <span class="method-name">testGetAvgPunchInAndOut_WithNoPunchData_ReturnsEmptyList</span>
+                  <a name="testCalculateDA">
+                  </a> <!-- testCalculateDA -->
+                  <span class="method-name">testCalculateDA</span>
                 </div> <!-- method-content -->
               </div> <!-- method -->
               <div class="method">
                 <div class="method-content">
-                  <a name="testGetAvgPunchInAndOut_WithValidData_ReturnsAveragePunchInAndOutTimes">
-                  </a> <!-- testGetAvgPunchInAndOut_WithValidData_ReturnsAveragePunchInAndOutTimes -->
-                  <span class="method-name">testGetAvgPunchInAndOut_WithValidData_ReturnsAveragePunchInAndOutTimes</span>
+                  <a name="testCalculateDeductions">
+                  </a> <!-- testCalculateDeductions -->
+                  <span class="method-name">testCalculateDeductions</span>
                 </div> <!-- method-content -->
               </div> <!-- method -->
               <div class="method">
                 <div class="method-content">
-                  <a name="testGetYears">
-                  </a> <!-- testGetYears -->
-                  <span class="method-name">testGetYears</span>
+                  <a name="testCalculateESI">
+                  </a> <!-- testCalculateESI -->
+                  <span class="method-name">testCalculateESI</span>
                 </div> <!-- method-content -->
               </div> <!-- method -->
               <div class="method">
                 <div class="method-content">
-                  <a name="testGetYesterdayPunchData">
-                  </a> <!-- testGetYesterdayPunchData -->
-                  <span class="method-name">testGetYesterdayPunchData</span>
+                  <a name="testCalculateGratuity">
+                  </a> <!-- testCalculateGratuity -->
+                  <span class="method-name">testCalculateGratuity</span>
                 </div> <!-- method-content -->
               </div> <!-- method -->
               <div class="method">
                 <div class="method-content">
-                  <a name="testInsertEmployeeAttendance">
-                  </a> <!-- testInsertEmployeeAttendance -->
-                  <span class="method-name">testInsertEmployeeAttendance</span>
+                  <a name="testCalculateHRA">
+                  </a> <!-- testCalculateHRA -->
+                  <span class="method-name">testCalculateHRA</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="testCalculatePF">
+                  </a> <!-- testCalculatePF -->
+                  <span class="method-name">testCalculatePF</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="testCalculateTA">
+                  </a> <!-- testCalculateTA -->
+                  <span class="method-name">testCalculateTA</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="testCalculateTax">
+                  </a> <!-- testCalculateTax -->
+                  <span class="method-name">testCalculateTax</span>
                 </div> <!-- method-content -->
               </div> <!-- method -->
             </div> <!-- main-panel-content rounded-window-bottom -->
@@ -220,7 +353,7 @@
         </div> <!-- panel Default_suite -->
         <div panel-name="test-xml-Default_suite" class="panel">
           <div class="main-panel-header rounded-window-top">
-            <span class="header-content">C:\Users\penum\AppData\Local\Temp\testng-eclipse-105942371\testng-customsuite.xml</span>
+            <span class="header-content">C:\Users\penum\AppData\Local\Temp\testng-eclipse-955826387\testng-customsuite.xml</span>
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <pre>
@@ -229,7 +362,7 @@
 &lt;suite name=&quot;Default suite&quot; guice-stage=&quot;DEVELOPMENT&quot;&gt;
   &lt;test thread-count=&quot;5&quot; name=&quot;Default test&quot; verbose=&quot;2&quot;&gt;
     &lt;classes&gt;
-      &lt;class name=&quot;test.EmployeeAttendanceServiceTest&quot;/&gt;
+      &lt;class name=&quot;test.PayRollServiceImplTest&quot;/&gt;
     &lt;/classes&gt;
   &lt;/test&gt; &lt;!-- Default test --&gt;
 &lt;/suite&gt; &lt;!-- Default suite --&gt;
@@ -269,44 +402,60 @@ data.addColumn('number', 'Number');
 data.addColumn('string', 'Method');
 data.addColumn('string', 'Class');
 data.addColumn('number', 'Time (ms)');
-data.addRows(8);
+data.addRows(12);
 data.setCell(0, 0, 0)
-data.setCell(0, 1, 'testCalculateAttendance')
-data.setCell(0, 2, 'test.EmployeeAttendanceServiceTest')
-data.setCell(0, 3, 44);
+data.setCell(0, 1, 'testCalculateAdditions')
+data.setCell(0, 2, 'test.PayRollServiceImplTest')
+data.setCell(0, 3, 14);
 data.setCell(1, 0, 1)
-data.setCell(1, 1, 'testGetYears')
-data.setCell(1, 2, 'test.EmployeeAttendanceServiceTest')
+data.setCell(1, 1, 'testCalculateNetPay')
+data.setCell(1, 2, 'test.PayRollServiceImplTest')
 data.setCell(1, 3, 13);
 data.setCell(2, 0, 2)
-data.setCell(2, 1, 'testGetYesterdayPunchData')
-data.setCell(2, 2, 'test.EmployeeAttendanceServiceTest')
-data.setCell(2, 3, 10);
+data.setCell(2, 1, 'testCalculateGratuity')
+data.setCell(2, 2, 'test.PayRollServiceImplTest')
+data.setCell(2, 3, 4);
 data.setCell(3, 0, 3)
-data.setCell(3, 1, 'testGetAvgPunchInAndOut_WithNoPunchData_ReturnsEmptyList')
-data.setCell(3, 2, 'test.EmployeeAttendanceServiceTest')
-data.setCell(3, 3, 9);
+data.setCell(3, 1, 'testCalculateESI')
+data.setCell(3, 2, 'test.PayRollServiceImplTest')
+data.setCell(3, 3, 4);
 data.setCell(4, 0, 4)
-data.setCell(4, 1, 'testGetAvgPunchInAndOut_WithValidData_ReturnsAveragePunchInAndOutTimes')
-data.setCell(4, 2, 'test.EmployeeAttendanceServiceTest')
+data.setCell(4, 1, 'testCalculateHRA')
+data.setCell(4, 2, 'test.PayRollServiceImplTest')
 data.setCell(4, 3, 3);
 data.setCell(5, 0, 5)
-data.setCell(5, 1, 'testConvertToDateTime_WhenCellDoesNotContainDateTime_ReturnsNull')
-data.setCell(5, 2, 'test.EmployeeAttendanceServiceTest')
+data.setCell(5, 1, 'testCalculateDeductions')
+data.setCell(5, 2, 'test.PayRollServiceImplTest')
 data.setCell(5, 3, 3);
 data.setCell(6, 0, 6)
-data.setCell(6, 1, 'testInsertEmployeeAttendance')
-data.setCell(6, 2, 'test.EmployeeAttendanceServiceTest')
-data.setCell(6, 3, 2);
+data.setCell(6, 1, 'testCalculatePF')
+data.setCell(6, 2, 'test.PayRollServiceImplTest')
+data.setCell(6, 3, 3);
 data.setCell(7, 0, 7)
-data.setCell(7, 1, 'testConvertToDateTime_WhenCellContainsDateTime_ReturnsDateTimeValue')
-data.setCell(7, 2, 'test.EmployeeAttendanceServiceTest')
+data.setCell(7, 1, 'testCalculateTA')
+data.setCell(7, 2, 'test.PayRollServiceImplTest')
 data.setCell(7, 3, 2);
+data.setCell(8, 0, 8)
+data.setCell(8, 1, 'testCalculateBasicPay')
+data.setCell(8, 2, 'test.PayRollServiceImplTest')
+data.setCell(8, 3, 2);
+data.setCell(9, 0, 9)
+data.setCell(9, 1, 'testCalculateDA')
+data.setCell(9, 2, 'test.PayRollServiceImplTest')
+data.setCell(9, 3, 2);
+data.setCell(10, 0, 10)
+data.setCell(10, 1, 'testCalculateTax')
+data.setCell(10, 2, 'test.PayRollServiceImplTest')
+data.setCell(10, 3, 2);
+data.setCell(11, 0, 11)
+data.setCell(11, 1, 'testCalculateTotalPay')
+data.setCell(11, 2, 'test.PayRollServiceImplTest')
+data.setCell(11, 3, 2);
 window.suiteTableData['Default_suite']= { tableData: data, tableDiv: 'times-div-Default_suite'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 86 ms</span>
+              <span class="suite-total-time">Total running time: 54 ms</span>
               <div id="times-div-Default_suite">
               </div> <!-- times-div-Default_suite -->
             </div> <!-- times-div -->
@@ -332,70 +481,62 @@ return data;
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <div class="chronological-class">
-              <div class="chronological-class-name">test.EmployeeAttendanceServiceTest</div> <!-- chronological-class-name -->
-              <div class="configuration-method before">
+              <div class="chronological-class-name">test.PayRollServiceImplTest</div> <!-- chronological-class-name -->
+              <div class="configuration-class before">
                 <span class="method-name">setUp</span>
                 <span class="method-start">0 ms</span>
-              </div> <!-- configuration-method before -->
+              </div> <!-- configuration-class before -->
               <div class="test-method">
-                <span class="method-name">testCalculateAttendance</span>
-                <span class="method-start">846 ms</span>
+                <span class="method-name">testCalculateAdditions</span>
+                <span class="method-start">46 ms</span>
               </div> <!-- test-method -->
-              <div class="configuration-method before">
-                <span class="method-name">setUp</span>
-                <span class="method-start">894 ms</span>
-              </div> <!-- configuration-method before -->
               <div class="test-method">
-                <span class="method-name">testConvertToDateTime_WhenCellContainsDateTime_ReturnsDateTimeValue</span>
-                <span class="method-start">902 ms</span>
+                <span class="method-name">testCalculateBasicPay</span>
+                <span class="method-start">66 ms</span>
               </div> <!-- test-method -->
-              <div class="configuration-method before">
-                <span class="method-name">setUp</span>
-                <span class="method-start">906 ms</span>
-              </div> <!-- configuration-method before -->
               <div class="test-method">
-                <span class="method-name">testConvertToDateTime_WhenCellDoesNotContainDateTime_ReturnsNull</span>
-                <span class="method-start">907 ms</span>
+                <span class="method-name">testCalculateDA</span>
+                <span class="method-start">72 ms</span>
               </div> <!-- test-method -->
-              <div class="configuration-method before">
-                <span class="method-name">setUp</span>
-                <span class="method-start">914 ms</span>
-              </div> <!-- configuration-method before -->
               <div class="test-method">
-                <span class="method-name">testGetAvgPunchInAndOut_WithNoPunchData_ReturnsEmptyList</span>
-                <span class="method-start">915 ms</span>
+                <span class="method-name">testCalculateDeductions</span>
+                <span class="method-start">76 ms</span>
               </div> <!-- test-method -->
-              <div class="configuration-method before">
-                <span class="method-name">setUp</span>
-                <span class="method-start">926 ms</span>
-              </div> <!-- configuration-method before -->
               <div class="test-method">
-                <span class="method-name">testGetAvgPunchInAndOut_WithValidData_ReturnsAveragePunchInAndOutTimes</span>
-                <span class="method-start">927 ms</span>
+                <span class="method-name">testCalculateESI</span>
+                <span class="method-start">81 ms</span>
               </div> <!-- test-method -->
-              <div class="configuration-method before">
-                <span class="method-name">setUp</span>
-                <span class="method-start">933 ms</span>
-              </div> <!-- configuration-method before -->
               <div class="test-method">
-                <span class="method-name">testGetYears</span>
-                <span class="method-start">935 ms</span>
+                <span class="method-name">testCalculateGratuity</span>
+                <span class="method-start">87 ms</span>
               </div> <!-- test-method -->
-              <div class="configuration-method before">
-                <span class="method-name">setUp</span>
-                <span class="method-start">951 ms</span>
-              </div> <!-- configuration-method before -->
               <div class="test-method">
-                <span class="method-name">testGetYesterdayPunchData</span>
-                <span class="method-start">952 ms</span>
+                <span class="method-name">testCalculateHRA</span>
+                <span class="method-start">93 ms</span>
               </div> <!-- test-method -->
-              <div class="configuration-method before">
-                <span class="method-name">setUp</span>
-                <span class="method-start">964 ms</span>
-              </div> <!-- configuration-method before -->
               <div class="test-method">
-                <span class="method-name">testInsertEmployeeAttendance</span>
-                <span class="method-start">966 ms</span>
+                <img src="failed.png">
+                </img>
+                <span class="method-name">testCalculateNetPay</span>
+                <span class="method-start">98 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">testCalculatePF</span>
+                <span class="method-start">114 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">testCalculateTA</span>
+                <span class="method-start">119 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">testCalculateTax</span>
+                <span class="method-start">123 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <img src="failed.png">
+                </img>
+                <span class="method-name">testCalculateTotalPay</span>
+                <span class="method-start">129 ms</span>
               </div> <!-- test-method -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->

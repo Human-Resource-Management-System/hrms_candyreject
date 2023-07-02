@@ -1,77 +1,145 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="0" total="8" passed="8" failed="0" skipped="0">
+<testng-results ignored="0" total="12" passed="10" failed="2" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2023-07-02T12:08:25 IST" name="Default suite" finished-at="2023-07-02T12:08:26 IST" duration-ms="1015">
+  <suite started-at="2023-07-02T19:24:10 IST" name="Default suite" finished-at="2023-07-02T19:24:10 IST" duration-ms="165">
     <groups>
     </groups>
-    <test started-at="2023-07-02T12:08:25 IST" name="Default test" finished-at="2023-07-02T12:08:26 IST" duration-ms="1015">
-      <class name="test.EmployeeAttendanceServiceTest">
-        <test-method is-config="true" signature="setUp()[pri:0, instance:test.EmployeeAttendanceServiceTest@4b20ca2b]" started-at="2023-07-02T12:08:25 IST" name="setUp" finished-at="2023-07-02T12:08:26 IST" duration-ms="844" status="PASS">
+    <test started-at="2023-07-02T19:24:10 IST" name="Default test" finished-at="2023-07-02T19:24:10 IST" duration-ms="165">
+      <class name="test.PayRollServiceImplTest">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:test.PayRollServiceImplTest@65b3a85a]" started-at="2023-07-02T19:24:10 IST" name="setUp" finished-at="2023-07-02T19:24:10 IST" duration-ms="27" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="testCalculateAttendance()[pri:0, instance:test.EmployeeAttendanceServiceTest@4b20ca2b]" started-at="2023-07-02T12:08:26 IST" name="testCalculateAttendance" finished-at="2023-07-02T12:08:26 IST" duration-ms="44" status="PASS">
+        <test-method signature="testCalculateAdditions()[pri:0, instance:test.PayRollServiceImplTest@65b3a85a]" started-at="2023-07-02T19:24:10 IST" name="testCalculateAdditions" finished-at="2023-07-02T19:24:10 IST" duration-ms="14" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- testCalculateAttendance -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:test.EmployeeAttendanceServiceTest@4b20ca2b]" started-at="2023-07-02T12:08:26 IST" name="setUp" finished-at="2023-07-02T12:08:26 IST" duration-ms="8" status="PASS">
+        </test-method> <!-- testCalculateAdditions -->
+        <test-method signature="testCalculateBasicPay()[pri:0, instance:test.PayRollServiceImplTest@65b3a85a]" started-at="2023-07-02T19:24:10 IST" name="testCalculateBasicPay" finished-at="2023-07-02T19:24:10 IST" duration-ms="2" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method signature="testConvertToDateTime_WhenCellContainsDateTime_ReturnsDateTimeValue()[pri:0, instance:test.EmployeeAttendanceServiceTest@4b20ca2b]" started-at="2023-07-02T12:08:26 IST" name="testConvertToDateTime_WhenCellContainsDateTime_ReturnsDateTimeValue" finished-at="2023-07-02T12:08:26 IST" duration-ms="2" status="PASS">
+        </test-method> <!-- testCalculateBasicPay -->
+        <test-method signature="testCalculateDA()[pri:0, instance:test.PayRollServiceImplTest@65b3a85a]" started-at="2023-07-02T19:24:10 IST" name="testCalculateDA" finished-at="2023-07-02T19:24:10 IST" duration-ms="2" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- testConvertToDateTime_WhenCellContainsDateTime_ReturnsDateTimeValue -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:test.EmployeeAttendanceServiceTest@4b20ca2b]" started-at="2023-07-02T12:08:26 IST" name="setUp" finished-at="2023-07-02T12:08:26 IST" duration-ms="1" status="PASS">
+        </test-method> <!-- testCalculateDA -->
+        <test-method signature="testCalculateDeductions()[pri:0, instance:test.PayRollServiceImplTest@65b3a85a]" started-at="2023-07-02T19:24:10 IST" name="testCalculateDeductions" finished-at="2023-07-02T19:24:10 IST" duration-ms="3" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method signature="testConvertToDateTime_WhenCellDoesNotContainDateTime_ReturnsNull()[pri:0, instance:test.EmployeeAttendanceServiceTest@4b20ca2b]" started-at="2023-07-02T12:08:26 IST" name="testConvertToDateTime_WhenCellDoesNotContainDateTime_ReturnsNull" finished-at="2023-07-02T12:08:26 IST" duration-ms="3" status="PASS">
+        </test-method> <!-- testCalculateDeductions -->
+        <test-method signature="testCalculateESI()[pri:0, instance:test.PayRollServiceImplTest@65b3a85a]" started-at="2023-07-02T19:24:10 IST" name="testCalculateESI" finished-at="2023-07-02T19:24:10 IST" duration-ms="4" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- testConvertToDateTime_WhenCellDoesNotContainDateTime_ReturnsNull -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:test.EmployeeAttendanceServiceTest@4b20ca2b]" started-at="2023-07-02T12:08:26 IST" name="setUp" finished-at="2023-07-02T12:08:26 IST" duration-ms="1" status="PASS">
+        </test-method> <!-- testCalculateESI -->
+        <test-method signature="testCalculateGratuity()[pri:0, instance:test.PayRollServiceImplTest@65b3a85a]" started-at="2023-07-02T19:24:10 IST" name="testCalculateGratuity" finished-at="2023-07-02T19:24:10 IST" duration-ms="4" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method signature="testGetAvgPunchInAndOut_WithNoPunchData_ReturnsEmptyList()[pri:0, instance:test.EmployeeAttendanceServiceTest@4b20ca2b]" started-at="2023-07-02T12:08:26 IST" name="testGetAvgPunchInAndOut_WithNoPunchData_ReturnsEmptyList" finished-at="2023-07-02T12:08:26 IST" duration-ms="9" status="PASS">
+        </test-method> <!-- testCalculateGratuity -->
+        <test-method signature="testCalculateHRA()[pri:0, instance:test.PayRollServiceImplTest@65b3a85a]" started-at="2023-07-02T19:24:10 IST" name="testCalculateHRA" finished-at="2023-07-02T19:24:10 IST" duration-ms="3" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- testGetAvgPunchInAndOut_WithNoPunchData_ReturnsEmptyList -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:test.EmployeeAttendanceServiceTest@4b20ca2b]" started-at="2023-07-02T12:08:26 IST" name="setUp" finished-at="2023-07-02T12:08:26 IST" duration-ms="1" status="PASS">
+        </test-method> <!-- testCalculateHRA -->
+        <test-method signature="testCalculateNetPay()[pri:0, instance:test.PayRollServiceImplTest@65b3a85a]" started-at="2023-07-02T19:24:10 IST" name="testCalculateNetPay" finished-at="2023-07-02T19:24:10 IST" duration-ms="13" status="FAIL">
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[expected [70616.66666666667] but found [75116.66666666667]]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: expected [70616.66666666667] but found [75116.66666666667]
+at org.testng.Assert.fail(Assert.java:111)
+at org.testng.Assert.failNotEquals(Assert.java:1578)
+at org.testng.Assert.assertEquals(Assert.java:728)
+at org.testng.Assert.assertEquals(Assert.java:775)
+at test.PayRollServiceImplTest.testCalculateNetPay(PayRollServiceImplTest.java:118)
+at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:664)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:227)
+at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)
+at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:957)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:200)
+at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
+at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
+at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+at org.testng.TestRunner.privateRun(TestRunner.java:848)
+at org.testng.TestRunner.run(TestRunner.java:621)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:443)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)
+at org.testng.SuiteRunner.run(SuiteRunner.java:336)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1280)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1200)
+at org.testng.TestNG.runSuites(TestNG.java:1114)
+at org.testng.TestNG.run(TestNG.java:1082)
+at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method signature="testGetAvgPunchInAndOut_WithValidData_ReturnsAveragePunchInAndOutTimes()[pri:0, instance:test.EmployeeAttendanceServiceTest@4b20ca2b]" started-at="2023-07-02T12:08:26 IST" name="testGetAvgPunchInAndOut_WithValidData_ReturnsAveragePunchInAndOutTimes" finished-at="2023-07-02T12:08:26 IST" duration-ms="3" status="PASS">
+        </test-method> <!-- testCalculateNetPay -->
+        <test-method signature="testCalculatePF()[pri:0, instance:test.PayRollServiceImplTest@65b3a85a]" started-at="2023-07-02T19:24:10 IST" name="testCalculatePF" finished-at="2023-07-02T19:24:10 IST" duration-ms="3" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- testGetAvgPunchInAndOut_WithValidData_ReturnsAveragePunchInAndOutTimes -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:test.EmployeeAttendanceServiceTest@4b20ca2b]" started-at="2023-07-02T12:08:26 IST" name="setUp" finished-at="2023-07-02T12:08:26 IST" duration-ms="2" status="PASS">
+        </test-method> <!-- testCalculatePF -->
+        <test-method signature="testCalculateTA()[pri:0, instance:test.PayRollServiceImplTest@65b3a85a]" started-at="2023-07-02T19:24:10 IST" name="testCalculateTA" finished-at="2023-07-02T19:24:10 IST" duration-ms="2" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method signature="testGetYears()[pri:0, instance:test.EmployeeAttendanceServiceTest@4b20ca2b]" started-at="2023-07-02T12:08:26 IST" name="testGetYears" finished-at="2023-07-02T12:08:26 IST" duration-ms="13" status="PASS">
+        </test-method> <!-- testCalculateTA -->
+        <test-method signature="testCalculateTax()[pri:0, instance:test.PayRollServiceImplTest@65b3a85a]" started-at="2023-07-02T19:24:10 IST" name="testCalculateTax" finished-at="2023-07-02T19:24:10 IST" duration-ms="2" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- testGetYears -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:test.EmployeeAttendanceServiceTest@4b20ca2b]" started-at="2023-07-02T12:08:26 IST" name="setUp" finished-at="2023-07-02T12:08:26 IST" duration-ms="1" status="PASS">
+        </test-method> <!-- testCalculateTax -->
+        <test-method signature="testCalculateTotalPay()[pri:0, instance:test.PayRollServiceImplTest@65b3a85a]" started-at="2023-07-02T19:24:10 IST" name="testCalculateTotalPay" finished-at="2023-07-02T19:24:10 IST" duration-ms="2" status="FAIL">
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[expected [45000.0] but found [40500.0]]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: expected [45000.0] but found [40500.0]
+at org.testng.Assert.fail(Assert.java:111)
+at org.testng.Assert.failNotEquals(Assert.java:1578)
+at org.testng.Assert.assertEquals(Assert.java:728)
+at org.testng.Assert.assertEquals(Assert.java:775)
+at test.PayRollServiceImplTest.testCalculateTotalPay(PayRollServiceImplTest.java:105)
+at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:664)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:227)
+at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)
+at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:957)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:200)
+at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
+at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
+at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+at org.testng.TestRunner.privateRun(TestRunner.java:848)
+at org.testng.TestRunner.run(TestRunner.java:621)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:443)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)
+at org.testng.SuiteRunner.run(SuiteRunner.java:336)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1280)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1200)
+at org.testng.TestNG.runSuites(TestNG.java:1114)
+at org.testng.TestNG.run(TestNG.java:1082)
+at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method signature="testGetYesterdayPunchData()[pri:0, instance:test.EmployeeAttendanceServiceTest@4b20ca2b]" started-at="2023-07-02T12:08:26 IST" name="testGetYesterdayPunchData" finished-at="2023-07-02T12:08:26 IST" duration-ms="10" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testGetYesterdayPunchData -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:test.EmployeeAttendanceServiceTest@4b20ca2b]" started-at="2023-07-02T12:08:26 IST" name="setUp" finished-at="2023-07-02T12:08:26 IST" duration-ms="1" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method signature="testInsertEmployeeAttendance()[pri:0, instance:test.EmployeeAttendanceServiceTest@4b20ca2b]" started-at="2023-07-02T12:08:26 IST" name="testInsertEmployeeAttendance" finished-at="2023-07-02T12:08:26 IST" duration-ms="2" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testInsertEmployeeAttendance -->
-      </class> <!-- test.EmployeeAttendanceServiceTest -->
+        </test-method> <!-- testCalculateTotalPay -->
+      </class> <!-- test.PayRollServiceImplTest -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>
