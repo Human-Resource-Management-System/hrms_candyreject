@@ -55,11 +55,11 @@ function toggleAllBoxes() {
 <body>
 <h2 align='center'>Default test</h2><table border='1' align="center">
 <tr>
-<td>Tests passed/Failed/Skipped:</td><td>10/2/0</td>
+<td>Tests passed/Failed/Skipped:</td><td>0/2/0</td>
 </tr><tr>
-<td>Started on:</td><td>Sun Jul 02 19:24:10 IST 2023</td>
+<td>Started on:</td><td>Sun Jul 02 22:41:46 IST 2023</td>
 </tr>
-<tr><td>Total time:</td><td>0 seconds (165 ms)</td>
+<tr><td>Total time:</td><td>0 seconds (891 ms)</td>
 </tr><tr>
 <td>Included groups:</td><td></td>
 </tr><tr>
@@ -76,13 +76,10 @@ function toggleAllBoxes() {
 <td><b>Instance</b></td>
 </tr>
 <tr>
-<td title='test.PayRollServiceImplTest.testCalculateNetPay()'><b>testCalculateNetPay</b><br>Test class: test.PayRollServiceImplTest</td>
-<td><div><pre>java.lang.AssertionError: expected [70616.66666666667] but found [75116.66666666667]
-	at org.testng.Assert.fail(Assert.java:111)
-	at org.testng.Assert.failNotEquals(Assert.java:1578)
-	at org.testng.Assert.assertEquals(Assert.java:728)
-	at org.testng.Assert.assertEquals(Assert.java:775)
-	at test.PayRollServiceImplTest.testCalculateNetPay(PayRollServiceImplTest.java:118)
+<td title='test.InductionControllerTest.testGetEmployeeDetails()'><b>testGetEmployeeDetails</b><br>Test class: test.InductionControllerTest</td>
+<td><div><pre>java.lang.NullPointerException: Cannot invoke &quot;org.springframework.ui.Model.addAttribute(String, Object)&quot; because &quot;model&quot; is null
+	at controllers.InductionController.getEmployeeDetails(InductionController.java:67)
+	at test.InductionControllerTest.testGetEmployeeDetails(InductionControllerTest.java:65)
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
 	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
@@ -109,83 +106,10 @@ function toggleAllBoxes() {
 	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
 	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
 	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
-</pre></div><a href='#' onClick='toggleBox("stack-trace1190566357", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
-<div class='stack-trace' id='stack-trace1190566357'><pre>java.lang.AssertionError: expected [70616.66666666667] but found [75116.66666666667]
-	at org.testng.Assert.fail(Assert.java:111)
-	at org.testng.Assert.failNotEquals(Assert.java:1578)
-	at org.testng.Assert.assertEquals(Assert.java:728)
-	at org.testng.Assert.assertEquals(Assert.java:775)
-	at test.PayRollServiceImplTest.testCalculateNetPay(PayRollServiceImplTest.java:118)
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
-	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
-	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:664)
-	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:227)
-	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)
-	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:957)
-	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:200)
-	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
-	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
-	at org.testng.TestRunner.privateRun(TestRunner.java:848)
-	at org.testng.TestRunner.run(TestRunner.java:621)
-	at org.testng.SuiteRunner.runTest(SuiteRunner.java:443)
-	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)
-	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)
-	at org.testng.SuiteRunner.run(SuiteRunner.java:336)
-	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
-	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
-	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1280)
-	at org.testng.TestNG.runSuitesLocally(TestNG.java:1200)
-	at org.testng.TestNG.runSuites(TestNG.java:1114)
-	at org.testng.TestNG.run(TestNG.java:1082)
-	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
-	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
-	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
-</pre></div></td>
-<td>0</td>
-<td>test.PayRollServiceImplTest@65b3a85a</td></tr>
-<tr>
-<td title='test.PayRollServiceImplTest.testCalculateTotalPay()'><b>testCalculateTotalPay</b><br>Test class: test.PayRollServiceImplTest</td>
-<td><div><pre>java.lang.AssertionError: expected [45000.0] but found [40500.0]
-	at org.testng.Assert.fail(Assert.java:111)
-	at org.testng.Assert.failNotEquals(Assert.java:1578)
-	at org.testng.Assert.assertEquals(Assert.java:728)
-	at org.testng.Assert.assertEquals(Assert.java:775)
-	at test.PayRollServiceImplTest.testCalculateTotalPay(PayRollServiceImplTest.java:105)
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
-	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
-	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:664)
-	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:227)
-	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)
-	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:957)
-	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:200)
-	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
-	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
-	at org.testng.TestRunner.privateRun(TestRunner.java:848)
-	at org.testng.TestRunner.run(TestRunner.java:621)
-	at org.testng.SuiteRunner.runTest(SuiteRunner.java:443)
-	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)
-	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)
-	at org.testng.SuiteRunner.run(SuiteRunner.java:336)
-	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
-	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
-	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1280)
-	at org.testng.TestNG.runSuitesLocally(TestNG.java:1200)
-	at org.testng.TestNG.runSuites(TestNG.java:1114)
-	at org.testng.TestNG.run(TestNG.java:1082)
-	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
-	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
-	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
-</pre></div><a href='#' onClick='toggleBox("stack-trace275056979", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
-<div class='stack-trace' id='stack-trace275056979'><pre>java.lang.AssertionError: expected [45000.0] but found [40500.0]
-	at org.testng.Assert.fail(Assert.java:111)
-	at org.testng.Assert.failNotEquals(Assert.java:1578)
-	at org.testng.Assert.assertEquals(Assert.java:728)
-	at org.testng.Assert.assertEquals(Assert.java:775)
-	at test.PayRollServiceImplTest.testCalculateTotalPay(PayRollServiceImplTest.java:105)
+</pre></div><a href='#' onClick='toggleBox("stack-trace1278196189", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace1278196189'><pre>java.lang.NullPointerException: Cannot invoke &quot;org.springframework.ui.Model.addAttribute(String, Object)&quot; because &quot;model&quot; is null
+	at controllers.InductionController.getEmployeeDetails(InductionController.java:67)
+	at test.InductionControllerTest.testGetEmployeeDetails(InductionControllerTest.java:65)
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
 	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
@@ -214,66 +138,71 @@ function toggleAllBoxes() {
 	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
 </pre></div></td>
 <td>0</td>
-<td>test.PayRollServiceImplTest@65b3a85a</td></tr>
-</table><p>
-<table width='100%' border='1' class='invocation-passed'>
-<tr><td colspan='4' align='center'><b>PASSED TESTS</b></td></tr>
-<tr><td><b>Test method</b></td>
-<td><b>Attribute(s)</b></td>
-<td width="30%"><b>Exception</b></td>
-<td width="10%"><b>Time (seconds)</b></td>
-<td><b>Instance</b></td>
-</tr>
+<td>test.InductionControllerTest@36f48b4</td></tr>
 <tr>
-<td title='test.PayRollServiceImplTest.testCalculateHRA()'><b>testCalculateHRA</b><br>Test class: test.PayRollServiceImplTest</td>
-<td></td>
+<td title='test.InductionControllerTest.testShowEmployees()'><b>testShowEmployees</b><br>Test class: test.InductionControllerTest</td>
+<td><div><pre>java.lang.NullPointerException: Cannot invoke &quot;org.springframework.ui.Model.addAttribute(String, Object)&quot; because &quot;model&quot; is null
+	at controllers.InductionController.showEmployees(InductionController.java:57)
+	at test.InductionControllerTest.testShowEmployees(InductionControllerTest.java:52)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:664)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:227)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:957)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:200)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:848)
+	at org.testng.TestRunner.run(TestRunner.java:621)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:443)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:336)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1280)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1200)
+	at org.testng.TestNG.runSuites(TestNG.java:1114)
+	at org.testng.TestNG.run(TestNG.java:1082)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+</pre></div><a href='#' onClick='toggleBox("stack-trace934223763", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace934223763'><pre>java.lang.NullPointerException: Cannot invoke &quot;org.springframework.ui.Model.addAttribute(String, Object)&quot; because &quot;model&quot; is null
+	at controllers.InductionController.showEmployees(InductionController.java:57)
+	at test.InductionControllerTest.testShowEmployees(InductionControllerTest.java:52)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:664)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:227)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:957)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:200)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:848)
+	at org.testng.TestRunner.run(TestRunner.java:621)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:443)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:336)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1280)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1200)
+	at org.testng.TestNG.runSuites(TestNG.java:1114)
+	at org.testng.TestNG.run(TestNG.java:1082)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+</pre></div></td>
 <td>0</td>
-<td>test.PayRollServiceImplTest@65b3a85a</td></tr>
-<tr>
-<td title='test.PayRollServiceImplTest.testCalculateTA()'><b>testCalculateTA</b><br>Test class: test.PayRollServiceImplTest</td>
-<td></td>
-<td>0</td>
-<td>test.PayRollServiceImplTest@65b3a85a</td></tr>
-<tr>
-<td title='test.PayRollServiceImplTest.testCalculateBasicPay()'><b>testCalculateBasicPay</b><br>Test class: test.PayRollServiceImplTest</td>
-<td></td>
-<td>0</td>
-<td>test.PayRollServiceImplTest@65b3a85a</td></tr>
-<tr>
-<td title='test.PayRollServiceImplTest.testCalculateAdditions()'><b>testCalculateAdditions</b><br>Test class: test.PayRollServiceImplTest</td>
-<td></td>
-<td>0</td>
-<td>test.PayRollServiceImplTest@65b3a85a</td></tr>
-<tr>
-<td title='test.PayRollServiceImplTest.testCalculateDA()'><b>testCalculateDA</b><br>Test class: test.PayRollServiceImplTest</td>
-<td></td>
-<td>0</td>
-<td>test.PayRollServiceImplTest@65b3a85a</td></tr>
-<tr>
-<td title='test.PayRollServiceImplTest.testCalculateGratuity()'><b>testCalculateGratuity</b><br>Test class: test.PayRollServiceImplTest</td>
-<td></td>
-<td>0</td>
-<td>test.PayRollServiceImplTest@65b3a85a</td></tr>
-<tr>
-<td title='test.PayRollServiceImplTest.testCalculateTax()'><b>testCalculateTax</b><br>Test class: test.PayRollServiceImplTest</td>
-<td></td>
-<td>0</td>
-<td>test.PayRollServiceImplTest@65b3a85a</td></tr>
-<tr>
-<td title='test.PayRollServiceImplTest.testCalculateDeductions()'><b>testCalculateDeductions</b><br>Test class: test.PayRollServiceImplTest</td>
-<td></td>
-<td>0</td>
-<td>test.PayRollServiceImplTest@65b3a85a</td></tr>
-<tr>
-<td title='test.PayRollServiceImplTest.testCalculatePF()'><b>testCalculatePF</b><br>Test class: test.PayRollServiceImplTest</td>
-<td></td>
-<td>0</td>
-<td>test.PayRollServiceImplTest@65b3a85a</td></tr>
-<tr>
-<td title='test.PayRollServiceImplTest.testCalculateESI()'><b>testCalculateESI</b><br>Test class: test.PayRollServiceImplTest</td>
-<td></td>
-<td>0</td>
-<td>test.PayRollServiceImplTest@65b3a85a</td></tr>
+<td>test.InductionControllerTest@36f48b4</td></tr>
 </table><p>
 </body>
 </html>

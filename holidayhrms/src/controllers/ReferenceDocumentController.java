@@ -12,7 +12,10 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,19 +27,27 @@ import org.springframework.web.multipart.MultipartFile;
 
 import models.EmployeeRefDocuments;
 import models.input.output.DocumentInputModel;
-import service.ReferenceServiceInterface;
+import service_interfaces.ReferenceServiceInterface;
 
 @Controller
 public class ReferenceDocumentController {
-	@Autowired
-	private ReferenceServiceInterface rs;// service interface
 
-	@Autowired
+	private ReferenceServiceInterface rs;// service interface
 	private EmployeeRefDocuments doc;// Entity model class
+	
+	@Autowired
+	public ReferenceDocumentController(ReferenceServiceInterface rs, EmployeeRefDocuments doc) {
+		this.rs = rs;
+		this.doc = doc;
+	}
+	
+	private final Logger logger = LoggerFactory.getLogger(ReferenceDocumentController.class);
+
 
 	@RequestMapping(value = "/viewDocuments", method = RequestMethod.GET) // To view the list of all documents at admin
 																			// side
 	public String viewDocuments(Model model) {
+		logger.info("Request received to view all documents");
 		List<EmployeeRefDocuments> document = rs.getAllDocuments();
 		model.addAttribute("document", document);
 		return "documentlist";
@@ -45,6 +56,7 @@ public class ReferenceDocumentController {
 	@RequestMapping(value = "/emprefDocuments", method = RequestMethod.GET) // to view documents employside which are
 																			// uploaded by admin
 	public String viewReferenceDocuments(Model model) {
+		logger.info("Request received to view reference documents");
 		List<EmployeeRefDocuments> document = rs.getAllDocuments();
 		model.addAttribute("document", document);
 		return "emprefdoclist";
@@ -52,11 +64,13 @@ public class ReferenceDocumentController {
 
 	@RequestMapping(value = "/addReferenceDocument", method = RequestMethod.GET) // to upload the document by admin
 	public String addReferenceDocument(Model model) {
+		logger.info("Request received to add a reference document");
 		return "UploadReferenceDocument";
 	}
 
 	@RequestMapping(value = "/DocumentSave", method = RequestMethod.POST) // to save the doc
-	public String saveDocument(@ModelAttribute DocumentInputModel dim, Model model, HttpServletRequest req) {
+	public String saveDocument(@ModelAttribute DocumentInputModel dim, Model model, HttpServletRequest req,HttpSession session) {
+		logger.info("Request received to save a document");
 		EmployeeRefDocuments document = new EmployeeRefDocuments();
 		MultipartFile documentData = dim.getDocumentData();
 		String Docname = documentData.getOriginalFilename();// Extract the file name from the MultipartFile
@@ -81,9 +95,9 @@ public class ReferenceDocumentController {
 				fos.write(documentBytes);
 				fos.close();
 
-				System.out.println("File uploaded successfully");
+				int id = (int) session.getAttribute("adminId");
 
-				rs.addReferenceDocument(document);// Add the document to the database
+				rs.addReferenceDocument(document,id);// Add the document to the database
 
 				model.addAttribute("message", "Document uploaded successfully!");// Display success message
 			} catch (IOException e) {
@@ -99,6 +113,7 @@ public class ReferenceDocumentController {
 	@RequestMapping(value = "/OpenDocument", method = RequestMethod.GET) // to open the selected document from the list
 	public void openDocument(@RequestParam("docname") String docname, HttpServletResponse response,
 			HttpServletRequest request) {
+		logger.info("Request received to open a document");
 		// Construct the file path based on the selected docname
 		String filePath = request.getServletContext().getRealPath("/") + "WEB-INF" + File.separator + "views"
 				+ File.separator + "Files" + File.separator + docname;
@@ -128,18 +143,18 @@ public class ReferenceDocumentController {
 				outputStream.close();
 
 			} else {
-				System.out.println("No File exists");
+				logger.warn("File does not exist");
 			}
 		} catch (IOException e) {
 			// Handle the exception
-			e.printStackTrace();
+	        logger.error("Error opening document: {}", e.getMessage());
 		}
 	}
 
 	@RequestMapping(value = "/deleteReferenceDocument", method = RequestMethod.GET) // to delete the document by admin
 	public String deleteReferenceDocument(@RequestParam("docname") String docname, Model model,
 			HttpServletRequest request) {
-		System.out.println("going to delete");
+		logger.info("Request received to delete a reference document");
 		rs.deleteReferenceDocument(docname);
 		return "documentList";
 	}
