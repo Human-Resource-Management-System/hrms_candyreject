@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import DAO_Interfaces.HolidayDAO;
 import models.GradeHoliday;
 import models.Holiday;
+import models.HrmsJobGrade;
 
 @Repository
 public class HolidayDAOImpl implements HolidayDAO {
@@ -81,5 +82,30 @@ public class HolidayDAOImpl implements HolidayDAO {
 		System.out.println("dao count" + count);
 		return count;
 	}
+	
+	@Override
+	public List<HrmsJobGrade> getAllJobGradesInfo(){
+		TypedQuery<HrmsJobGrade> query = entityManager.createQuery("SELECT jg FROM HrmsJobGrade jg",
+				HrmsJobGrade.class);
+		return query.getResultList();
+	}
+	
+	@Override
+	public void saveJobGrade(HrmsJobGrade jobgrade) {
+		entityManager.persist(jobgrade);
+	}
+	
+	@Override
+	public void saveJobGradeHoliday(GradeHoliday holiday) {
+		entityManager.persist(holiday);
+	}
+
+	@Override
+	public void updateJobGradeHoliday(GradeHoliday holiday) {
+		GradeHoliday holidaydata = entityManager.find(GradeHoliday.class, holiday.getJbgr_id());
+		holidaydata.setJbgr_totalnoh(holiday.getJbgr_totalnoh());
+		entityManager.merge(holidaydata);
+	}
+
 
 }

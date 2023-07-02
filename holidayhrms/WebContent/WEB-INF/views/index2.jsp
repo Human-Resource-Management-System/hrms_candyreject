@@ -266,11 +266,12 @@ canvas {
                 <a onclick="applyLeaves()"><i class="ri-file-list-line"></i> Apply Leaves</a>
               </li>
               <li class="item">
+                <a onclick="viewAttendance()"><i class="ri-time-line"></i> Attendance</a>
+              </li>    
+              <li class="item">
                 <a onclick="getPermissions()"><i class="ri-check-double-line"></i> Permissions</a>
               </li>
-              <li class="item">
-                <a onclick="viewAttendance()"><i class="ri-time-line"></i> Attendance</a>
-              </li>             
+                       
             </ul>
           </li>
 

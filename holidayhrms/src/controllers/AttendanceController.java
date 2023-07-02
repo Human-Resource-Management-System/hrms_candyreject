@@ -1,10 +1,8 @@
 package controllers;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
-import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
+import java.util.Date;
 
 import javax.servlet.http.HttpSession;
 
@@ -40,21 +38,16 @@ import service_interfaces.EmployeeAttendanceServiceInterface;
 @Controller
 public class AttendanceController {
 
-	private static final Logger logger = LoggerFactory.getLogger(AttendanceController.class);
-
-	private EmployeeAttendance attendance;
-	private EmployeeAttendanceId attendanceId;
+	private static Logger logger = LoggerFactory.getLogger(AttendanceController.class);
 	private Gson gson;
 	private EmployeeDAO employeeDAO;
 	private EmployeeAttendanceServiceInterface employeeAttendanceService;
 	private EmployeeAttendanceDAO employeeAttendanceDAO;
 
 	@Autowired
-	public AttendanceController(EmployeeAttendance attendance, EmployeeAttendanceId attendanceId, Gson gson,
+	public AttendanceController(Gson gson,
 			EmployeeDAO employeeDAO, EmployeeAttendanceDAO employeeAttendanceDAO,
 			EmployeeAttendanceServiceInterface employeeAttendanceService) {
-		this.attendance = attendance;
-		this.attendanceId = attendanceId;
 		this.gson = gson;
 		this.employeeDAO = employeeDAO;
 		this.employeeAttendanceService = employeeAttendanceService;
@@ -77,13 +70,13 @@ public class AttendanceController {
 			int id = (int) session.getAttribute("employeeId");
 			// Retrieves the employee ID from the session
 
-			logger.info("Accessing /employeeAttendance endpoint for employee ID: {}", id);
+			logger.info("Accessing /employeeAttendance endpoint for employee ID");
 
 			Employee employee = employeeDAO.getEmployee(id);
 			// Retrieves the employee information from the DAO using the employee ID
 
 			if (employee == null) {
-				logger.error("Employee not found for employee ID: {}", id);
+				logger.error("Employee not found for employee ID");
 				return "error";
 			}
 			Date joinDate = employee.getEmplJondate();
@@ -95,7 +88,7 @@ public class AttendanceController {
 			model.addAttribute("years", yearsList);
 			// Adds the yearsList as an attribute named "years" to the model
 
-			logger.info("Employee attendance form loaded successfully for employee ID: {}", id);
+			logger.info("Employee attendance form loaded successfully for employee ID");
 
 			return "employeeAttendance";
 			// Returns the view name "employeeAttendance" to render the employee attendance form
@@ -123,7 +116,7 @@ public class AttendanceController {
 			int id = attendanceRequest.getEmployeeid();
 			// Retrieves the year, month, and employee ID from the attendance request object
 
-			logger.info("Processing attendance data for year: {}, month: {}, employee ID: {}", year, month, id);
+			logger.info("Processing attendance data for year,month,employee ID");
 
 			List<Object[]> results = employeeAttendanceDAO.getPunchInAndPunchOutDataForYearAndMonthAndEmployee(id, year,
 					month);
@@ -131,7 +124,7 @@ public class AttendanceController {
 
 			if (results == null || results.isEmpty()) {
 
-				logger.warn("No attendance data found for year: {}, month: {}, employee ID: {}", year, month, id);
+				logger.warn("No attendance data found for year,month,employee ID");
 
 				// Handle case where no attendance data is found
 				return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No attendance data found.");
@@ -140,7 +133,7 @@ public class AttendanceController {
 			EmployeeRequestResult response = employeeAttendanceService.calculateAttendance(results);
 			// Calls the service method to calculate the attendance based on the retrieved results
 
-			logger.info("Attendance calculated for year: {}, month: {}, employee ID: {}", year, month, id);
+			logger.info("Attendance calculated for year,month,employee ID");
 
 			return ResponseEntity.ok(gson.toJson(response));
 			// Returns a response entity with the calculated attendance result serialized as JSON
@@ -158,16 +151,16 @@ public class AttendanceController {
 			int id = (int) session.getAttribute("employeeId");
 			// Gets the employee ID from the session
 
-			logger.info("Getting punch data for employee ID: {}", id);
+			logger.info("Getting punch data for employee ID");
 			List<AttendanceEvent> punchData = employeeAttendanceService.getYesterdayPunchData(id);
 			// Retrieves yesterday's punch-in and punch-out data for the employee ID
 
 			if (punchData == null || punchData.isEmpty()) {
 				// Handle case where no punch data is found
-				logger.warn("No punch data found for yesterday for employee ID: {}", id);
+				logger.warn("No punch data found for yesterday for employee ID");
 				return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No punch data found for yesterday.");
 			}
-			logger.info("Punch data retrieved for employee ID: {}", id);
+			logger.info("Punch data retrieved for employee ID");
 			return ResponseEntity.status(HttpStatus.OK).body(gson.toJson(punchData));
 			// Returns a response entity with the punch data serialized as JSON
 		} catch (Exception e) {
@@ -181,58 +174,18 @@ public class AttendanceController {
 	@RequestMapping(value = "/uploadAttendance", method = RequestMethod.POST)
 	public ResponseEntity<String> uploadEmployeeAttendance(@RequestParam("file") MultipartFile file) {
 
-		try (Workbook workbook = WorkbookFactory.create(file.getInputStream())) {
-
-			// Get the first sheet from the workbook
-			Sheet sheet = workbook.getSheetAt(0);
-
-			// Create an iterator to iterate over the rows of the sheet
-			Iterator<Row> rowIterator = sheet.iterator();
-
-			rowIterator.next(); // Skip header row
-
-			// iterate over each row
-			while (rowIterator.hasNext()) {
-
-				// get next row
-				Row row = rowIterator.next();
-
-				// Assuming column order: employeeId, punchIn, punchOut, punchSystem
-				// retrieve respective data from the excel
-				Integer employeeId = (int) row.getCell(0).getNumericCellValue();
-				LocalDateTime punchIn = employeeAttendanceService.convertToDateTime(row.getCell(1));
-				LocalDateTime punchOut = employeeAttendanceService.convertToDateTime(row.getCell(2));
-				String punchSystem = row.getCell(3).toString();
-
-				logger.info("Processing attendance record for employee ID: {}", employeeId);
-
-				// set the data to the model
-				attendance.setPunchIn(punchIn);
-				attendance.setPunchOut(punchOut);
-				attendance.setPunchSystem(punchSystem);
-				attendanceId.setEmployeeId(employeeId);
-
-				// generate next index for the record
-				int nextIndex = employeeAttendanceDAO.getNextAttendanceRequestIndex(employeeId);
-				attendanceId.setEmplPIndex(nextIndex);
-				attendance.setAttendanceId(attendanceId);
-
-				// insert the record into database using service
-				employeeAttendanceService.insertEmployeeAttendance(attendance);
-
-				logger.info("Attendance record processed for employee ID: {}", employeeId);
-
-			}
-		} catch (IOException e) {
-			// print the stack trace of IO Exception
-			logger.error("An error occurred while uploading Employee Attendance data", e);
-			String errorMessage = "File Parsing Error";
-			// return 500 error for any internal errors
-			return new ResponseEntity<>(errorMessage, HttpStatus.INTERNAL_SERVER_ERROR);
+		try {
+			logger.info("Processing the Excel File");
+			// process the excel file to extract the data
+			employeeAttendanceService.processExcelFile(file);
+			logger.info("successfully processed the Excel File");
+			return ResponseEntity.ok("success");
 		}
-
-		// on successful completion return 200 status with success message
-		return ResponseEntity.ok("succesfully updated");
+		catch(IOException e) {
+			logger.error("Failed to process the excel file");
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred.");
+		}
+	
 	}
 
 	// gets the list of years starting from the employee join date
@@ -242,14 +195,14 @@ public class AttendanceController {
 			int id = attendanceRequest.getEmployeeid();
 			// Retrieves the employee ID from the attendance request object
 
-			logger.info("Getting years of employee with ID: {}", id);
+			logger.info("Getting years of employee with ID");
 
 			Employee employee = employeeDAO.getEmployee(id);
 			// Retrieves the employee information from the DAO using the employee ID
 
 			if (employee == null) {
 				// Handle case where employee is not found
-				logger.warn("Employee not found with ID: {}", id);
+				logger.warn("Employee not found with ID");
 				return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Employee not found.");
 			}
 
@@ -259,14 +212,14 @@ public class AttendanceController {
 			List<Integer> yearsList = employeeAttendanceService.getYears(joinDate);
 			// Retrieves a list of years based on the employee's join date using the service method
 
-			logger.info("Years of employee retrieved successfully for employee ID: {}", id);
+			logger.info("Years of employee retrieved successfully for employee ID");
 
 			return ResponseEntity.status(HttpStatus.OK).body(gson.toJson(yearsList));
 			// Returns a response entity with the yearsList serialized as JSON and an HTTP status code indicating a
 			// successful request
 		} catch (Exception e) {
 			// Handle any other exceptions that may occur
-			logger.error("An error occurred while getting list of years for an employee", e);
+			logger.error("An error occurred while getting list of years for an employee");
 			String errorMessage = "Internal Server Error";
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorMessage);
 		}
@@ -278,12 +231,12 @@ public class AttendanceController {
 			int id = (int) session.getAttribute("employeeId");
 			// Retrieves the employee ID from the session
 
-			logger.info("Getting average punch in and punch out time for employee with ID: {}", id);
+			logger.info("Getting average punch in and punch out time for employee with ID");
 
 			List<Long> result = employeeAttendanceService.getAvgPunchInAndOut(id);
 			// Retrieves the average punch in and punch out time for the employee ID using the service method
 
-			logger.info("Average punch in and punch out time retrieved successfully for employee ID: {}", id);
+			logger.info("Average punch in and punch out time retrieved successfully for employee ID");
 
 			return ResponseEntity.status(HttpStatus.OK).body(gson.toJson(result));
 			// Returns a response entity with the average punch in and punch out time serialized as JSON and an HTTP

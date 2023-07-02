@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:context="http://www.springframework.org/schema/context" xmlns:mvc="http://www.springframework.org/schema/mvc"
-	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:p="http://www.springframework.org/schema/p"
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:p="http://www.springframework.org/schema/p"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
                            http://www.springframework.org/schema/beans/spring-beans.xsd
                            http://www.springframework.org/schema/mvc
@@ -13,7 +16,8 @@
 
 	<mvc:annotation-driven>
 		<mvc:message-converters>
-			<bean class="org.springframework.http.converter.ByteArrayHttpMessageConverter">
+			<bean
+				class="org.springframework.http.converter.ByteArrayHttpMessageConverter">
 				<property name="supportedMediaTypes">
 					<list>
 						<value>multipart/form-data</value>
@@ -24,12 +28,16 @@
 
 
 	</mvc:annotation-driven>
-	<context:component-scan base-package="controllers" />
+	<context:component-scan
+		base-package="controllers" />
 
 	<mvc:resources mapping="/css/**" location="/WEB-INF/css/" />
-	<mvc:resources mapping="/js/**" location="/WEB-INF/javascriptfiles/" />
-	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
+	<mvc:resources mapping="/js/**"
+		location="/WEB-INF/javascriptfiles/" />
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.JstlView" />
 		<property name="prefix" value="/WEB-INF/views/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
@@ -37,16 +45,19 @@
 	<!-- DataSource configuration -->
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="org.postgresql.Driver" />
-		<property name="url" value="jdbc:postgresql://192.168.110.48:5432/plf_training" />
-		<property name="username" value="plf_training_admin" />
-		<property name="password" value="pff123" />
+		<property name="url" value="jdbc:postgresql://localhost:5432/postgres" />
+		<property name="username" value="postgres" />
+		<property name="password" value="007" />
 	</bean>
 
 	<!-- EntityManager configuration -->
-	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
-		p:persistenceUnitName="myPersistenceUnit" p:dataSource-ref="dataSource">
+	<bean id="entityManagerFactory"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
+		p:persistenceUnitName="myPersistenceUnit"
+		p:dataSource-ref="dataSource">
 		<property name="jpaVendorAdapter">
-			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+			<bean
+				class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
 				<property name="generateDdl" value="true" />
 				<property name="showSql" value="true" />
 			</bean>
@@ -54,7 +65,8 @@
 		<property name="packagesToScan" value="models" />
 		<property name="jpaPropertyMap">
 			<map>
-				<entry key="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
+				<entry key="hibernate.dialect"
+					value="org.hibernate.dialect.PostgreSQLDialect" />
 				<entry key="hibernate.show_sql" value="true" />
 				<!-- Additional Hibernate properties can be added here -->
 			</map>
@@ -63,16 +75,21 @@
 
 
 	<!-- Enable transactional support for EntityManager -->
-	<tx:annotation-driven transaction-manager="jpaTransactionManager" />
+	<tx:annotation-driven
+		transaction-manager="jpaTransactionManager" />
 
 	<!-- EntityManager configuration -->
-	<bean id="entityManager" class="org.springframework.orm.jpa.support.SharedEntityManagerBean">
-		<property name="entityManagerFactory" ref="entityManagerFactory" />
+	<bean id="entityManager"
+		class="org.springframework.orm.jpa.support.SharedEntityManagerBean">
+		<property name="entityManagerFactory"
+			ref="entityManagerFactory" />
 	</bean>
 
 	<!-- Configure the Hibernate transaction manager -->
-	<bean id="jpaTransactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
-		<property name="entityManagerFactory" ref="entityManagerFactory" />
+	<bean id="jpaTransactionManager"
+		class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory"
+			ref="entityManagerFactory" />
 	</bean>
 
 	<!-- Dependency Injection Configuration -->
@@ -86,41 +103,62 @@
 	<bean id="mp" class="org.modelmapper.ModelMapper" />
 	<bean id="idao" class="DAO.InductionDAOImpl" />
 	<bean id="induction" class="models.Induction" />
-	<bean id="docServ" class="service.EmploymentInductionDocumentService" />
+	<bean id="docServ"
+		class="service.EmploymentInductionDocumentService" />
 	<bean id="indServ" class="service.EmploymentInductionService" />
 	<bean id="docDAO" class="DAO.EmploymentInductionDocDAOImpl" />
 	<bean id="document" class="models.EmploymentInductionDocument" />
-	<bean id="employeeLeaveModel" class="models.EmployeeLeaveModel" scope="prototype" />
-	<bean id="leaveRequest" class="models.EmployeeLeaveRequest" autowire="byName" />
-	<bean id="leaveRequestId" class="models.EmployeeLeaveRequestId" autowire="byName" />
+	<bean id="employeeLeaveModel" class="models.EmployeeLeaveModel"
+		scope="prototype" />
+	<bean id="leaveRequest" class="models.EmployeeLeaveRequest"
+		autowire="byName" />
+	<bean id="leaveRequestId" class="models.EmployeeLeaveRequestId"
+		autowire="byName" />
 	<bean id="gson" class="com.google.gson.Gson" autowire="byName" />
-	<bean id="employeeService" class="service.EmployeeLeaveService" autowire="byName" />
-	<bean id="leaveValidation" class="models.LeaveValidationModel" autowire="byName" />
-	<bean id="approvedLeaveModel" class="models.ApprovedLeaveModel" scope="prototype" />
-	<bean id="leaveRequestDAO" class="DAO.EmployeeLeaveRequestDAOImpl" />
-	<bean id="attendance" class="models.EmployeeAttendance" autowire="byName" />
-	<bean id="attendanceEvent" class="models.AttendanceEvent" scope="prototype"></bean>
-	<bean id="attendanceId" class="models.EmployeeAttendanceId" autowire="byName" />
-	<bean id="response" class="models.EmployeeRequestResult" autowire="byName" />
-	<bean id="jobGradeLeavesOutModel" class="models.input.output.JobGradeLeavesOutModel" scope="prototype" />
+	<bean id="employeeService" class="service.EmployeeLeaveService"
+		autowire="byName" />
+	<bean id="leaveValidation" class="models.LeaveValidationModel"
+		autowire="byName" />
+	<bean id="approvedLeaveModel" class="models.ApprovedLeaveModel"
+		scope="prototype" />
+	<bean id="attendance" class="models.EmployeeAttendance"
+		autowire="byName" />
+	<bean id="attendanceEvent" class="models.AttendanceEvent"
+		scope="prototype"></bean>
+	<bean id="attendanceId" class="models.EmployeeAttendanceId"
+		autowire="byName" />
+	<bean id="response" class="models.EmployeeRequestResult"
+		autowire="byName" />
+	<bean id="jobGradeLeavesOutModel"
+		class="models.input.output.JobGradeLeavesOutModel" scope="prototype" />
 	<bean id="empserv" class="service.EmpService" />
 	<bean id="empauto" class="models.Employee" />
 	<bean id="empdao" class="DAO.EmpDAO" />
-	<bean id="payRollservice" class="service.PayRollServiceImpl" autowire="byName" />
-	<bean id="payRollOutput" class="models.input.output.EmployeePayRollOutputModel" autowire="byName" />
-	<bean id="payRollInput" class="models.input.output.EmployeePayRollInputModel" autowire="byName" />
+	<bean id="payRollservice" class="service.PayRollServiceImpl"
+		autowire="byName" />
+	<bean id="payRollOutput"
+		class="models.input.output.EmployeePayRollOutputModel"
+		autowire="byName" />
+	<bean id="payRollInput"
+		class="models.input.output.EmployeePayRollInputModel"
+		autowire="byName" />
 	<bean id="payrollDAO" class="DAO.PayRollDAOImpl" autowire="byName" />
-	<bean id="empPaySlip" class="models.EmployeePayslip" autowire="byName" />
+	<bean id="empPaySlip" class="models.EmployeePayslip"
+		autowire="byName" />
 	<bean id="rd" class="DAO.ReferenceDAOImpl" />
 	<bean id="rs" class="service.ReferenceServiceImpl" />
 	<bean id="doc" class="models.EmployeeRefDocuments" />
 	<bean id="empservice" class="service.EmployeeLoginService" />
-	 <bean id="employeeOptedLeavesDAO" class="DAO.EmployeeOptedLeavesDAOImpl" />
-	  <bean id="jobGradeHolidaysDAO" class="DAO.JobGradeHolidaysDAOImpl"/>
-     <bean id="employeeoptedleaves" class="models.EmployeeOptedLeaves"  scope="prototype"/>
-    <bean id="employeeoptedleavesId" class="models.EmployeeOptedLeavesId" scope="prototype" />
-	   <bean id="candidates" class = "models.Candidate"/>
-	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+	<bean id="employeeOptedLeavesDAO"
+		class="DAO.EmployeeOptedLeavesDAOImpl" />
+	<bean id="jobGradeHolidaysDAO" class="DAO.JobGradeHolidaysDAOImpl" />
+	<bean id="employeeoptedleaves" class="models.EmployeeOptedLeaves"
+		scope="prototype" />
+	<bean id="employeeoptedleavesId"
+		class="models.EmployeeOptedLeavesId" scope="prototype" />
+	<bean id="candidates" class="models.Candidate" />
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<!-- Set the maximum allowed file size (in bytes) -->
 		<property name="maxUploadSize" value="10485760" /> <!-- 10MB -->
 		<!-- Set the maximum allowed size for a request (in bytes) -->
@@ -129,11 +167,22 @@
 
 
 	<!-- updated -->
-	<bean id="offerLetterDAO" class="DAO.OfferLetterDAOImpl" autowire="byName" />
-	<bean id="employeeAttendanceService" class="service.EmployeeAttendanceService" autowire="byName" />
-	<bean id="employeeAttendanceDAO" class="DAO.EmployeeAttendanceDAOImpl" autowire="byName" />
-	<bean id="empoffdocComposite" class="models.EmploymentOfferDocComposite" scope="prototype" />
-	<bean id="employmentofferdocument" class="models.EmploymentOfferDocument" scope="prototype" />
+	<bean id="offerLetterDAO" class="DAO.OfferLetterDAOImpl"
+		autowire="byName" />
+	<bean id="empoffdocComposite"
+		class="models.EmploymentOfferDocComposite" scope="prototype" />
+	<bean id="employmentofferdocument"
+		class="models.EmploymentOfferDocument" scope="prototype" />
+
+	<bean id="employeeAttendanceService"
+		class="service.EmployeeAttendanceService" autowire="byName" />
+	<bean id="employeeAttendanceDAO"
+		class="DAO.EmployeeAttendanceDAOImpl" autowire="byName" />
+	<bean id="leaveRequestDAO" class="DAO.EmployeeLeaveRequestDAOImpl"
+		autowire="byName" />
+	<bean id="jobGrade" class="models.HrmsJobGrade" autowire="byName" />
+	<bean id="jobGradeWiseLeaves" class="models.JobGradeWiseLeaves"
+		autowire="byName" />
 
 
 </beans>

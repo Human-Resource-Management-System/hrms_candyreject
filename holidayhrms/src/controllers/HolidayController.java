@@ -12,11 +12,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,7 +32,9 @@ import models.EmployeeOptedLeaves;
 import models.EmployeeOptedLeavesId;
 import models.GradeHoliday;
 import models.Holiday;
+import models.HrmsJobGrade;
 import models.JobGradeHolidays;
+import models.JobGradeModel;
 
 @Controller
 public class HolidayController {
@@ -38,17 +42,19 @@ public class HolidayController {
 	private final HolidayDAO hd;
 	private final JobGradeHolidaysDAO jobGradeHolidaysDAO;
 	private EmployeeOptedLeavesDAO employeeOptedLeavesDAO;
+	private HrmsJobGrade jobGrade;
 	private final Logger logger = LoggerFactory.getLogger(HolidayController.class);
 	@Autowired
 	private ApplicationContext context;
 
 	@Autowired
 	public HolidayController(HolidayDAO holidayDAO, EmployeeDAO ed, JobGradeHolidaysDAO jobGradeHolidaysDAO,
-			EmployeeOptedLeavesDAO employeeOptedLeavesDAO) {
+			EmployeeOptedLeavesDAO employeeOptedLeavesDAO,HrmsJobGrade jobGrade) {
 		this.hd = holidayDAO;
 		this.emp = ed;
 		this.jobGradeHolidaysDAO = jobGradeHolidaysDAO;
 		this.employeeOptedLeavesDAO = employeeOptedLeavesDAO;
+		this.jobGrade = jobGrade;
 	}
 
 	// to get list of holidays
@@ -58,15 +64,6 @@ public class HolidayController {
 		List<Holiday> holidays = hd.findAllHolidays();
 		model.addAttribute("holidays", holidays);
 		return "holidays";
-	}
-
-	// to get list of grade wise holidays
-	@RequestMapping("/getgradewiseholidays")
-	public String getgradewiseHolidays(Model model) {
-		logger.info("Request received for /getgradewiseholidays");
-		List<GradeHoliday> gradeholidays = hd.findAllGradeHolidays();
-		model.addAttribute("gradeholidays", gradeholidays);
-		return "gradeholidays";
 	}
 
 	@RequestMapping(value = "/submitOptionalHolidays", method = RequestMethod.POST)
@@ -148,6 +145,53 @@ public class HolidayController {
 	public String handleEmployeeNotFoundException(EmployeeNotFoundException ex, Model model) {
 		model.addAttribute("errorMessage", ex.getMessage());
 		return "error-page";
+	}
+	
+	// to get list of grade wise holidays
+	@RequestMapping("/getgradewiseholidays")
+	public String getgradewiseHolidays(Model model) {
+		List<GradeHoliday> gradeholidays = hd.findAllGradeHolidays();
+	    List<HrmsJobGrade> existingJobGrades = hd.getAllJobGradesInfo();
+		model.addAttribute("jobgradeinfo", existingJobGrades);
+		model.addAttribute("gradeholidays", gradeholidays);
+		return "gradeholidays";
+	}
+	
+	@RequestMapping(value="/getJobGradeList",method=RequestMethod.GET)
+	public String getJobGradesList(Model model) {
+		List<HrmsJobGrade> info = hd.getAllJobGradesInfo();
+		model.addAttribute("gradeInfo", info);
+		return "JobGrades";
+	}
+	
+	
+	@RequestMapping(value="/addGrades",method=RequestMethod.POST)
+	@Transactional
+	public ResponseEntity<String> addGrades(@ModelAttribute JobGradeModel jobgrade) {
+		try {
+	    jobGrade.setId(jobgrade.getJbgrId());
+	    jobGrade.setName(jobgrade.getJbgrName());
+	    jobGrade.setDescription(jobgrade.getJbgrDescription());
+	    hd.saveJobGrade(jobGrade);
+	    
+	    return ResponseEntity.ok("success");
+		}catch(Exception e) {
+			System.out.println(e);
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred.");
+		}
+	}
+	@RequestMapping(value = "/addjobgradeholidays", method = RequestMethod.POST)
+	@Transactional
+	public ResponseEntity<String> addJobGradeLeaves(@ModelAttribute GradeHoliday gradeHoliday){
+		hd.saveJobGradeHoliday(gradeHoliday);
+		return ResponseEntity.ok("successfully added");
+	}
+	
+	@RequestMapping(value="/editjobgradeholidays" , method=RequestMethod.POST)
+	@Transactional
+	public ResponseEntity<String> updateJobGradeLeaves(@ModelAttribute GradeHoliday gradeHoliday){
+		hd.updateJobGradeHoliday(gradeHoliday);
+		return ResponseEntity.ok("successfully updated");
 	}
 
 }

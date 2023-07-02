@@ -1,129 +1,171 @@
 package service;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import DAO.EmployeeAttendanceDAOImpl;
 import DAO_Interfaces.EmployeeAttendanceDAO;
 import models.AttendanceEvent;
 import models.EmployeeAttendance;
+import models.EmployeeAttendanceId;
 import models.EmployeeRequestResult;
 import service_interfaces.EmployeeAttendanceServiceInterface;
 
 @Service
 public class EmployeeAttendanceService implements EmployeeAttendanceServiceInterface {
-	@Autowired
+
+	private static Logger logger = LoggerFactory.getLogger(EmployeeAttendanceDAOImpl.class);
+
 	private EmployeeAttendanceDAO employeeAttendanceDAO;
 
-	@Autowired
-	private ApplicationContext context;
+ 
+	private EmployeeAttendance attendance;
+	private EmployeeAttendanceId attendanceId;
 
-	private EmployeeRequestResult response;
-
 	@Autowired
-	public EmployeeAttendanceService(EmployeeRequestResult response) {
-		this.response = response;
+	public EmployeeAttendanceService(EmployeeAttendanceDAO employeeAttendanceDAO,EmployeeAttendance attendance, EmployeeAttendanceId attendanceId) {
+		this.employeeAttendanceDAO = employeeAttendanceDAO;
+		this.attendance = attendance;
+		this.attendanceId = attendanceId;
 	}
 
 	@Transactional
 	@Override
 	public void insertEmployeeAttendance(EmployeeAttendance attendance) {
 		employeeAttendanceDAO.save(attendance);
+		logger.info("Employee attendance inserted successfully.");
 
 	}
 
 	@Override
 	public List<AttendanceEvent> getYesterdayPunchData(int employeeId) {
-		// Retrieve punch-in and punch-out data from the DAO
-		List<Object[]> results = employeeAttendanceDAO.getYesterdayPunchInAndPunchOut(employeeId);
 
-		// Formatting the data required for the graphs
-		List<AttendanceEvent> formattedEvents = new ArrayList<>();
-		DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("hh:mm a");
-		for (Object[] row : results) {
-			LocalDateTime punchIn = (LocalDateTime) row[0];
-			LocalDateTime punchOut = (LocalDateTime) row[1];
+		try {
+			// Retrieve punch-in and punch-out data from the DAO
+			List<Object[]> results = employeeAttendanceDAO.getYesterdayPunchInAndPunchOut(employeeId);
 
-			// Format punch-in time
-			String formattedPunchIn = punchIn.format(outputFormatter);
-			// Format punch-out time
-			String formattedPunchOut = punchOut.format(outputFormatter);
-			// Create AttendanceEvent object for punch-in event
-			AttendanceEvent attendanceEvent = context.getBean(AttendanceEvent.class);
-			attendanceEvent.setTime(formattedPunchIn);
-			attendanceEvent.setEvent("Punch In");
-			formattedEvents.add(attendanceEvent);
-			// Create AttendanceEvent object for punch-out event
-			attendanceEvent = context.getBean(AttendanceEvent.class);
-			attendanceEvent.setTime(formattedPunchOut);
-			attendanceEvent.setEvent("Punch Out");
-			formattedEvents.add(attendanceEvent);
+			// Formatting the data required for the graphs
+			List<AttendanceEvent> formattedEvents = new ArrayList<>();
+			DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("hh:mm a");
+			for (Object[] row : results) {
+				LocalDateTime punchIn = (LocalDateTime) row[0];
+				LocalDateTime punchOut = (LocalDateTime) row[1];
+
+				// Format punch-in time
+				String formattedPunchIn = punchIn.format(outputFormatter);
+				// Format punch-out time
+				String formattedPunchOut = punchOut.format(outputFormatter);
+				// Create AttendanceEvent object for punch-in event
+				AttendanceEvent attendanceEvent = new AttendanceEvent()
+						;
+				attendanceEvent.setTime(formattedPunchIn);
+				attendanceEvent.setEvent("Punch In");
+				formattedEvents.add(attendanceEvent);
+				// Create AttendanceEvent object for punch-out event
+				attendanceEvent = new AttendanceEvent();
+				attendanceEvent.setTime(formattedPunchOut);
+				attendanceEvent.setEvent("Punch Out");
+				formattedEvents.add(attendanceEvent);
+			}
+
+			logger.info("Employee Yesterday Punch data is successfully loaded into model");
+
+			// Return the list of formatted events
+			return formattedEvents;
+		} catch (Exception e) {
+			logger.error("Failed to get yesterday's punch data for EmployeeId", e);
+			return Collections.emptyList();
 		}
-		// Return the list of formatted events
-		return formattedEvents;
 	}
 
 	@Override
 	public EmployeeRequestResult calculateAttendance(List<Object[]> punchData) {
-		int daysWithMinimumHours = 0;
 
-		Map<LocalDateTime, Duration> workingHoursPerDay = new HashMap<>();
+		try {
 
-		// Iterate over the punch-in and punch-out data
-		for (Object[] punches : punchData) {
-			LocalDateTime punchIn = (LocalDateTime) punches[0];
-			LocalDateTime punchOut = (LocalDateTime) punches[1];
+			logger.info("calculating the Attendance");
 
-			// Skip data with missing punch-in or punch-out
-			if (punchIn == null || punchOut == null) {
-				continue;
+			int daysWithMinimumHours = 0;
+
+			Map<LocalDateTime, Duration> workingHoursPerDay = new HashMap<>();
+
+			// Iterate over the punch-in and punch-out data
+			for (Object[] punches : punchData) {
+				LocalDateTime punchIn = (LocalDateTime) punches[0];
+				LocalDateTime punchOut = (LocalDateTime) punches[1];
+
+				// Skip data with missing punch-in or punch-out
+				if (punchIn == null || punchOut == null) {
+					continue;
+				}
+				// Calculate the duration between punch-in and punch-out
+				Duration duration = Duration.between(punchIn, punchOut);
+				LocalDateTime dateOnly = punchIn.toLocalDate().atStartOfDay();
+				// Update the working hours for the specific day
+				if (workingHoursPerDay.containsKey(dateOnly)) {
+					Duration totalDuration = workingHoursPerDay.get(dateOnly).plus(duration);
+					workingHoursPerDay.put(dateOnly, totalDuration);
+				} else {
+					workingHoursPerDay.put(dateOnly, duration);
+				}
 			}
-			// Calculate the duration between punch-in and punch-out
-			Duration duration = Duration.between(punchIn, punchOut);
-			LocalDateTime dateOnly = punchIn.toLocalDate().atStartOfDay();
-			// Update the working hours for the specific day
-			if (workingHoursPerDay.containsKey(dateOnly)) {
-				Duration totalDuration = workingHoursPerDay.get(dateOnly).plus(duration);
-				workingHoursPerDay.put(dateOnly, totalDuration);
-			} else {
-				workingHoursPerDay.put(dateOnly, duration);
+			// Count the number of days with minimum working hours (8 hours)
+			for (Duration duration : workingHoursPerDay.values()) {
+				long hours = duration.toHours();
+
+				if (hours >= 8) {
+					daysWithMinimumHours++;
+				}
 			}
-		}
-		// Count the number of days with minimum working hours (8 hours)
-		for (Duration duration : workingHoursPerDay.values()) {
-			long hours = duration.toHours();
+			// Calculate the attendance percentage
+			int totalDays = workingHoursPerDay.size();
+			double attendancePercentage = (double) daysWithMinimumHours / totalDays * 100;
 
-			if (hours >= 8) {
-				daysWithMinimumHours++;
+			if (Double.isNaN(attendancePercentage)) {
+				attendancePercentage = 0.0;
 			}
+			
+			EmployeeRequestResult response = new EmployeeRequestResult();
+
+			response.setDayswithminhrs(daysWithMinimumHours);
+			response.setPercentage(attendancePercentage);
+			response.setTotaldays(totalDays);
+
+			logger.info("successfully calculated the attendance");
+
+			return response;
+
+		} catch (Exception e) {
+			logger.error("Failed to calculate the Attendance ", e);
+			return null;
 		}
-		// Calculate the attendance percentage
-		int totalDays = workingHoursPerDay.size();
-		double attendancePercentage = (double) daysWithMinimumHours / totalDays * 100;
-
-		if (Double.isNaN(attendancePercentage)) {
-			attendancePercentage = 0.0;
-		}
-
-		response.setDayswithminhrs(daysWithMinimumHours);
-		response.setPercentage(attendancePercentage);
-		response.setTotaldays(totalDays);
-
-		return response;
 
 	}
 
@@ -140,6 +182,9 @@ public class EmployeeAttendanceService implements EmployeeAttendanceServiceInter
 
 	@Override
 	public List<Integer> getYears(Date joinDate) {
+
+		logger.info("Generating the list of years till now from the join date of an employee");
+
 		// Convert the joinDate to a LocalDate object
 		LocalDate join = LocalDate.parse(new SimpleDateFormat("yyyy-MM-dd").format(joinDate));
 		// Get the current date
@@ -157,6 +202,9 @@ public class EmployeeAttendanceService implements EmployeeAttendanceServiceInter
 			// Move to the next year
 			joinYear++;
 		}
+
+		logger.info("successfully generated the Years List");
+
 		// Return the list of years
 		return yearList;
 
@@ -165,59 +213,121 @@ public class EmployeeAttendanceService implements EmployeeAttendanceServiceInter
 	@Override
 	public List<Long> getAvgPunchInAndOut(int id) {
 
-		int i;
-		long punchin = 0, punchout = 0;
-		// Retrieve the punch-in and punch-out data for the current year and month
-		List<Object[]> punchData = employeeAttendanceDAO.getPunchInAndPunchOutDataForYearAndMonthAndEmployee(id,
-				LocalDate.now().getYear(), LocalDate.now().getMonthValue());
-		List<Long> result = new ArrayList<>();
+		try {
 
-		if (punchData.size() > 0) {
+			logger.info("calculating the average Punch Data");
 
-			List<LocalDateTime> noofDays = new ArrayList<>();
-			LocalDateTime dateOnly = null;
+			int i;
+			long punchin = 0, punchout = 0;
+			// Retrieve the punch-in and punch-out data for the current year and month
+			List<Object[]> punchData = employeeAttendanceDAO.getPunchInAndPunchOutDataForYearAndMonthAndEmployee(id,
+					LocalDate.now().getYear(), LocalDate.now().getMonthValue());
+			List<Long> result = new ArrayList<>();
 
-			// Iterate over the punch data
-			for (i = 0; i < punchData.size() - 1; i++) {
+			if (punchData.size() > 0) {
 
-				LocalDateTime pInOfCurrent = (LocalDateTime) punchData.get(i)[0];
-				LocalDateTime pOutOfCurrent = (LocalDateTime) punchData.get(i)[1];
-				LocalDateTime pInOfNext = (LocalDateTime) punchData.get(i + 1)[0];
+				List<LocalDateTime> noofDays = new ArrayList<>();
+				LocalDateTime dateOnly = null;
 
-				if (pInOfCurrent != null && pOutOfCurrent != null) {
-					// Calculate the total punch-in time in minutes
-					punchin += Duration.between(pInOfCurrent, pOutOfCurrent).toMinutes();
+				// Iterate over the punch data
+				for (i = 0; i < punchData.size() - 1; i++) {
+
+					LocalDateTime pInOfCurrent = (LocalDateTime) punchData.get(i)[0];
+					LocalDateTime pOutOfCurrent = (LocalDateTime) punchData.get(i)[1];
+					LocalDateTime pInOfNext = (LocalDateTime) punchData.get(i + 1)[0];
+
+					if (pInOfCurrent != null && pOutOfCurrent != null) {
+						// Calculate the total punch-in time in minutes
+						punchin += Duration.between(pInOfCurrent, pOutOfCurrent).toMinutes();
+
+					}
+
+					// Check if the punch-out and punch-in are on the same day
+					if (pOutOfCurrent.toLocalDate().getDayOfMonth() == pInOfNext.toLocalDate().getDayOfMonth()
+							&& pOutOfCurrent != null && pInOfNext != null) {
+						// Calculate the punch-out to punch-in time difference in minutes
+						punchout += Duration.between(pOutOfCurrent, pInOfNext).toMinutes();
+					}
+					dateOnly = pInOfCurrent;
+					// Add unique dates to the noofDays list
+					if (!noofDays.contains(dateOnly.toLocalDate().atStartOfDay()))
+						noofDays.add(dateOnly.toLocalDate().atStartOfDay());
 
 				}
-
-				// Check if the punch-out and punch-in are on the same day
-				if (pOutOfCurrent.toLocalDate().getDayOfMonth() == pInOfNext.toLocalDate().getDayOfMonth()
-						&& pOutOfCurrent != null && pInOfNext != null) {
-					// Calculate the punch-out to punch-in time difference in minutes
-					punchout += Duration.between(pOutOfCurrent, pInOfNext).toMinutes();
+				if ((LocalDateTime) punchData.get(i)[0] != null && (LocalDateTime) punchData.get(i)[1] != null) {
+					// Calculate the punch-in time and date for the last entry
+					punchin += Duration
+							.between((LocalDateTime) punchData.get(i)[0], (LocalDateTime) punchData.get(i)[1])
+							.toMinutes();
 				}
-				dateOnly = pInOfCurrent;
-				// Add unique dates to the noofDays list
+				dateOnly = (LocalDateTime) punchData.get(i)[0];
 				if (!noofDays.contains(dateOnly.toLocalDate().atStartOfDay()))
 					noofDays.add(dateOnly.toLocalDate().atStartOfDay());
 
-			}
-			if ((LocalDateTime) punchData.get(i)[0] != null && (LocalDateTime) punchData.get(i)[1] != null) {
-				// Calculate the punch-in time and date for the last entry
-				punchin += Duration.between((LocalDateTime) punchData.get(i)[0], (LocalDateTime) punchData.get(i)[1])
-						.toMinutes();
-			}
-			dateOnly = (LocalDateTime) punchData.get(i)[0];
-			if (!noofDays.contains(dateOnly.toLocalDate().atStartOfDay()))
-				noofDays.add(dateOnly.toLocalDate().atStartOfDay());
+				// Calculate the average punch-in and punch-out times
+				result.add(punchin / noofDays.size());
+				result.add(punchout / noofDays.size());
 
-			// Calculate the average punch-in and punch-out times
-			result.add(punchin / noofDays.size());
-			result.add(punchout / noofDays.size());
+			}
 
+			logger.info("successfully calculated the average punch data");
+
+			return result;
+
+		} catch (Exception e) {
+			logger.error("Failed to get Average Punch data");
+			return Collections.emptyList();
 		}
+	}
+	
+	@Override
+	@Transactional
+	public void processExcelFile(MultipartFile file) throws IOException{
+		try (Workbook workbook = WorkbookFactory.create(file.getInputStream())) {
 
-		return result;
+			// Get the first sheet from the workbook
+			Sheet sheet = workbook.getSheetAt(0);
+
+			// Create an iterator to iterate over the rows of the sheet
+			Iterator<Row> rowIterator = sheet.iterator();
+
+			rowIterator.next(); // Skip header row
+
+			// iterate over each row
+			while (rowIterator.hasNext()) {
+
+				// get next row
+				Row row = rowIterator.next();
+
+				// Assuming column order: employeeId, punchIn, punchOut, punchSystem
+				// retrieve respective data from the excel
+				Integer employeeId = (int) row.getCell(0).getNumericCellValue();
+				LocalDateTime punchIn = convertToDateTime(row.getCell(1));
+				LocalDateTime punchOut = convertToDateTime(row.getCell(2));
+				String punchSystem = row.getCell(3).toString();
+
+				logger.info("Processing attendance record for employee ID");
+
+				// set the data to the model
+				attendance.setPunchIn(punchIn);
+				attendance.setPunchOut(punchOut);
+				attendance.setPunchSystem(punchSystem);
+				attendanceId.setEmployeeId(employeeId);
+
+				// generate next index for the record
+				int nextIndex = employeeAttendanceDAO.getNextAttendanceRequestIndex(employeeId);
+				attendanceId.setEmplPIndex(nextIndex);
+				attendance.setAttendanceId(attendanceId);
+
+				// insert the record into database using service
+				insertEmployeeAttendance(attendance);
+
+				logger.info("Attendance record processed for employee.");
+
+			}
+		} catch (IOException e) {
+			throw e;
+		}
 	}
 
 }

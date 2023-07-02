@@ -1,7 +1,8 @@
 package DAO_Interfaces;
 
-import models.JobGrade;
+import models.HrmsJobGrade;
+
 
 public interface JobGradeDAO {
-    JobGrade getJobGradeById(String jbgrId);
+    HrmsJobGrade getJobGradeById(String jbgrId);
 }
