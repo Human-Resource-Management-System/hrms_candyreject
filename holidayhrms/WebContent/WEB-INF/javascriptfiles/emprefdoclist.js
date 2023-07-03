@@ -13,11 +13,6 @@
       }
     }
 
-
-
-
-
-
     function showMessage(message) {
       // Assuming you have a message element in your HTML, e.g., <div id="message"></div>
       const messageElement = document.getElementById('message');

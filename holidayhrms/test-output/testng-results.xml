@@ -1,27 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="0" total="2" passed="0" failed="2" skipped="0">
+<testng-results ignored="0" total="6" passed="5" failed="1" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2023-07-02T22:41:46 IST" name="Default suite" finished-at="2023-07-02T22:41:47 IST" duration-ms="891">
+  <suite started-at="2023-07-03T17:28:09 IST" name="Default suite" finished-at="2023-07-03T17:28:11 IST" duration-ms="1715">
     <groups>
     </groups>
-    <test started-at="2023-07-02T22:41:46 IST" name="Default test" finished-at="2023-07-02T22:41:47 IST" duration-ms="891">
-      <class name="test.InductionControllerTest">
-        <test-method is-config="true" signature="setUp()[pri:0, instance:test.InductionControllerTest@36f48b4]" started-at="2023-07-02T22:41:46 IST" name="setUp" finished-at="2023-07-02T22:41:47 IST" duration-ms="788" status="PASS">
+    <test started-at="2023-07-03T17:28:09 IST" name="Default test" finished-at="2023-07-03T17:28:11 IST" duration-ms="1715">
+      <class name="test.TestReferenceDocumentDAOImpl">
+        <test-method is-config="true" signature="setup()[pri:0, instance:test.TestReferenceDocumentDAOImpl@4a11eb84]" started-at="2023-07-03T17:28:09 IST" name="setup" finished-at="2023-07-03T17:28:11 IST" duration-ms="1443" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method signature="testGetEmployeeDetails()[pri:0, instance:test.InductionControllerTest@36f48b4]" started-at="2023-07-02T22:41:47 IST" name="testGetEmployeeDetails" finished-at="2023-07-02T22:41:47 IST" duration-ms="30" status="FAIL">
-          <exception class="java.lang.NullPointerException">
+        </test-method> <!-- setup -->
+        <test-method signature="testDeleteById()[pri:0, instance:test.TestReferenceDocumentDAOImpl@4a11eb84]" started-at="2023-07-03T17:28:11 IST" name="testDeleteById" finished-at="2023-07-03T17:28:11 IST" duration-ms="62" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testDeleteById -->
+        <test-method is-config="true" signature="setup()[pri:0, instance:test.TestReferenceDocumentDAOImpl@4a11eb84]" started-at="2023-07-03T17:28:11 IST" name="setup" finished-at="2023-07-03T17:28:11 IST" duration-ms="2" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method signature="testFindById()[pri:0, instance:test.TestReferenceDocumentDAOImpl@4a11eb84]" started-at="2023-07-03T17:28:11 IST" name="testFindById" finished-at="2023-07-03T17:28:11 IST" duration-ms="7" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testFindById -->
+        <test-method is-config="true" signature="setup()[pri:0, instance:test.TestReferenceDocumentDAOImpl@4a11eb84]" started-at="2023-07-03T17:28:11 IST" name="setup" finished-at="2023-07-03T17:28:11 IST" duration-ms="1" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method signature="testGetAllDocuments()[pri:0, instance:test.TestReferenceDocumentDAOImpl@4a11eb84]" started-at="2023-07-03T17:28:11 IST" name="testGetAllDocuments" finished-at="2023-07-03T17:28:11 IST" duration-ms="33" status="FAIL">
+          <exception class="org.mockito.exceptions.verification.WantedButNotInvoked">
             <message>
-              <![CDATA[Cannot invoke "org.springframework.ui.Model.addAttribute(String, Object)" because "model" is null]]>
+              <![CDATA[
+Wanted but not invoked:
+entityManager.createQuery(
+    "SELECT doc FROM models.EmployeeRefDocuments doc",
+    class models.EmployeeRefDocuments
+);
+-> at test.TestReferenceDocumentDAOImpl.testGetAllDocuments(TestReferenceDocumentDAOImpl.java:92)
+Actually, there were zero interactions with this mock.
+]]>
             </message>
             <full-stacktrace>
-              <![CDATA[java.lang.NullPointerException: Cannot invoke "org.springframework.ui.Model.addAttribute(String, Object)" because "model" is null
-at controllers.InductionController.getEmployeeDetails(InductionController.java:67)
-at test.InductionControllerTest.testGetEmployeeDetails(InductionControllerTest.java:65)
-at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
-at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+              <![CDATA[Wanted but not invoked:
+entityManager.createQuery(
+    "SELECT doc FROM models.EmployeeRefDocuments doc",
+    class models.EmployeeRefDocuments
+);
+-> at test.TestReferenceDocumentDAOImpl.testGetAllDocuments(TestReferenceDocumentDAOImpl.java:92)
+Actually, there were zero interactions with this mock.
+
+at test.TestReferenceDocumentDAOImpl.testGetAllDocuments(TestReferenceDocumentDAOImpl.java:92)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+at java.base/java.lang.reflect.Method.invoke(Method.java:564)
 at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
 at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:664)
 at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:227)
@@ -30,7 +62,7 @@ at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInv
 at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:200)
 at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
 at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
-at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+at java.base/java.util.ArrayList.forEach(ArrayList.java:1510)
 at org.testng.TestRunner.privateRun(TestRunner.java:848)
 at org.testng.TestRunner.run(TestRunner.java:621)
 at org.testng.SuiteRunner.runTest(SuiteRunner.java:443)
@@ -48,56 +80,35 @@ at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
 at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
 ]]>
             </full-stacktrace>
-          </exception> <!-- java.lang.NullPointerException -->
+          </exception> <!-- org.mockito.exceptions.verification.WantedButNotInvoked -->
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- testGetEmployeeDetails -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:test.InductionControllerTest@36f48b4]" started-at="2023-07-02T22:41:47 IST" name="setUp" finished-at="2023-07-02T22:41:47 IST" duration-ms="7" status="PASS">
+        </test-method> <!-- testGetAllDocuments -->
+        <test-method is-config="true" signature="setup()[pri:0, instance:test.TestReferenceDocumentDAOImpl@4a11eb84]" started-at="2023-07-03T17:28:11 IST" name="setup" finished-at="2023-07-03T17:28:11 IST" duration-ms="1" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method signature="testShowEmployees()[pri:0, instance:test.InductionControllerTest@36f48b4]" started-at="2023-07-02T22:41:47 IST" name="testShowEmployees" finished-at="2023-07-02T22:41:47 IST" duration-ms="2" status="FAIL">
-          <exception class="java.lang.NullPointerException">
-            <message>
-              <![CDATA[Cannot invoke "org.springframework.ui.Model.addAttribute(String, Object)" because "model" is null]]>
-            </message>
-            <full-stacktrace>
-              <![CDATA[java.lang.NullPointerException: Cannot invoke "org.springframework.ui.Model.addAttribute(String, Object)" because "model" is null
-at controllers.InductionController.showEmployees(InductionController.java:57)
-at test.InductionControllerTest.testShowEmployees(InductionControllerTest.java:52)
-at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
-at java.base/java.lang.reflect.Method.invoke(Method.java:578)
-at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
-at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:664)
-at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:227)
-at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)
-at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:957)
-at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:200)
-at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
-at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
-at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
-at org.testng.TestRunner.privateRun(TestRunner.java:848)
-at org.testng.TestRunner.run(TestRunner.java:621)
-at org.testng.SuiteRunner.runTest(SuiteRunner.java:443)
-at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)
-at org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)
-at org.testng.SuiteRunner.run(SuiteRunner.java:336)
-at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
-at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
-at org.testng.TestNG.runSuitesSequentially(TestNG.java:1280)
-at org.testng.TestNG.runSuitesLocally(TestNG.java:1200)
-at org.testng.TestNG.runSuites(TestNG.java:1114)
-at org.testng.TestNG.run(TestNG.java:1082)
-at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
-at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
-at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
-]]>
-            </full-stacktrace>
-          </exception> <!-- java.lang.NullPointerException -->
+        </test-method> <!-- setup -->
+        <test-method signature="testGetDOCIndex()[pri:0, instance:test.TestReferenceDocumentDAOImpl@4a11eb84]" started-at="2023-07-03T17:28:11 IST" name="testGetDOCIndex" finished-at="2023-07-03T17:28:11 IST" duration-ms="6" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- testShowEmployees -->
-      </class> <!-- test.InductionControllerTest -->
+        </test-method> <!-- testGetDOCIndex -->
+        <test-method is-config="true" signature="setup()[pri:0, instance:test.TestReferenceDocumentDAOImpl@4a11eb84]" started-at="2023-07-03T17:28:11 IST" name="setup" finished-at="2023-07-03T17:28:11 IST" duration-ms="2" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method signature="testGetIndex()[pri:0, instance:test.TestReferenceDocumentDAOImpl@4a11eb84]" started-at="2023-07-03T17:28:11 IST" name="testGetIndex" finished-at="2023-07-03T17:28:11 IST" duration-ms="8" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testGetIndex -->
+        <test-method is-config="true" signature="setup()[pri:0, instance:test.TestReferenceDocumentDAOImpl@4a11eb84]" started-at="2023-07-03T17:28:11 IST" name="setup" finished-at="2023-07-03T17:28:11 IST" duration-ms="2" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method signature="testSave()[pri:0, instance:test.TestReferenceDocumentDAOImpl@4a11eb84]" started-at="2023-07-03T17:28:11 IST" name="testSave" finished-at="2023-07-03T17:28:11 IST" duration-ms="8" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testSave -->
+      </class> <!-- test.TestReferenceDocumentDAOImpl -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>

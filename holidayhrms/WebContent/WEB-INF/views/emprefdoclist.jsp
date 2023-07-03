@@ -5,12 +5,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="./css/emprefdoclist.css">
-     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+ <link rel="stylesheet" type="text/css" href="./css/emprefdoclist.css">
             <script src="./js/emprefdoclist.js"></script>
+   
 </head>
 <body>
-<div class="container">
   <h1>Reference Documents</h1>
   <div class="category-select">
     <label for="category">Select Category:</label>
@@ -25,7 +24,7 @@
   </div>
 
 <%
-  List<EmployeeRefDocuments> document = (List<EmployeeRefDocuments>) request.getAttribute("document");
+  List<EmployeeRefDocuments> document = (List<EmployeeRefDocuments>) request.getAttribute("refdocs");
 %>
 
   <div class="category" id="employee-handbook">
@@ -35,8 +34,12 @@
     for (EmployeeRefDocuments doc : document) {
       if (doc != null && doc.getCategory().equals(m)) { %>
         <div class="document">      
-      <a href="OpenDocument?docname=<%= doc.getDocName() %>"><%= doc.getDocName() %></a>&nbsp;&nbsp;
-           
+      <div class="document-name">
+            <%= doc.getDocName() %>
+          </div>
+          <div class="document-actions">
+            <button class="view-button" onclick="location.href='OpenDocument?docname=<%= doc.getDocName() %>'">View</button>
+          </div>
         </div>
       <% } 
     } %>
@@ -49,10 +52,13 @@
     for (EmployeeRefDocuments doc : document) {
       if (doc != null && doc.getCategory().equals(n)) { %>
         <div class="document">
-               <a href="OpenDocument?docname=<%= doc.getDocName() %>"><%= doc.getDocName() %></a>&nbsp;&nbsp;
-           
-        </div>
-      <% } 
+               <div class="document-name">
+            <%= doc.getDocName() %>
+          </div>
+          <div class="document-actions">
+            <button class="view-button" onclick="location.href='OpenDocument?docname=<%= doc.getDocName() %>'">View</button>
+          </div>
+        </div> <% } 
     } %>
   </div>
 
@@ -63,9 +69,13 @@
   for (EmployeeRefDocuments doc : document) {
     if (doc != null && doc.getCategory().trim().equals(p)) { %>
       <div class="document">
-          <a href="OpenDocument?docname=<%= doc.getDocName() %>"><%= doc.getDocName() %></a>&nbsp;&nbsp;
-          
-      </div>
+         <div class="document-name">
+            <%= doc.getDocName() %>
+          </div>
+          <div class="document-actions">
+            <button class="view-button" onclick="location.href='OpenDocument?docname=<%= doc.getDocName() %>'">View</button>
+          </div>
+        </div>
     <% } 
   } %>
 </div>
@@ -77,8 +87,12 @@
     for (EmployeeRefDocuments doc : document) {
       if (doc != null && doc.getCategory().equals(q)) { %>
         <div class="document">
-         <a href="OpenDocument?docname=<%= doc.getDocName() %>"><%= doc.getDocName() %></a>&nbsp;&nbsp;
-         
+          <div class="document-name">
+            <%= doc.getDocName() %>
+          </div>
+          <div class="document-actions">
+            <button class="view-button" onclick="location.href='OpenDocument?docname=<%= doc.getDocName() %>'">View</button>
+          </div>
         </div>
       <% } 
     } %>
@@ -91,14 +105,17 @@
     for (EmployeeRefDocuments doc : document) {
       if (doc != null && doc.getCategory().equals(r)) { %>
         <div class="document">
-        <a href="OpenDocument?docname=<%= doc.getDocName() %>"><%= doc.getDocName() %></a>&nbsp;&nbsp;
-       
+          <div class="document-name">
+            <%= doc.getDocName() %>
+          </div>
+          <div class="document-actions">
+            <button class="view-button" onclick="location.href='OpenDocument?docname=<%= doc.getDocName() %>'">View</button>
+          </div>
         </div>
       <% } 
     } %>
   </div>
-
-</div>
+  
 
 </body>
 

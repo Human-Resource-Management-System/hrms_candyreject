@@ -1,3 +1,4 @@
+
 package models;
 
 import javax.persistence.Column;
@@ -25,6 +26,13 @@ public class InductionDocumentTypes {
 	// Constructors, getters, and setters
 
 	public InductionDocumentTypes() {
+	}
+
+	public InductionDocumentTypes(int idtyId, String idtyCode, String idtyTitle, String idtyDescription) {
+		this.idtyId = idtyId;
+		this.idtyCode = idtyCode;
+		this.idtyTitle = idtyTitle;
+		this.idtyDescription = idtyDescription;
 	}
 
 	// Getters and setters

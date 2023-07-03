@@ -1,3 +1,4 @@
+
 package DAO;
 
 import java.util.List;
@@ -10,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import DAO_Interfaces.CandidateDAO;
 import models.Candidate;
-import models.HrmsEmploymentOffer;
 
 @Repository
 public class CandidateDAOImpl implements CandidateDAO {
@@ -38,6 +38,5 @@ public class CandidateDAOImpl implements CandidateDAO {
 		String query = "SELECT c FROM Candidate c";
 		return entityManager.createQuery(query, Candidate.class).getResultList();
 	}
-
 
 }

@@ -5,12 +5,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <link rel="stylesheet" type="text/css" href="./css/documentlist.css">
-     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+ <link rel="stylesheet" type="text/css" href="./css/documentlist.css">
+    
+  
             <script src="./js/documentlist.js"></script>
+   
 </head>
 <body>
- <div class="container">
   <h1>Reference Documents</h1>
   <div class="category-select">
     <label for="category">Select Category:</label>
@@ -18,14 +19,14 @@
       <option value="all">All Categories</option>
       <option value="employee-handbook">Employee Handbook</option>
       <option value="code-of-conduct">Code of Conduct</option>
-      <option value="Anti-Harrasement-Policy">Anti Harassment Policy</option>
+      <option value="Anti-Harassment-Policy">Anti Harassment Policy</option>
       <option value="IT-Security-Policy">IT Security Policy</option>
       <option value="Travel-and-Expense-Policy">Travel and Expense Policy</option>
     </select>
   </div>
 
 <%
-  List<EmployeeRefDocuments> document = (List<EmployeeRefDocuments>) request.getAttribute("document");
+  List<EmployeeRefDocuments> document = (List<EmployeeRefDocuments>) request.getAttribute("refdocs");
 %>
 
   <div class="category" id="employee-handbook">
@@ -35,8 +36,13 @@
     for (EmployeeRefDocuments doc : document) {
       if (doc != null && doc.getCategory().equals(m)) { %>
         <div class="document">      
-      <a href="OpenDocument?docname=<%= doc.getDocName() %>"><%= doc.getDocName() %></a>&nbsp;&nbsp;
-           <a href="deleteReferenceDocument?docname=<%= doc.getDocName() %>">Delete</a>
+      <div class="document-name">
+            <%= doc.getDocName() %>
+          </div>
+          <div class="document-actions">
+            <button class="view-button" onclick="location.href='OpenDocument?docname=<%= doc.getDocName() %>'">View</button>
+            <button class="delete-button" onclick="location.href='deleteReferenceDocument?docname=<%= doc.getDocName() %>'">Delete</button>
+          </div>
         </div>
       <% } 
     } %>
@@ -49,10 +55,14 @@
     for (EmployeeRefDocuments doc : document) {
       if (doc != null && doc.getCategory().equals(n)) { %>
         <div class="document">
-               <a href="OpenDocument?docname=<%= doc.getDocName() %>"><%= doc.getDocName() %></a>&nbsp;&nbsp;
-           <a href="deleteReferenceDocument?docname=<%= doc.getDocName() %>">Delete</a>
-        </div>
-      <% } 
+               <div class="document-name">
+            <%= doc.getDocName() %>
+          </div>
+          <div class="document-actions">
+            <button class="view-button" onclick="location.href='OpenDocument?docname=<%= doc.getDocName() %>'">View</button>
+            <button class="delete-button" onclick="location.href='deleteReferenceDocument?docname=<%= doc.getDocName() %>'">Delete</button>
+          </div>
+        </div> <% } 
     } %>
   </div>
 
@@ -63,9 +73,14 @@
   for (EmployeeRefDocuments doc : document) {
     if (doc != null && doc.getCategory().trim().equals(p)) { %>
       <div class="document">
-          <a href="OpenDocument?docname=<%= doc.getDocName() %>"><%= doc.getDocName() %></a>&nbsp;&nbsp;
-          <a href="deleteReferenceDocument?docname=<%= doc.getDocName() %>">Delete</a>
-      </div>
+         <div class="document-name">
+            <%= doc.getDocName() %>
+          </div>
+          <div class="document-actions">
+            <button class="view-button" onclick="location.href='OpenDocument?docname=<%= doc.getDocName() %>'">View</button>
+            <button class="delete-button" onclick="location.href='deleteReferenceDocument?docname=<%= doc.getDocName() %>'">Delete</button>
+          </div>
+        </div>
     <% } 
   } %>
 </div>
@@ -77,8 +92,13 @@
     for (EmployeeRefDocuments doc : document) {
       if (doc != null && doc.getCategory().equals(q)) { %>
         <div class="document">
-         <a href="OpenDocument?docname=<%= doc.getDocName() %>"><%= doc.getDocName() %></a>&nbsp;&nbsp;
-          <a href="deleteReferenceDocument?docname=<%= doc.getDocName() %>">Delete</a>
+          <div class="document-name">
+            <%= doc.getDocName() %>
+          </div>
+          <div class="document-actions">
+            <button class="view-button" onclick="location.href='OpenDocument?docname=<%= doc.getDocName() %>'">View</button>
+            <button class="delete-button" onclick="location.href='deleteReferenceDocument?docname=<%= doc.getDocName() %>'">Delete</button>
+          </div>
         </div>
       <% } 
     } %>
@@ -91,18 +111,24 @@
     for (EmployeeRefDocuments doc : document) {
       if (doc != null && doc.getCategory().equals(r)) { %>
         <div class="document">
-        <a href="OpenDocument?docname=<%= doc.getDocName() %>"><%= doc.getDocName() %></a>&nbsp;&nbsp;
-        <a href="deleteReferenceDocument?docname=<%= doc.getDocName() %>">Delete</a>
+          <div class="document-name">
+            <%= doc.getDocName() %>
+          </div>
+          <div class="document-actions">
+            <button class="view-button" onclick="location.href='OpenDocument?docname=<%= doc.getDocName() %>'">View</button>
+            <button class="delete-button" onclick="location.href='deleteReferenceDocument?docname=<%= doc.getDocName() %>'">Delete</button>
+          </div>
         </div>
       <% } 
     } %>
   </div>
+  
 
   <div class="add-button">
     <a href="addReferenceDocument">Add Document</a>
   </div>
-</div>
 
+ 
 </body>
 
 </html>

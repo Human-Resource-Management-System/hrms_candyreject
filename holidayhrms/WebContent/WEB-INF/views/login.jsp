@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -9,12 +10,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="style.css">
     <!---we had linked our css file----->
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
         }
+        
         
 .container {
   display: flex;
@@ -24,7 +27,10 @@
   padding-bottom: 100px;
 }
 
+
 .slideshow {
+margin-top:150px;
+margin-left:50px;
   width: 600px;
   height: 300px;
   position: relative;
@@ -115,20 +121,24 @@ nav ul li a
     color:black;
     font-family: sans-serif;
 }
-nav ul li button
-{
+nav ul li button {
     font-size: 20px;
-    color:black;
+    color: white;
     outline: none;
     border: none;
-    background: transparent;
+    background: linear-gradient(to right, #3BC59A, #2C8EBB);
     cursor: pointer;
     font-family: sans-serif;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background 0.3s ease;
 }
-nav ul li button:hover
-{
-    color: aqua;
+
+nav ul li button:hover {
+    background: linear-gradient(to right, #2C8EBB, #3BC59A);
 }
+
+
 nav ul li a:hover
 {
     color: #3BC59A;
@@ -136,7 +146,7 @@ nav ul li a:hover
 a
 {
     text-decoration: none;
-    color: #3BC59A;
+    color:black;
     font-size: 28px;
     font-family: Oswald, sans-serif;
 }
@@ -144,18 +154,22 @@ a
 {
     display: none;
     padding-left: 900px;
-    padding-top: 75px;
+    padding-top: 40px;
+    
 }
-.form-box
-{
-    width:380px;
-	height:480px;
-	position:relative;
-	margin:2% auto;
-	background:rgba(0,0,0,0.3);
-	padding:10px;
+.form-box {
+    width: 340px;
+    height: 400px;
+    position: relative;
+    margin: 2% auto;
+    margin: 100px 15px 30px -2px;
+    background: linear-gradient(to bottom, #e0f5ff, #b3e6ff); /* Lighter blue gradient */
+    padding: 10px;
     overflow: hidden;
+    border-radius: 50px;
+    border:0.5px solid black;
 }
+
 .button-box
 {
 	width:220px;
@@ -180,7 +194,7 @@ a
 	position: absolute;
 	width: 110px;
 	height: 100%;
-	background: #F3C693;
+    background: linear-gradient(to right, #85d7ff, #0088ff); /* Lighter blue gradient */
 	border-radius: 30px;
 	transition: .5s;
 }
@@ -217,7 +231,7 @@ a
 	cursor: pointer;
 	display: block;
 	margin: auto;
-	background: #F3C693;
+    background: linear-gradient(to right, #85d7ff, #0088ff); /* Lighter blue gradient */
 	border: 0;
 	outline: none;
 	border-radius: 30px;
@@ -258,8 +272,8 @@ span
         }
         
 .forgot-password a {
-      color: #3BC59A;
-      font-size:20px; /* Dark Gray */
+      color: navy;
+      font-size:15px; /* Dark Gray */
         }
         
  .popup{
@@ -296,7 +310,13 @@ span
 	margin:30px 0px 10px;
 	
 }
-
+   .full-page {
+            height: 100%;
+            width: 100%;
+            background: linear-gradient(to bottom, #E6F1FF, #D8E7FF, #CBe3FF, #BDDFFF, #B0DBFF);
+            background-size: cover;
+            position: absolute;
+        }
 .popup button{
 	width:100%;
 	margin-top:50px;
@@ -310,7 +330,9 @@ span
 	cursor:pointer;
 	box-shadow:0 5px 5px rgba(0,0,0,0.2);
 }       
-
+.input-field {
+    color: black !important;
+}
         
     </style>
 </head>
@@ -339,19 +361,96 @@ span
                 <form id='login' class='input-group-login' action ="employee" method="POST">
                     <input type='text' id="empl_email" name ="empl_email" class='input-field'placeholder='Email Id' required >
 		    <input type='password'id="empl_password" name="empl_password" class='input-field'placeholder='Enter Password' required>
-		      <div class="forgot-password"> <a href="forgot.jsp">Forgot Password?</a></div>
-		    <button type='submit'class='submit-btn' >Log in</button>
+		    		    <button type='submit'class='submit-btn' >Log in</button>
+		    
+		      <div class="forgot-password"> <a href="forgot">Forgot Password?</a></div>
 		 </form>
 		 <form id='register' class='input-group-register' action ="admin" method="POST">
                     <input type='text'id="admin_email" name ="admin_email" class='input-field'placeholder='Email Id' required >
 		    <input type='password' id="admin_password"  name ="admin_password" class='input-field'placeholder='Enter Password' required>
-		    <div class="forgot-password a"> <a href="forgot.jsp">Forgot Password?</a></div>
 		    <button type='submit'class='submit-btn' >Log in</button>
+		    <div class="forgot-password a"> <a href="forgot">Forgot Password?</a></div>
+		    
 	         </form>
             </div>
         </div>
     </div>
-     
+     <div class="container">
+        <div class="slideshow">
+            <div class="slides">
+                <div class="slide active">
+                    <img src="<c:url value='/images/image1.jpg' />" alt="Image 1">
+                </div>
+                <div class="slide">
+                    <img src="<c:url value='/images/image2.jpg' />" alt="Image 1">
+                </div>
+                <div class="slide">
+                    <img src="<c:url value='/images/image3.jpg' />" alt="Image 1">
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        var x=document.getElementById('login');
+		var y=document.getElementById('register');
+		var z=document.getElementById('btn');
+		function register()
+		{
+			x.style.left='-400px';
+			y.style.left='50px';
+			z.style.left='110px';
+		}
+		function login()
+		{
+			x.style.left='50px';
+			y.style.left='450px';
+			z.style.left='0px';
+		}
+	</script>
+	<script>
+        var modal = document.getElementById('login-form');
+        window.onclick = function(event) 
+        {
+            if (event.target == modal) 
+            {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+    
+        <script>
+        // Slideshow functionality
+        const slides = document.querySelectorAll('.slide');
+        let currentSlide = 0;
+
+        function showSlide(slideIndex) {
+            slides.forEach((slide) => {
+                slide.classList.remove('active');
+            });
+            slides[slideIndex].classList.add('active');
+        }
+
+        function nextSlide() {
+            showSlide(currentSlide);
+            currentSlide = (currentSlide + 1) % slides.length;
+        }
+
+        nextSlide(); // Show the initial slide
+
+        setInterval(nextSlide, 3000); // Change slide every 3 seconds
+    </script>
+    <script>
+    let popup = document.getElementById("popup");
+    
+    function openPopup(){
+    	popup.classList.add("open-popup");
+    }
+    
+    function closePopup(){
+    	popup.classList.remove("open-popup");
+    }
+    
+    </script>
     <script>
         var x=document.getElementById('login');
 		var y=document.getElementById('register');

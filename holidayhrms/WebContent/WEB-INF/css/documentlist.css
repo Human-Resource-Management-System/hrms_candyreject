@@ -1,12 +1,5 @@
 @charset "ISO-8859-1";
-	   .container {
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-      padding: 20px;
-      max-width: 600px;
-      background-color: white;
-  
-    }
-  
+	   
     h1 {
       font-size: 28px;
       margin-bottom: 20px;
@@ -41,10 +34,12 @@
     }
 
     .document {
-      display: flex;
-      align-items: center;
-      margin-bottom: 10px;
-    }
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Add box shadow property */
+    padding: 10px; /* Optional: Add some padding to the document element */
+  }
 
     .document-name {
       margin-right: 10px;
@@ -57,21 +52,26 @@
   }
 
  .delete-button {
-    padding: 5px 10px;
-    background-color: #FF0000; /* Change the background color to your preferred color */
-    color: red;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 14px; /* Change the font size to your preferred size */
-    font-weight: bold; /* Add font weight if desired */
-    /* Add any other desired styles */
-  }
+   padding: 4px 10px;
+  background-color:#FF8989;
+  color: white;
+}
 
-  .delete-button:hover {
-    background-color:  #45a049; /* Change the background color on hover if desired */
-    text-decoration: none;
-  }
+.delete-button:hover {
+  background-color: #FF8989; /* Change the background color on hover if desired */
+  text-decoration: none;
+}
+
+.view-button {
+	  padding: 4px 10px;
+  background-color: #5A96E3; /* Dark blue color */
+  color: white;
+}
+
+.view-button:hover {
+  background-color: #5A96E3; /* Darker shade of blue on hover */
+  text-decoration: none;
+}
     .add-button {
       margin-top: 20px;
     }

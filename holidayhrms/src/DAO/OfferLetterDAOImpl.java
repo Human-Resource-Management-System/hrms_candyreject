@@ -1,3 +1,4 @@
+
 package DAO;
 
 import java.util.List;
@@ -29,22 +30,33 @@ public class OfferLetterDAOImpl implements OfferLetterDAO {
 	private EntityManager entityManager;
 	Candidate cann;
 
+	public void setEntityManager(EntityManager entityManager) {
+		this.entityManager = entityManager;
+	}
+
+	public void setApplicationContext(ApplicationContext context) {
+		this.context = context;
+
+	}
+
 	@Autowired
 	ApplicationContext context;
 
 	// get all the candidates list whom offer letter already provided
 	@Override
+	@Transactional
 	public List<Candidate> findAllProvidedCandidates() {
 		logger.info("requested to get all the provided candidates from data base by using status i.e AC");
 
 		TypedQuery<Candidate> query = entityManager
-				.createQuery("SELECT c FROM Candidate c WHERE c.candStatus = :status", Candidate.class);
+				.createQuery("SELECT cd FROM Candidate cd WHERE cd.candStatus = :status", Candidate.class);
 		query.setParameter("status", "AC");
 		return query.getResultList();
 	}
 
 	// get all the candidates list for whom the offer letter have to be send
 	@Override
+	@Transactional
 	public List<Candidate> findAllIssuedCandidates() {
 		logger.info(
 				"requested to get all the  candidates for issue offerletters from data base by using status i.e NA");
@@ -152,7 +164,7 @@ public class OfferLetterDAOImpl implements OfferLetterDAO {
 		}
 	}
 
-	private List<InductionDocumentTypes> getInductionDocuments() {
+	public List<InductionDocumentTypes> getInductionDocuments() {
 		logger.info("Fetching inductionDocumentTypes from the database");
 
 		TypedQuery<InductionDocumentTypes> query = entityManager.createQuery("SELECT d FROM InductionDocumentTypes d",
@@ -161,7 +173,7 @@ public class OfferLetterDAOImpl implements OfferLetterDAO {
 	}
 
 	// getting IdtyId by the document name
-	private int findIdtyIdByTitle(List<InductionDocumentTypes> inductionDocuments, String title) {
+	public int findIdtyIdByTitle(List<InductionDocumentTypes> inductionDocuments, String title) {
 		logger.info("Finding IdtyId by title: " + title);
 		for (InductionDocumentTypes document : inductionDocuments) {
 			if (document.getIdtyTitle().equalsIgnoreCase(title)) {

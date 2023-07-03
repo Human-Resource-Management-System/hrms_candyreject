@@ -6,7 +6,6 @@
 <head>
  <link rel="stylesheet" type="text/css" href="./css/UploadReferenceDocument.css">
      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-            <script src="./js/UploadReferenceDocument.js"></script>
 </head>
 <body>
  <div class="form-container">
@@ -34,6 +33,40 @@
     <input class="submit-button" type="submit" value="Upload">
   </form>
 
+  <script>
+    const form = document.getElementById('document-form');
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const category = document.getElementById('category').value;
+      const documentData = document.getElementById('file-upload').files[0];
+  
+      if (!category || !documentData) {
+        alert('Please fill in all the required fields and upload a document.');
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append('category', category);
+      formData.append('documentData', documentData);
+      
+      fetch('DocumentSave', {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => {
+        if (response.ok) {
+          alert('Document uploaded successfully!');
+          form.reset();
+        } else {
+          throw new Error('Error uploading document.');
+        }
+      })
+      .catch(error => {
+        alert(error.message);
+      });
+    });
+  </script>
 
 </body>
 </html>

@@ -1,4 +1,5 @@
-    const form = document.getElementById('document-form');
+  
+  const form = document.getElementById('document-form');
     form.addEventListener('submit', function(event) {
       event.preventDefault();
 
@@ -30,3 +31,4 @@
         alert(error.message);
       });
     });
+ 
