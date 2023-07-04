@@ -277,6 +277,24 @@
   	  });
   	}
     
+    
+    function loadContent(candidateId) {
+	    var url = "viewcandidate?id=" + candidateId;
+	    var xhr = new XMLHttpRequest();
+	    xhr.onreadystatechange = function() {
+	      if (xhr.readyState === XMLHttpRequest.DONE) {
+	        if (xhr.status === 200) {
+	          document.getElementById("main").innerHTML = xhr.responseText;
+	        } else {
+	          // Handle error
+	          console.error("Error loading content:", xhr.status);
+	        }
+	      }
+	    };
+	    xhr.open("GET", url, true);
+	    xhr.send();
+	  }
+    
     function getLeaveRequests() {
     	  $.ajax({
     	    type: "GET",

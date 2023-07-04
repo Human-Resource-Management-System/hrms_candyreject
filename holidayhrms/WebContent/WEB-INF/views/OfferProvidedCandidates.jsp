@@ -1,3 +1,5 @@
+
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" %>
 <%@ page import="models.Candidate" %>
 <%@ page import="java.util.List" %>
@@ -37,7 +39,8 @@
                             <td><%= candidate.getCandLastName() %></td>
                             <td><%= candidate.getCandRDate() %></td>
                             <td><%= candidate.getCandStatus() %></td>
-                            <td><a class="view-link" href="viewcandidate?id=<%= candidate.getCandId() %>">View</a></td>
+                            <td><a class="view-link" href="#" onclick="loadContent('<%= candidate.getCandId() %>')">View</a></td>
+
                             
             				<td>
             
