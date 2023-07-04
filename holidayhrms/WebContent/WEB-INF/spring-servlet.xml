@@ -157,6 +157,9 @@
 	<bean id="employeeAttendanceDAO" class="DAO.EmployeeAttendanceDAOImpl" autowire="byName" />
 	<bean id="empoffdocComposite" class="models.EmploymentOfferDocComposite" scope="prototype" />
 	<bean id="employmentofferdocument" class="models.EmploymentOfferDocument" scope="prototype" />
-
+<bean id="offerservice" class="service.OfferLetterService"  autowire="byName" />
+<bean id="mailService" class="service.OtpMailService" />
+	<bean id="forgotPassword" class="DAO.ForgotPasswordDAOImpl" />
+	<bean id="entityforgot" class="models.EntityForgotPassword" autowire="byName" />
 
 </beans>

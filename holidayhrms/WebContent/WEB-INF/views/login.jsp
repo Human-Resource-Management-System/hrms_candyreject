@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -162,9 +161,9 @@ a
     height: 400px;
     position: relative;
     margin: 2% auto;
-    margin: 100px 15px 30px -2px;
+    margin: 66px 15px 30px -2px;
     background: linear-gradient(to bottom, #e0f5ff, #b3e6ff); /* Lighter blue gradient */
-    padding: 10px;
+    padding: 20px;
     overflow: hidden;
     border-radius: 50px;
     border:0.5px solid black;
