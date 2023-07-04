@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.google.gson.Gson;
 
-import DAO_Interfaces.ApplyPermissionDao;
+import DAO_Interfaces.ApplyPermissionDAO;
 import models.ApplyPermissions;
 import models.Employee;
 import models.PermissionAdminModel;
@@ -34,14 +34,14 @@ import models.PermissionInputModel;
 @Controller
 public class PermissionsController {
 
-	private ApplyPermissionDao apd;
+	private ApplyPermissionDAO apd;
 	private ApplyPermissions ap;
 	private PermissionCompositeKey pcompositeKey;
 	private Gson gson;
 	private final Logger logger = LoggerFactory.getLogger(PermissionsController.class);
 
 	@Autowired
-	public PermissionsController(ApplyPermissionDao apdi, ApplyPermissions app, PermissionCompositeKey cKey,
+	public PermissionsController(ApplyPermissionDAO apdi, ApplyPermissions app, PermissionCompositeKey cKey,
 			Gson gson) {
 		apd = apdi;
 		ap = app;
@@ -172,6 +172,17 @@ public class PermissionsController {
 		System.out.println(count);
 
 		return ResponseEntity.ok(gson.toJson(count));
+	}
+
+	@RequestMapping(value = "/permissionStatusAtEmpSide", method = RequestMethod.GET)
+	public String getPermissionsStatusAtEmp(HttpSession session, Model model) {
+		logger.info("Request received to show permissions applied at employee side");
+		int id = (int) session.getAttribute("employeeId");
+		List<ApplyPermissions> listOfPermission = apd.appliedPermissions(id);
+		System.out.println("done");
+		model.addAttribute("listOfPermission", listOfPermission);
+
+		return "empViewPermissions"; // Return the name of the JSP page to display the data
 	}
 
 }

@@ -34,7 +34,7 @@ import com.itextpdf.html2pdf.HtmlConverter;
 @SuppressWarnings("deprecation")
 public class PaySlipMail {
 	public static void sendEmail(HttpServletRequest request, HttpServletResponse response,
-			models.input.output.EmployeePayRollOutputModel payRollOutput) throws Exception {
+			models.input.output.EmployeePayRollOutputModel payRollOutput, String email) throws Exception {
 		// Set up model attributes with the variables for JSP replacements
 
 		// Resolve JSP view
@@ -73,7 +73,7 @@ public class PaySlipMail {
 		try {
 			MimeMessage mm = new MimeMessage(s);
 			mm.setFrom(new InternetAddress("sambangichandrasekhar340@gmail.com"));
-			mm.setRecipient(Message.RecipientType.TO, new InternetAddress("bhaskar.p@pennanttech.com"));
+			mm.setRecipient(Message.RecipientType.TO, new InternetAddress(email));
 			mm.setSubject("Payslip Details");
 			// mm.setContent(renderedHtml, "text/html");
 			mm.setContent("This is payslip email...........\n", "text/html");

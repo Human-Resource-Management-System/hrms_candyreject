@@ -19,6 +19,7 @@ import org.testng.annotations.Test;
 import DAO.OfferLetterDAOImpl;
 import models.Candidate;
 import models.Employee;
+import models.EmploymentOfferDocument;
 import models.HrmsEmploymentOffer;
 import models.InductionDocumentTypes;
 
@@ -211,4 +212,16 @@ public class OfferLetterDAOImplTest {
 		Assert.assertEquals(2, idtyId);
 	}
 
+	@Test
+	public void testUpdateEmploymentOfferDocuments() {
+		// mock EmploymentOfferDocument
+		EmploymentOfferDocument mockDocument = new EmploymentOfferDocument();
+		// Set properties of the mock document
+
+		// Call the method to be tested
+		offerLetterDAO.updateEmploymentOfferDocuments(mockDocument);
+
+		// Verify that the persist method was called on the entity manager with the mock document
+		Mockito.verify(entityManager).persist(mockDocument);
+	}
 }

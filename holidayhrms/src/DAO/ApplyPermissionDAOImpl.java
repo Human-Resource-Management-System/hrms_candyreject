@@ -14,14 +14,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import DAO_Interfaces.ApplyPermissionDao;
+import DAO_Interfaces.ApplyPermissionDAO;
 import models.ApplyPermissions;
 import models.Employee;
 
 @Component
 @Transactional
-public class ApplyPermissionDaoImpl implements ApplyPermissionDao {
-	private final Logger logger = LoggerFactory.getLogger(ApplyPermissionDaoImpl.class);
+public class ApplyPermissionDAOImpl implements ApplyPermissionDAO {
+	private final Logger logger = LoggerFactory.getLogger(ApplyPermissionDAOImpl.class);
 
 	@PersistenceContext
 	private EntityManager em;
@@ -101,6 +101,7 @@ public class ApplyPermissionDaoImpl implements ApplyPermissionDao {
 		Long count = query.getSingleResult();
 
 		return count;
+
 	}
 
 	@Override
@@ -127,6 +128,17 @@ public class ApplyPermissionDaoImpl implements ApplyPermissionDao {
 		query.setParameter("year", year);
 		Long count = query.getSingleResult();
 		return count;
+	}
+
+	@Override
+	public List<ApplyPermissions> appliedPermissions(int id) {
+		logger.info("dispalying the permissions applied by an employee in an year");
+
+		String queryString = "SELECT elrq FROM ApplyPermissions elrq WHERE elrq.id.empl_id = :empId";
+		Query query = em.createQuery(queryString);
+		query.setParameter("empId", id);
+		List<ApplyPermissions> result = query.getResultList();
+		return result;
 	}
 
 }

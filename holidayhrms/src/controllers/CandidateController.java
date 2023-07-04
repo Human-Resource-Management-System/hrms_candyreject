@@ -23,7 +23,6 @@ import models.input.output.CandidateIO;
 
 @Controller
 public class CandidateController {
-
 	private CandidateDAO candidateDAO;
 	private final ModelMapper modelMapper;
 	private static final Logger logger = LoggerFactory.getLogger(CandidateController.class);

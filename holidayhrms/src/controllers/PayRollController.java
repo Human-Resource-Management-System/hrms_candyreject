@@ -71,6 +71,7 @@ public class PayRollController {
 		double basicsal = employee.getEmpl_basicsal();
 		double fixedsal = employee.getEmpl_fixedsal();
 		double variablesal = employee.getEmpl_variablesal();
+		String email = employee.getEmplOffemail();
 
 		// for setting values into input model
 
@@ -139,7 +140,7 @@ public class PayRollController {
 		model.addAttribute("pay", payRollOutput);
 
 		try {
-			PaySlipMail.sendEmail(request, response, payRollOutput);
+			PaySlipMail.sendEmail(request, response, payRollOutput, email);
 		} catch (Exception e) {
 
 			e.printStackTrace();

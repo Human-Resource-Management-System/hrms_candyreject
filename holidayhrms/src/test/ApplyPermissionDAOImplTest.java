@@ -6,6 +6,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.testng.Assert.assertSame;
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -23,17 +24,17 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import DAO.ApplyPermissionDaoImpl;
+import DAO.ApplyPermissionDAOImpl;
 import models.ApplyPermissions;
 import models.Employee;
 
-public class ApplyPermissionDaoImplTest {
+public class ApplyPermissionDAOImplTest {
 
 	@Mock
 	private EntityManager entityManager;
 
 	@InjectMocks
-	private ApplyPermissionDaoImpl applyPermissionDAO;
+	private ApplyPermissionDAOImpl applyPermissionDAO;
 
 	@BeforeMethod
 	public void setUp() {
@@ -208,5 +209,32 @@ public class ApplyPermissionDaoImplTest {
 
 		// Verify the result
 		Assert.assertEquals(result, expectedCount);
+	}
+
+	@Test
+	public void testAppliedPermissions() {
+		// Mock the necessary objects
+		Query query = mock(Query.class);
+		List<ApplyPermissions> expectedResult = new ArrayList<>();
+		expectedResult.add(new ApplyPermissions());
+		int empId = 123;
+
+		// Set up mock behaviors
+		when(entityManager.createQuery(anyString())).thenReturn(query);
+		when(query.setParameter(eq("empId"), eq(empId))).thenReturn(query);
+		when(query.getResultList()).thenReturn(expectedResult);
+
+		// Call the method to be tested
+		List<ApplyPermissions> result = applyPermissionDAO.appliedPermissions(empId);
+
+		// Verify the interactions and assertions
+		verify(entityManager).createQuery(anyString());
+		verify(query).setParameter(eq("empId"), eq(empId));
+		verify(query).getResultList();
+
+		verify(entityManager, times(1)).createQuery(anyString());
+		verify(query, times(1)).setParameter(eq("empId"), eq(empId));
+		verify(query, times(1)).getResultList();
+		assertSame(result, expectedResult);
 	}
 }

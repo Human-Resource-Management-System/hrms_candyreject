@@ -10,7 +10,7 @@ import models.Employee;
  * 
  * The ApplyPermissionDao interface provides methods to interact with the database for permission-related operations.
  */
-public interface ApplyPermissionDao {
+public interface ApplyPermissionDAO {
 
 	/**
 	 * 
@@ -88,4 +88,6 @@ public interface ApplyPermissionDao {
 	 * @return The count of approved permissions for the specified criteria.
 	 */
 	public long getEmployeeApprovedPermissionsCount(int id, int year);
+
+	public List<ApplyPermissions> appliedPermissions(int id);
 }

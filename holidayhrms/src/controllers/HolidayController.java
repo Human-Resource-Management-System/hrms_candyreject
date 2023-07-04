@@ -49,7 +49,7 @@ public class HolidayController {
 
 	@Autowired
 	public HolidayController(HolidayDAO holidayDAO, EmployeeDAO ed, JobGradeHolidaysDAO jobGradeHolidaysDAO,
-			EmployeeOptedLeavesDAO employeeOptedLeavesDAO,HrmsJobGrade jobGrade) {
+			EmployeeOptedLeavesDAO employeeOptedLeavesDAO, HrmsJobGrade jobGrade) {
 		this.hd = holidayDAO;
 		this.emp = ed;
 		this.jobGradeHolidaysDAO = jobGradeHolidaysDAO;
@@ -146,50 +146,58 @@ public class HolidayController {
 		model.addAttribute("errorMessage", ex.getMessage());
 		return "error-page";
 	}
-	
+
 	// to get list of grade wise holidays
 	@RequestMapping("/getgradewiseholidays")
 	public String getgradewiseHolidays(Model model) {
+		logger.info("Request received for displaying grade wise holidays");
 		List<GradeHoliday> gradeholidays = hd.findAllGradeHolidays();
-	    List<HrmsJobGrade> existingJobGrades = hd.getAllJobGradesInfo();
+		List<HrmsJobGrade> existingJobGrades = hd.getAllJobGradesInfo();
 		model.addAttribute("jobgradeinfo", existingJobGrades);
 		model.addAttribute("gradeholidays", gradeholidays);
 		return "gradeholidays";
 	}
-	
-	@RequestMapping(value="/getJobGradeList",method=RequestMethod.GET)
+
+	@RequestMapping(value = "/getJobGradeList", method = RequestMethod.GET)
 	public String getJobGradesList(Model model) {
+		logger.info("Request received to  display job grade list");
+
 		List<HrmsJobGrade> info = hd.getAllJobGradesInfo();
 		model.addAttribute("gradeInfo", info);
 		return "JobGrades";
 	}
-	
-	
-	@RequestMapping(value="/addGrades",method=RequestMethod.POST)
+
+	@RequestMapping(value = "/addGrades", method = RequestMethod.POST)
 	@Transactional
 	public ResponseEntity<String> addGrades(@ModelAttribute JobGradeModel jobgrade) {
 		try {
-	    jobGrade.setId(jobgrade.getJbgrId());
-	    jobGrade.setName(jobgrade.getJbgrName());
-	    jobGrade.setDescription(jobgrade.getJbgrDescription());
-	    hd.saveJobGrade(jobGrade);
-	    
-	    return ResponseEntity.ok("success");
-		}catch(Exception e) {
+
+			logger.info("Request received for adding new grade in job grade");
+			jobGrade.setId(jobgrade.getJbgrId());
+			jobGrade.setName(jobgrade.getJbgrName());
+			jobGrade.setDescription(jobgrade.getJbgrDescription());
+			hd.saveJobGrade(jobGrade);
+
+			return ResponseEntity.ok("success");
+		} catch (Exception e) {
 			System.out.println(e);
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred.");
 		}
 	}
+
 	@RequestMapping(value = "/addjobgradeholidays", method = RequestMethod.POST)
 	@Transactional
-	public ResponseEntity<String> addJobGradeLeaves(@ModelAttribute GradeHoliday gradeHoliday){
+	public ResponseEntity<String> addJobGradeHolidays(@ModelAttribute GradeHoliday gradeHoliday) {
+		logger.info("Request received for adding holidays for new job grade");
 		hd.saveJobGradeHoliday(gradeHoliday);
 		return ResponseEntity.ok("successfully added");
 	}
-	
-	@RequestMapping(value="/editjobgradeholidays" , method=RequestMethod.POST)
+
+	@RequestMapping(value = "/editjobgradeholidays", method = RequestMethod.POST)
 	@Transactional
-	public ResponseEntity<String> updateJobGradeLeaves(@ModelAttribute GradeHoliday gradeHoliday){
+	public ResponseEntity<String> updateJobGradeHolidays(@ModelAttribute GradeHoliday gradeHoliday) {
+		logger.info("Request received for changing job grade holidays");
+
 		hd.updateJobGradeHoliday(gradeHoliday);
 		return ResponseEntity.ok("successfully updated");
 	}

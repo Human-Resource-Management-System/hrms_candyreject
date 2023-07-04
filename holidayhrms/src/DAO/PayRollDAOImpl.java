@@ -13,7 +13,7 @@ import models.EmployeePayslip;
 
 public class PayRollDAOImpl implements PayRollDAO {
 
-	private final Logger logger = LoggerFactory.getLogger(ApplyPermissionDaoImpl.class);
+	private final Logger logger = LoggerFactory.getLogger(ApplyPermissionDAOImpl.class);
 	
 	@PersistenceContext
 	private EntityManager entityManager;
