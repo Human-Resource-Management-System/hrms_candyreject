@@ -10,6 +10,55 @@
 <html>
 <head>
     <title>Employee Data</title>
+    <style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th, td {
+        text-align: left;
+        padding: 8px;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    .checkbox-cell {
+        text-align: center;
+    }
+    
+      #chandu {
+  
+            margin-top: 100px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+         #submitBtn {
+        display: block;
+        margin: 0 auto; /* Center align the button horizontally */
+        margin-top: 10px; /* Add top margin as needed */
+           background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        
+    }
+        
+      
+        
+        
+</style>
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
     <script>
         $(document).ready(function () {
@@ -47,6 +96,7 @@
                 	success: function(response){
                 		console.log(response);
                 		alert(response);
+                		window.location.reload();
                 	},
                     error:function(error){
                     	console.log(error);
@@ -58,19 +108,13 @@
     </script>
 </head>
 <body>
-    <h1>Employee Information</h1>
-
-    <h2>Employee Details</h2>
-    <p>Employee ID: ${employee.emplId}</p>
-    <p>Employee Job Grade: ${employee.emplJbgrId}</p>
-    <p>Name: ${employee.emplFirstname} ${employee.emplLastname}</p>
     <!-- Add other employee details as needed -->
-
+<div id="chandu">
     <h2>Holiday Information</h2>
     <p>Total Number of Holidays: ${jobGradeHolidays.jbgr_totalnoh}</p>
     <p>Total Number of Optional Holidays: ${jobGradeHolidays.jbgr_totalnoh - mandholidays}</p>
     <!-- Add other leave-related information as needed -->
-
+<br><br>
     <form id="HolidayForm">
         <table id="dataTable">
             <thead>
@@ -101,9 +145,11 @@
             </tbody>
         </table>
 
-        <input type="button" value="Submit" id="submitBtn">
     </form>
-    
-    
+    </div>
+        <input type="button" value="Submit" id="submitBtn">
+  
 </body>
 </html>
+
+

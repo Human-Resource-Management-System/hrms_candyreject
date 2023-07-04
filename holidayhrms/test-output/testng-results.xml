@@ -1,93 +1,270 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="0" total="10" passed="10" failed="0" skipped="0">
+<testng-results ignored="0" total="11" passed="8" failed="3" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2023-07-04T16:10:14 IST" name="Default suite" finished-at="2023-07-04T16:10:17 IST" duration-ms="2762">
+  <suite started-at="2023-07-04T16:40:17 IST" name="Default suite" finished-at="2023-07-04T16:40:19 IST" duration-ms="1886">
     <groups>
     </groups>
-    <test started-at="2023-07-04T16:10:14 IST" name="Default test" finished-at="2023-07-04T16:10:17 IST" duration-ms="2762">
-      <class name="test.ApplyPermissionDAOImplTest">
-        <test-method is-config="true" signature="setUp()[pri:0, instance:test.ApplyPermissionDAOImplTest@6d4f266]" started-at="2023-07-04T16:10:14 IST" name="setUp" finished-at="2023-07-04T16:10:16 IST" duration-ms="1776" status="PASS">
+    <test started-at="2023-07-04T16:40:17 IST" name="Default test" finished-at="2023-07-04T16:40:19 IST" duration-ms="1886">
+      <class name="test.TestInductionDAOImpl">
+        <test-method is-config="true" signature="setup()[pri:0, instance:test.TestInductionDAOImpl@7fe7c640]" started-at="2023-07-04T16:40:17 IST" name="setup" finished-at="2023-07-04T16:40:18 IST" duration-ms="1351" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method signature="testAppliedPermissions()[pri:0, instance:test.ApplyPermissionDAOImplTest@6d4f266]" started-at="2023-07-04T16:10:16 IST" name="testAppliedPermissions" finished-at="2023-07-04T16:10:16 IST" duration-ms="203" status="PASS">
+        </test-method> <!-- setup -->
+        <test-method signature="testGetAllEmploymentOffers()[pri:0, instance:test.TestInductionDAOImpl@7fe7c640]" started-at="2023-07-04T16:40:18 IST" name="testGetAllEmploymentOffers" finished-at="2023-07-04T16:40:18 IST" duration-ms="176" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- testAppliedPermissions -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:test.ApplyPermissionDAOImplTest@6d4f266]" started-at="2023-07-04T16:10:16 IST" name="setUp" finished-at="2023-07-04T16:10:16 IST" duration-ms="3" status="PASS">
+        </test-method> <!-- testGetAllEmploymentOffers -->
+        <test-method is-config="true" signature="setup()[pri:0, instance:test.TestInductionDAOImpl@7fe7c640]" started-at="2023-07-04T16:40:18 IST" name="setup" finished-at="2023-07-04T16:40:18 IST" duration-ms="2" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method signature="testGetEmployeeAndPermissionRequestData()[pri:0, instance:test.ApplyPermissionDAOImplTest@6d4f266]" started-at="2023-07-04T16:10:16 IST" name="testGetEmployeeAndPermissionRequestData" finished-at="2023-07-04T16:10:17 IST" duration-ms="377" status="PASS">
+        </test-method> <!-- setup -->
+        <test-method signature="testGetAllInductions()[pri:0, instance:test.TestInductionDAOImpl@7fe7c640]" started-at="2023-07-04T16:40:18 IST" name="testGetAllInductions" finished-at="2023-07-04T16:40:18 IST" duration-ms="9" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- testGetEmployeeAndPermissionRequestData -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:test.ApplyPermissionDAOImplTest@6d4f266]" started-at="2023-07-04T16:10:17 IST" name="setUp" finished-at="2023-07-04T16:10:17 IST" duration-ms="1" status="PASS">
+        </test-method> <!-- testGetAllInductions -->
+        <test-method is-config="true" signature="setup()[pri:0, instance:test.TestInductionDAOImpl@7fe7c640]" started-at="2023-07-04T16:40:18 IST" name="setup" finished-at="2023-07-04T16:40:18 IST" duration-ms="0" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method signature="testGetEmployeeAndPermissionRequestDataCountPerMonth()[pri:0, instance:test.ApplyPermissionDAOImplTest@6d4f266]" started-at="2023-07-04T16:10:17 IST" name="testGetEmployeeAndPermissionRequestDataCountPerMonth" finished-at="2023-07-04T16:10:17 IST" duration-ms="8" status="PASS">
+        </test-method> <!-- setup -->
+        <test-method signature="testGetCountOfOfferIdentity()[pri:0, instance:test.TestInductionDAOImpl@7fe7c640]" started-at="2023-07-04T16:40:18 IST" name="testGetCountOfOfferIdentity" finished-at="2023-07-04T16:40:18 IST" duration-ms="8" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- testGetEmployeeAndPermissionRequestDataCountPerMonth -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:test.ApplyPermissionDAOImplTest@6d4f266]" started-at="2023-07-04T16:10:17 IST" name="setUp" finished-at="2023-07-04T16:10:17 IST" duration-ms="1" status="PASS">
+        </test-method> <!-- testGetCountOfOfferIdentity -->
+        <test-method is-config="true" signature="setup()[pri:0, instance:test.TestInductionDAOImpl@7fe7c640]" started-at="2023-07-04T16:40:18 IST" name="setup" finished-at="2023-07-04T16:40:18 IST" duration-ms="4" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method signature="testGetEmployeeAndPermissionRequestData_NoResult()[pri:0, instance:test.ApplyPermissionDAOImplTest@6d4f266]" started-at="2023-07-04T16:10:17 IST" name="testGetEmployeeAndPermissionRequestData_NoResult" finished-at="2023-07-04T16:10:17 IST" duration-ms="10" status="PASS">
+        </test-method> <!-- setup -->
+        <test-method signature="testGetEmployeeOfferedIdMaxMap()[pri:0, instance:test.TestInductionDAOImpl@7fe7c640]" started-at="2023-07-04T16:40:18 IST" name="testGetEmployeeOfferedIdMaxMap" finished-at="2023-07-04T16:40:18 IST" duration-ms="6" status="FAIL">
+          <exception class="java.lang.NullPointerException">
+            <message>
+              <![CDATA[Cannot invoke "javax.persistence.TypedQuery.setParameter(String, Object)" because "typedQuery" is null]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.NullPointerException: Cannot invoke "javax.persistence.TypedQuery.setParameter(String, Object)" because "typedQuery" is null
+at DAO.InductionDAOImpl.getCountOfOfferIdentity(InductionDAOImpl.java:108)
+at test.TestInductionDAOImpl.testGetEmployeeOfferedIdMaxMap(TestInductionDAOImpl.java:154)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+at java.base/java.lang.reflect.Method.invoke(Method.java:564)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:664)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:227)
+at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)
+at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:957)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:200)
+at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
+at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
+at java.base/java.util.ArrayList.forEach(ArrayList.java:1510)
+at org.testng.TestRunner.privateRun(TestRunner.java:848)
+at org.testng.TestRunner.run(TestRunner.java:621)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:443)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)
+at org.testng.SuiteRunner.run(SuiteRunner.java:336)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1280)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1200)
+at org.testng.TestNG.runSuites(TestNG.java:1114)
+at org.testng.TestNG.run(TestNG.java:1082)
+at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.NullPointerException -->
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- testGetEmployeeAndPermissionRequestData_NoResult -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:test.ApplyPermissionDAOImplTest@6d4f266]" started-at="2023-07-04T16:10:17 IST" name="setUp" finished-at="2023-07-04T16:10:17 IST" duration-ms="1" status="PASS">
+        </test-method> <!-- testGetEmployeeOfferedIdMaxMap -->
+        <test-method is-config="true" signature="setup()[pri:0, instance:test.TestInductionDAOImpl@7fe7c640]" started-at="2023-07-04T16:40:18 IST" name="setup" finished-at="2023-07-04T16:40:18 IST" duration-ms="2" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method signature="testGetEmployeeApprovedPermissionsCount()[pri:0, instance:test.ApplyPermissionDAOImplTest@6d4f266]" started-at="2023-07-04T16:10:17 IST" name="testGetEmployeeApprovedPermissionsCount" finished-at="2023-07-04T16:10:17 IST" duration-ms="8" status="PASS">
+        </test-method> <!-- setup -->
+        <test-method signature="testGetEmploymentInductionDocCount()[pri:0, instance:test.TestInductionDAOImpl@7fe7c640]" started-at="2023-07-04T16:40:18 IST" name="testGetEmploymentInductionDocCount" finished-at="2023-07-04T16:40:18 IST" duration-ms="4" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- testGetEmployeeApprovedPermissionsCount -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:test.ApplyPermissionDAOImplTest@6d4f266]" started-at="2023-07-04T16:10:17 IST" name="setUp" finished-at="2023-07-04T16:10:17 IST" duration-ms="1" status="PASS">
+        </test-method> <!-- testGetEmploymentInductionDocCount -->
+        <test-method is-config="true" signature="setup()[pri:0, instance:test.TestInductionDAOImpl@7fe7c640]" started-at="2023-07-04T16:40:18 IST" name="setup" finished-at="2023-07-04T16:40:18 IST" duration-ms="1" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method signature="testGetEmployeesByHRAndManager()[pri:0, instance:test.ApplyPermissionDAOImplTest@6d4f266]" started-at="2023-07-04T16:10:17 IST" name="testGetEmployeesByHRAndManager" finished-at="2023-07-04T16:10:17 IST" duration-ms="194" status="PASS">
+        </test-method> <!-- setup -->
+        <test-method signature="testGetEmploymentInductionDocCountMap()[pri:0, instance:test.TestInductionDAOImpl@7fe7c640]" started-at="2023-07-04T16:40:18 IST" name="testGetEmploymentInductionDocCountMap" finished-at="2023-07-04T16:40:18 IST" duration-ms="5" status="FAIL">
+          <exception class="java.lang.NullPointerException">
+            <message>
+              <![CDATA[Cannot invoke "javax.persistence.TypedQuery.setParameter(String, Object)" because "typedQuery" is null]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.NullPointerException: Cannot invoke "javax.persistence.TypedQuery.setParameter(String, Object)" because "typedQuery" is null
+at DAO.InductionDAOImpl.getEmploymentInductionDocCount(InductionDAOImpl.java:131)
+at test.TestInductionDAOImpl.testGetEmploymentInductionDocCountMap(TestInductionDAOImpl.java:193)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+at java.base/java.lang.reflect.Method.invoke(Method.java:564)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:664)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:227)
+at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)
+at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:957)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:200)
+at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
+at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
+at java.base/java.util.ArrayList.forEach(ArrayList.java:1510)
+at org.testng.TestRunner.privateRun(TestRunner.java:848)
+at org.testng.TestRunner.run(TestRunner.java:621)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:443)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)
+at org.testng.SuiteRunner.run(SuiteRunner.java:336)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1280)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1200)
+at org.testng.TestNG.runSuites(TestNG.java:1114)
+at org.testng.TestNG.run(TestNG.java:1082)
+at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.NullPointerException -->
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- testGetEmployeesByHRAndManager -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:test.ApplyPermissionDAOImplTest@6d4f266]" started-at="2023-07-04T16:10:17 IST" name="setUp" finished-at="2023-07-04T16:10:17 IST" duration-ms="1" status="PASS">
+        </test-method> <!-- testGetEmploymentInductionDocCountMap -->
+        <test-method is-config="true" signature="setup()[pri:0, instance:test.TestInductionDAOImpl@7fe7c640]" started-at="2023-07-04T16:40:18 IST" name="setup" finished-at="2023-07-04T16:40:18 IST" duration-ms="1" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method signature="testGetNextPermissionIndex()[pri:0, instance:test.ApplyPermissionDAOImplTest@6d4f266]" started-at="2023-07-04T16:10:17 IST" name="testGetNextPermissionIndex" finished-at="2023-07-04T16:10:17 IST" duration-ms="7" status="PASS">
+        </test-method> <!-- setup -->
+        <test-method signature="testGetIndex()[pri:0, instance:test.TestInductionDAOImpl@7fe7c640]" started-at="2023-07-04T16:40:18 IST" name="testGetIndex" finished-at="2023-07-04T16:40:18 IST" duration-ms="5" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- testGetNextPermissionIndex -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:test.ApplyPermissionDAOImplTest@6d4f266]" started-at="2023-07-04T16:10:17 IST" name="setUp" finished-at="2023-07-04T16:10:17 IST" duration-ms="2" status="PASS">
+        </test-method> <!-- testGetIndex -->
+        <test-method is-config="true" signature="setup()[pri:0, instance:test.TestInductionDAOImpl@7fe7c640]" started-at="2023-07-04T16:40:18 IST" name="setup" finished-at="2023-07-04T16:40:18 IST" duration-ms="1" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method signature="testGetPermissionByIdAndIndex()[pri:0, instance:test.ApplyPermissionDAOImplTest@6d4f266]" started-at="2023-07-04T16:10:17 IST" name="testGetPermissionByIdAndIndex" finished-at="2023-07-04T16:10:17 IST" duration-ms="9" status="PASS">
+        </test-method> <!-- setup -->
+        <test-method signature="testGetInductionById()[pri:0, instance:test.TestInductionDAOImpl@7fe7c640]" started-at="2023-07-04T16:40:18 IST" name="testGetInductionById" finished-at="2023-07-04T16:40:18 IST" duration-ms="9" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- testGetPermissionByIdAndIndex -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:test.ApplyPermissionDAOImplTest@6d4f266]" started-at="2023-07-04T16:10:17 IST" name="setUp" finished-at="2023-07-04T16:10:17 IST" duration-ms="1" status="PASS">
+        </test-method> <!-- testGetInductionById -->
+        <test-method is-config="true" signature="setup()[pri:0, instance:test.TestInductionDAOImpl@7fe7c640]" started-at="2023-07-04T16:40:18 IST" name="setup" finished-at="2023-07-04T16:40:18 IST" duration-ms="1" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method signature="testGetPermissionByIdAndIndex_NoResult()[pri:0, instance:test.ApplyPermissionDAOImplTest@6d4f266]" started-at="2023-07-04T16:10:17 IST" name="testGetPermissionByIdAndIndex_NoResult" finished-at="2023-07-04T16:10:17 IST" duration-ms="3" status="PASS">
+        </test-method> <!-- setup -->
+        <test-method signature="testInsertEmployee()[pri:0, instance:test.TestInductionDAOImpl@7fe7c640]" started-at="2023-07-04T16:40:18 IST" name="testInsertEmployee" finished-at="2023-07-04T16:40:18 IST" duration-ms="9" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- testGetPermissionByIdAndIndex_NoResult -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:test.ApplyPermissionDAOImplTest@6d4f266]" started-at="2023-07-04T16:10:17 IST" name="setUp" finished-at="2023-07-04T16:10:17 IST" duration-ms="1" status="PASS">
+        </test-method> <!-- testInsertEmployee -->
+        <test-method is-config="true" signature="setup()[pri:0, instance:test.TestInductionDAOImpl@7fe7c640]" started-at="2023-07-04T16:40:18 IST" name="setup" finished-at="2023-07-04T16:40:18 IST" duration-ms="1" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method signature="testPersist()[pri:0, instance:test.ApplyPermissionDAOImplTest@6d4f266]" started-at="2023-07-04T16:10:17 IST" name="testPersist" finished-at="2023-07-04T16:10:17 IST" duration-ms="4" status="PASS">
+        </test-method> <!-- setup -->
+        <test-method signature="testInsertEmployeeWithNullInduction()[pri:0, instance:test.TestInductionDAOImpl@7fe7c640]" started-at="2023-07-04T16:40:18 IST" name="testInsertEmployeeWithNullInduction" finished-at="2023-07-04T16:40:18 IST" duration-ms="2" status="PASS">
+          <exception class="exceptions.CustomException">
+            <message>
+              <![CDATA[Custom exception message]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[exceptions.CustomException: Custom exception message
+at DAO.InductionDAOImpl.insertEmployee(InductionDAOImpl.java:51)
+at test.TestInductionDAOImpl.testInsertEmployeeWithNullInduction(TestInductionDAOImpl.java:82)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+at java.base/java.lang.reflect.Method.invoke(Method.java:564)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:664)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:227)
+at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)
+at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:957)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:200)
+at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
+at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
+at java.base/java.util.ArrayList.forEach(ArrayList.java:1510)
+at org.testng.TestRunner.privateRun(TestRunner.java:848)
+at org.testng.TestRunner.run(TestRunner.java:621)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:443)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)
+at org.testng.SuiteRunner.run(SuiteRunner.java:336)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1280)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1200)
+at org.testng.TestNG.runSuites(TestNG.java:1114)
+at org.testng.TestNG.run(TestNG.java:1082)
+at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+]]>
+            </full-stacktrace>
+          </exception> <!-- exceptions.CustomException -->
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- testPersist -->
-      </class> <!-- test.ApplyPermissionDAOImplTest -->
+        </test-method> <!-- testInsertEmployeeWithNullInduction -->
+        <test-method is-config="true" signature="setup()[pri:0, instance:test.TestInductionDAOImpl@7fe7c640]" started-at="2023-07-04T16:40:18 IST" name="setup" finished-at="2023-07-04T16:40:18 IST" duration-ms="1" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method signature="testUpdateEmploymentOfferStatus()[pri:0, instance:test.TestInductionDAOImpl@7fe7c640]" started-at="2023-07-04T16:40:18 IST" name="testUpdateEmploymentOfferStatus" finished-at="2023-07-04T16:40:19 IST" duration-ms="127" status="FAIL">
+          <exception class="org.mockito.exceptions.base.MockitoException">
+            <message>
+              <![CDATA[
+Only void methods can doNothing()!
+Example of correct use of doNothing():
+    doNothing().
+    doThrow(new RuntimeException())
+    .when(mock).someVoidMethod();
+Above means:
+someVoidMethod() does nothing the 1st time but throws an exception the 2nd time is called]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.mockito.exceptions.base.MockitoException: 
+Only void methods can doNothing()!
+Example of correct use of doNothing():
+    doNothing().
+    doThrow(new RuntimeException())
+    .when(mock).someVoidMethod();
+Above means:
+someVoidMethod() does nothing the 1st time but throws an exception the 2nd time is called
+at test.TestInductionDAOImpl.testUpdateEmploymentOfferStatus(TestInductionDAOImpl.java:121)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+at java.base/java.lang.reflect.Method.invoke(Method.java:564)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:664)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:227)
+at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)
+at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:957)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:200)
+at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
+at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
+at java.base/java.util.ArrayList.forEach(ArrayList.java:1510)
+at org.testng.TestRunner.privateRun(TestRunner.java:848)
+at org.testng.TestRunner.run(TestRunner.java:621)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:443)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)
+at org.testng.SuiteRunner.run(SuiteRunner.java:336)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1280)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1200)
+at org.testng.TestNG.runSuites(TestNG.java:1114)
+at org.testng.TestNG.run(TestNG.java:1082)
+at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.mockito.exceptions.base.MockitoException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testUpdateEmploymentOfferStatus -->
+      </class> <!-- test.TestInductionDAOImpl -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>
