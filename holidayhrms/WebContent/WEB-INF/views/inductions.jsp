@@ -24,7 +24,7 @@
             <tbody>
                 <% for (Integer induction : inductions) { %>
                     <tr>
-                       <td>Induction :  <a class="view-link" href="get-induction-details?id=<%= induction %>"><%= induction  %></a></td>
+                       <td>Induction :  <a class="view-link" href="getinductiondetails?id=<%= induction %>"><%= induction  %></a></td>
                     </tr>
                 <% } %>
             </tbody>
@@ -32,5 +32,6 @@
     <% } else { %>
         <p class="no-inductions">No inductions found.</p>
     <% } %>
+</body>
 </body>
 </html>

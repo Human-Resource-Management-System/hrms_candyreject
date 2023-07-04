@@ -15,5 +15,4 @@ public class AppConfig {
 		return resolver;
 	}
 
-	// Other configuration methods and beans
 }

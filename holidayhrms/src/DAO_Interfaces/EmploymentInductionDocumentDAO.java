@@ -13,16 +13,7 @@ public interface EmploymentInductionDocumentDAO {
 	 * @param document the employment induction document to be added
 	 */
 	void addEmploymentInductionDocument(EmploymentInductionDocument document);
-	
 
-	/**
-	 * Retrieves an employment induction document based on the specified document index.
-	 *
-	 * @param documentIndex the index of the employment induction document
-	 * @return the employment induction document matching the document index
-	 */
-	EmploymentInductionDocument getEmploymentInductionDocument(int documentIndex);
-	
 	/**
 	 * Retrieves a list of all employment induction documents.
 	 *
@@ -30,5 +21,4 @@ public interface EmploymentInductionDocumentDAO {
 	 */
 	List<EmploymentInductionDocumentViewModel> getAllDocuments();
 
-	// Other methods for updating and deleting EmploymentInductionDocuments can be added here
 }

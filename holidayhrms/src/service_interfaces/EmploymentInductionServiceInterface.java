@@ -1,19 +1,15 @@
 package service_interfaces;
 
+import java.util.List;
+
+import models.input.output.OfferDiffModel;
+
 public interface EmploymentInductionServiceInterface {
 
-	/**
-	 * Retrieves the next induction ID.
-	 *
-	 * @return the next induction ID
-	 */
-	int getidNext();
+	Integer getid();
 
-	/**
-	 * Retrieves the current induction ID.
-	 *
-	 * @return the current induction ID
-	 */
-	int getid();
+	List<OfferDiffModel> getAllEmploymentOffers();
+
+	String getStatusById(Integer indcEmofId);
 
 }

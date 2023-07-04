@@ -14,30 +14,25 @@ import service_interfaces.EmploymentInductionDocumentServiceInterface;
 
 @Service
 public class EmploymentInductionDocumentService implements EmploymentInductionDocumentServiceInterface {
-	@Autowired
+
 	private EmploymentInductionDocumentDAO docDAO;
-
 	private final Logger logger = LoggerFactory.getLogger(EmploymentInductionDocumentService.class);
-	
-	// Adds an employment induction document.
-	public void addEmploymentInductionDocument(EmploymentInductionDocument document) {
-		docDAO.addEmploymentInductionDocument(document);
-		logger.info("Added employment induction document with index.");
+
+	@Autowired
+	EmploymentInductionDocumentService(EmploymentInductionDocumentDAO docDAO) {
+		this.docDAO = docDAO;
 	}
 
-	// Retrieves the file data of an employment induction document based on the document index.
-	public String getEmploymentInductionDocumentFile(int documentIndex) {
-		EmploymentInductionDocument document = docDAO.getEmploymentInductionDocument(documentIndex);
-		logger.info("Retrieved employment induction document with index.");
-		String fileData = document.getDocumentData();
-
-		return fileData;
+	public void addCandidateInductionDocument(EmploymentInductionDocument documentt) {
+		logger.info("--------Adding Candidate induction document------------");
+		docDAO.addEmploymentInductionDocument(documentt);// moves to the DAO class to add the documents
+		logger.info("--------Employment Candidate document added successfully--------------");
 	}
 
-	// Retrieves a list of all employment induction documents.
 	public List<EmploymentInductionDocumentViewModel> getAllDocuments() {
-		logger.info("Retrieving all employment induction documents.");
-		return docDAO.getAllDocuments();
+		// Retrieves all employment induction documents.
+		logger.info("Retrieving all employment induction documents");
+		return docDAO.getAllDocuments();// to get the document list
 	}
 
 }

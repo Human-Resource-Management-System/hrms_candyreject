@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import DAO_Interfaces.EmploymentInductionDocumentDAO;
+import controllers.InductionController;
 import models.EmploymentInductionDocument;
 import models.input.output.EmploymentInductionDocumentViewModel;
 
@@ -22,27 +23,20 @@ public class EmploymentInductionDocDAOImpl implements EmploymentInductionDocumen
 
 	@PersistenceContext
 	private EntityManager entityManager;
+	private final Logger logger = LoggerFactory.getLogger(InductionController.class);
 
-	private final Logger logger = LoggerFactory.getLogger(EmploymentInductionDocDAOImpl.class);
-
-    // Adds an employment induction document to the database.
+	@Override
 	@Transactional
-	public void addEmploymentInductionDocument(EmploymentInductionDocument document) {
-		logger.info("Adding employment induction document");
-		entityManager.persist(document);
+	public void addEmploymentInductionDocument(EmploymentInductionDocument documentt) {
+		// to add Documents submitted at induction into the EmploymentInductionDocument table
+		logger.info("Adding induction document");
+		entityManager.persist(documentt);
+		logger.info("Induction document added successfully");
 	}
 
-	// Retrieves an employment induction document based on the specified document index.
-	@Transactional
-	public EmploymentInductionDocument getEmploymentInductionDocument(int documentIndex) {
-		logger.info("Getting employment induction document for index");
-		return entityManager.find(EmploymentInductionDocument.class, documentIndex);
-	}
-
-	// Retrieves a list of all employment induction documents.
 	@Override
 	public List<EmploymentInductionDocumentViewModel> getAllDocuments() {
-		logger.info("Getting all employment induction documents");
+		// to get all the Documents submitted at induction from the EmploymentInductionDocument table
 		String queryString = "SELECT e.emplid, e.emplidty, e.documentData, e.verified FROM EmploymentInductionDocument e WHERE e.emplid IS NOT NULL AND e.emplidty IS NOT NULL AND e.documentData IS NOT NULL AND e.verified IS NOT NULL";
 		Query query = entityManager.createQuery(queryString);
 		// return (List<EmploymentInductionDocumentViewModel>) query.getResultList();
@@ -60,7 +54,7 @@ public class EmploymentInductionDocDAOImpl implements EmploymentInductionDocumen
 					emid_idty_id, documentData, verified);
 			documents.add(document);
 		}
-
+		logger.info("Retrieved {} induction documents", documents.size());
 		return documents;
 	}
 

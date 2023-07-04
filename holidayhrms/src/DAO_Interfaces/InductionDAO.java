@@ -1,50 +1,86 @@
 package DAO_Interfaces;
 
 import java.util.List;
+import java.util.Map;
 
+import exceptions.CustomException;
 import models.Induction;
 
 public interface InductionDAO {
-	/**
-	 * Retrieves a list of all induction IDs.
-	 *
-	 * @return the list of all induction IDs
-	 */
 	List<Integer> getAllInductions();
-	
+
 	/**
-	 * Retrieves a list of induction objects based on the specified ID.
+	 * Retrieves all induction IDs.
 	 *
-	 * @param id the ID of the induction
-	 * @return the list of induction objects matching the ID
+	 * @return A list of all induction IDs.
 	 */
-	public List<Induction> getInductionById(int id);
-	
+	public List<Induction> getInductionById(Integer id);
+
 	/**
-	 * Inserts a new employee induction into the database.
+	 * Retrieves an induction by its ID.
 	 *
-	 * @param induction the induction object to be inserted
+	 * @param id The ID of the induction.
+	 * @return A list of inductions matching the ID.
 	 */
-	public void insertEmployee(Induction induction);
-	
+	public void insertEmployee(Induction induction) throws CustomException;
+
 	/**
-	 * Retrieves a list of all employment offer IDs.
+	 * Inserts an employee induction.
 	 *
-	 * @return the list of all employment offer IDs
+	 * @param induction The induction to be inserted.
+	 * @throws CustomException If an exception occurs during insertion.
 	 */
 	public List<Integer> getAllEmploymentOffers();
+
 	/**
-	 * Updates the status of an employment offer with the specified ID.
+	 * Retrieves all employment offer IDs.
 	 *
-	 * @param offerId the ID of the employment offer
-	 * @param status  the new status of the employment offer
+	 * @return A list of all employment offer IDs.
 	 */
 	void updateEmploymentOfferStatus(int offerId, String status);
-	/**
-	 * Retrieves the next available index for an induction.
-	 *
-	 * @return the next available index for an induction
-	 */
-	int getIndex();
 
+	/**
+	 * Updates the status of an employment offer.
+	 *
+	 * @param offerId The ID of the employment offer.
+	 * @param status  The new status of the employment offer.
+	 */
+	Integer getIndex();
+
+	/**
+	 * Retrieves the current index.
+	 *
+	 * @return The current index.
+	 */
+	Map<Integer, Integer> getEmployeeOfferedIdMaxMap(List<Integer> hd);
+
+	/**
+	 * Retrieves a mapping of employee offered ID to maximum value from a list of IDs.
+	 *
+	 * @param hd A list of IDs.
+	 * @return A mapping of employee offered ID to maximum value.
+	 */
+	int getCountOfOfferIdentity(int id);
+
+	/**
+	 * Retrieves the count of offer identity for a given ID.
+	 *
+	 * @param id The ID of the offer.
+	 * @return The count of offer identity.
+	 */
+	Map<Integer, Integer> getEmploymentInductionDocCountMap(List<Integer> hd);
+
+	/**
+	 * Retrieves a mapping of employment induction document count from a list of IDs.
+	 *
+	 * @param hd A list of IDs.
+	 * @return A mapping of employment induction document count.
+	 */
+	int getEmploymentInductionDocCount(int id);
+	/**
+	 * Retrieves the employment induction document count for a given ID.
+	 *
+	 * @param id The ID of the employment induction document.
+	 * @return The employment induction document count.
+	 */
 }

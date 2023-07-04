@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,105 +19,148 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import DAO_Interfaces.InductionDAO;
+import exceptions.CustomException;
 import models.EmploymentInductionDocument;
 import models.Induction;
 import models.input.output.EmploymentInductionDocumentViewModel;
+import models.input.output.OfferDiffModel;
 import models.input.output.SaveInductioninput;
 import models.input.output.addinductionDOC;
 import service_interfaces.EmploymentInductionDocumentServiceInterface;
 import service_interfaces.EmploymentInductionServiceInterface;
 
 @Controller
+
 public class InductionController {
 
-	@Autowired
-	private EmploymentInductionDocumentServiceInterface docServ; // injecting service class object
+	private final EmploymentInductionDocumentServiceInterface docServ;
+	private final EmploymentInductionServiceInterface indServ;
+	private final EmploymentInductionDocument documentt;
+	private final InductionDAO idao;
+	private final OfferDiffModel offerDiff;
+	private final Induction induction;
+	private final Logger logger = LoggerFactory.getLogger(InductionController.class);
 
 	@Autowired
-	private EmploymentInductionServiceInterface indServ; // injecting service class object
-
-	@Autowired
-	private EmploymentInductionDocument documentt; // injecting Document Entity Model class object
-
-	@Autowired
-	private InductionDAO idao;// injecting DAO class object
-
-	@Autowired
-	private Induction induction;// injecting induction class object
-
-	@RequestMapping("/inductionlist") // view the list of inductions conducted
-	public String showEmployees(Model model) {
-		List<Integer> inductions = idao.getAllInductions();
-		model.addAttribute("inductions", inductions);
-		return "inductions";
+	public InductionController(EmploymentInductionDocumentServiceInterface docServ,
+			EmploymentInductionServiceInterface indServ, EmploymentInductionDocument documentt, InductionDAO idao,
+			Induction induction, OfferDiffModel offerDiff) {
+		this.docServ = docServ;
+		this.indServ = indServ;
+		this.documentt = documentt;
+		this.idao = idao;
+		this.induction = induction;
+		this.offerDiff = offerDiff;
 	}
 
-	@RequestMapping("/get-induction-details") // shows the data regarding selected induction
-	public String getEmployeeDetails(@RequestParam("id") int indid, Model model) {
-		System.out.println(indid);
+	@RequestMapping("/inductionlist") // view the list of inductions conducted
+	public String getOfferedCandidates(Model model) {
+		logger.info("Showing Employees.");
+		// logger.debug("Retrieving all inductions from the InductionDAO.");
+		List<Integer> inductions = idao.getAllInductions();
+		logger.error("Logging a sample exception", new Exception("Testing"));
+		model.addAttribute("inductions", inductions);
+		logger.info("Moved to the INduction jsp page.");
+		return "inductions"; // opens the inductions.jsp page
+	}
+
+	@RequestMapping("/getinductiondetails") // shows the data regarding selected induction
+	public String getCandidateDetails(@RequestParam("id") Integer indid, Model model) {
+		logger.info("Getting induction details for ID: {}", indid);
+		logger.debug("Retrieving induction details for ID: {} from the InductionDAO.", indid);
 		List<Induction> i = idao.getInductionById(indid);
 		model.addAttribute("indid", i);
 		model.addAttribute("ID", indid);
-		return "inductiondetails";
+		logger.debug("Retrieved details for induction with ID: {}", indid);
+		logger.info("Redirecting to the inductiondetails.jsp page.");
+		return "inductiondetails"; // opens the inductiondetails.jsp page
 	}
 
-	@RequestMapping(value = "/inductioninsert", method = RequestMethod.GET) // to insert into induction
+	@RequestMapping(value = "/inductioninsert", method = RequestMethod.GET, produces = "text/html") // to insert into //
+																									// induction
 	public String createInduction(Model model) {
-		List<Integer> hd = idao.getAllEmploymentOffers();
-		model.addAttribute("employmentOffers", hd);
-		return "createInduction";
+		logger.info("VIewing the induction form");
+		logger.debug("Retrieving all employment offers from the EmploymentInductionService.");
+		List<OfferDiffModel> diffmodel = indServ.getAllEmploymentOffers(); // moves to the InductionDAO class
+		model.addAttribute("diffmodel", diffmodel);
+		logger.info("Opening the Form to Create induction");
+		return "createInduction"; // opens the createInduction.jsp page
 	}
 
 	@RequestMapping(value = "/inductionsave", method = RequestMethod.POST) // for saving the induction
-	public String saveInduction(@ModelAttribute SaveInductioninput request, Model model) {
-		// Map the properties from the input model to the entity model
-		List<Induction> inductions = new ArrayList<>(); // Create the Induction objects
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-
-		for (Integer indcEmofId : request.getIndcEmofId()) {
-			if (request.getIndcId().equals("same")) {
-				induction.setIndcId(indServ.getid());
-			} else {
-				induction.setIndcId(indServ.getidNext());
+	public String saveInduction(@ModelAttribute SaveInductioninput request, Model model) throws CustomException {
+		try {
+			logger.info("Saving induction");
+			List<Induction> inductions = new ArrayList<>(); // Create the Induction objects
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+			induction.setIndcId(indServ.getid());
+			logger.debug("Saving induction with ID: {}", induction.getIndcId());
+			for (Integer indcEmofId : request.getIndcEmofId()) {
+				induction.setIndcEmofId(indcEmofId);
+				induction.setIndcProcessedAusrId(request.getIndcProcessedAusrId());
+				String status = indServ.getStatusById(indcEmofId);
+				String status1 = "Submitted";
+				String status2 = "No document submitted";
+				if (status1.equals(status)) {
+					induction.setIndcStatus("PCMP");
+				} else if (status2.equals(status)) {
+					throw new CustomException(
+							"Candidates who submitted NILL documents are not allowed for the induction");
+				} else {
+					induction.setIndcStatus("PEND");
+				}
+				try {
+					if (request.getIndcDate() != null) {
+						Date date = dateFormat.parse(request.getIndcDate());
+						induction.setIndcDate(new java.sql.Date(date.getTime()));
+					} else {
+						model.addAttribute("errorMessage", "Date is required. Please enter a valid date.");
+						return "ErrorInduction"; // Return the ErrorInduction view
+					}
+				} catch (ParseException e) {// Set an error message to be displayed to the user
+					model.addAttribute("errorMessage", "Invalid date format. Please enter a valid date.");
+					return "ErrorInduction"; // Return the ErrorInduction view
+				}
+				inductions.add(induction);
+				// moves to the InductionDAO class to insert the candidates participated in the induction
+				idao.insertEmployee(induction);
+				// moves to the InductionDAO class to update the status in employeeoffer table
+				idao.updateEmploymentOfferStatus(indcEmofId, "INDC");
 			}
-			induction.setIndcEmofId(indcEmofId);
-			induction.setIndcProcessedAusrId(request.getIndcProcessedAusrId());
-			induction.setIndcStatus(request.getIndcStatus());
-			try {
-				Date date = dateFormat.parse(request.getIndcDate());
-				induction.setIndcDate(new java.sql.Date(date.getTime()));
-
-			} catch (ParseException e) {
-				System.out.println("Causing Error");
-			}
-			inductions.add(induction);
-			idao.insertEmployee(induction);//
-			idao.updateEmploymentOfferStatus(indcEmofId, "INDC");
+			logger.debug("Saved induction with ID: {}", induction.getIndcId());
+			List<Integer> induc = idao.getAllInductions();// goes to the getAllInductions method in DAO class
+			model.addAttribute("inductions", induc);
+			return "inductions"; // opens the inductions.jsp page
+		} catch (CustomException e) {
+			logger.error("An error occurred: {}", e.getMessage());
+			model.addAttribute("errorMessage", e.getMessage());
+			return "ErrorInduction";
 		}
-		List<Integer> induc = idao.getAllInductions();
-		model.addAttribute("inductions", induc);
-		return "inductions";
 	}
 
 	@GetMapping("/getform") // previews the form to fill and upload document
-	public String getform(Model model) {
+	public String getInductionform(Model model) {
+
+		// moves to the EmploymentInductionDocumentService class to get all document
 		List<EmploymentInductionDocumentViewModel> doc = docServ.getAllDocuments();
-		System.out.println(doc);
 		model.addAttribute("doc", doc);
-		return "InductionDocument";
+		logger.info("Getting induction Document Upload form");
+		return "InductionDocument"; // opens the InductionDocument jsp page
 	}
 
 	@GetMapping("/add") // to save the induction documents
-	public String addDocument(@ModelAttribute addinductionDOC input) {
-		documentt.setEmplid(input.getEmploymentOfferId());// employee offer id
-		System.out.println(input.getEmploymentOfferId());
-		documentt.setEmplidty(input.getDocumentTypeId());// employee offer document type setting
+	public String addInductionDocument(@ModelAttribute addinductionDOC input) {
+		// Map the properties from the input model to the entity model
+		documentt.setEmplid(input.getEmploymentOfferId());
+		documentt.setEmplidty(input.getDocumentTypeId());
 		documentt.setIndcProcessedAusrId(input.getProcessedUserId());
 		documentt.setVerified(input.getVerified());
 		String path = input.getDocumentData().getAbsolutePath();
-		System.out.println("-----------------------" + path);
 		documentt.setDocumentData(path);
-		docServ.addEmploymentInductionDocument(documentt);
+		logger.info("Moving to EmploymentInductionDocumentService to Add induction document");
+		// moves to the EmploymentInductionDocumentService class to insert document
+		docServ.addCandidateInductionDocument(documentt);
+		logger.info("Added induction document so returning Success");
 		return "success";
 	}
 }

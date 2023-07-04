@@ -10,7 +10,7 @@
             <script src="./js/InductionDocument.js"></script>
 </head>
 <body>
-    <h1>Employment Induction Documents</h1><br>
+    <h1>Employment Induction Documents</h1>
     
      <table>
         <thead>
@@ -31,9 +31,9 @@
                 </tr>
             </c:forEach>
         </tbody>
-    </table><br>
+    </table>
     
-    <button onclick="showAddDocumentForm()">Add Document</button><br>
+    <button onclick="showAddDocumentForm()">Add Document</button>
     
     <div id="addDocumentForm" class="add-document-form">
         <h2>Add Document</h2>
@@ -52,7 +52,7 @@
             <input type="text" id="processedUser" name="processedUserId" required><br>
 
             <label for="verified">Verified:</label>
-            <input type="text" id="verified" name="verified" required><br><br>
+            <input type="text" id="verified" name="verified" required><br>
 
             <button type="submit">Insert</button>
         </form>
