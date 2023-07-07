@@ -2,10 +2,12 @@ package models.input.output;
 
 public class OfferDiffModel {
 	private Integer offerId;
+	private String name;
 	private String status;
 
-	public OfferDiffModel(Integer offerId, String status) {
+	public OfferDiffModel(Integer offerId, String name, String status) {
 		this.offerId = offerId;
+		this.name = name;
 		this.status = status;
 	}
 
@@ -19,6 +21,14 @@ public class OfferDiffModel {
 
 	public void setOfferId(Integer offerId) {
 		this.offerId = offerId;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getStatus() {

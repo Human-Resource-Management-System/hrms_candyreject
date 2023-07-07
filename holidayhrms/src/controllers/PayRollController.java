@@ -22,7 +22,7 @@ import models.Employee;
 import models.EmployeePayslip;
 import models.input.output.EmployeePayRollInputModel;
 import models.input.output.EmployeePayRollOutputModel;
-import service.PaySlipMail;
+import service_interfaces.MailServiceInterface;
 import service_interfaces.PayRollService;
 
 @Controller
@@ -34,13 +34,16 @@ public class PayRollController {
 	private EmployeePayRollInputModel payRollInput;
 	private EmployeePayslip empPaySlip;
 	private PayRollDAO payrollDAO;
+	private MailServiceInterface mailService;
 	private static final Logger logger = LoggerFactory.getLogger(PayRollController.class);
 
 	@Autowired
 	PayRollController(PayRollService payRollservice, EmployeeDAO ed, EmployeePayRollOutputModel payRollOutput,
-			EmployeePayRollInputModel payRollInput, EmployeePayslip empPaySlip, PayRollDAO payrollDAO) {
+			EmployeePayRollInputModel payRollInput, EmployeePayslip empPaySlip, PayRollDAO payrollDAO,
+			MailServiceInterface mailService) {
 		this.payRollservice = payRollservice;
 		this.ed = ed;
+		this.mailService = mailService;
 		this.payRollOutput = payRollOutput;
 		this.payRollInput = payRollInput;
 		this.empPaySlip = empPaySlip;
@@ -140,7 +143,7 @@ public class PayRollController {
 		model.addAttribute("pay", payRollOutput);
 
 		try {
-			PaySlipMail.sendEmail(request, response, payRollOutput, email);
+			mailService.sendPaySlipMail(request, response, payRollOutput, email);
 		} catch (Exception e) {
 
 			e.printStackTrace();

@@ -21,13 +21,13 @@ import models.Employee;
 import models.EntityForgotPassword;
 import models.input.output.MailOtpModel;
 import service.EmployeeLoginService;
-import service_interfaces.MailService;
+import service_interfaces.MailServiceInterface;
 
 @Controller
 public class LoginController {
 
 	private final Logger logger = LoggerFactory.getLogger(LoginController.class);
-	private MailService mailService;
+	private MailServiceInterface mailService;
 	private ForgotPasswordDAOImpl forgotPassword;
 
 	private EntityForgotPassword entityforgot;
@@ -35,7 +35,7 @@ public class LoginController {
 	EmployeeLoginService empservice;
 
 	@Autowired
-	public LoginController(EmployeeLoginService empservice, Employee empauto, MailService mailService,
+	public LoginController(EmployeeLoginService empservice, Employee empauto, MailServiceInterface mailService,
 			ForgotPasswordDAOImpl forgotPassword, EntityForgotPassword entityforgot) {
 		this.empservice = empservice;
 		this.mailService = mailService;

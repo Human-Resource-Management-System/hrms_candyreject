@@ -149,18 +149,28 @@ public class InductionController {
 	}
 
 	@GetMapping("/add") // to save the induction documents
-	public String addInductionDocument(@ModelAttribute addinductionDOC input) {
+	public String addInductionDocument(@ModelAttribute addinductionDOC input, Model model) {
 		// Map the properties from the input model to the entity model
-		documentt.setEmplid(input.getEmploymentOfferId());
-		documentt.setEmplidty(input.getDocumentTypeId());
-		documentt.setIndcProcessedAusrId(input.getProcessedUserId());
-		documentt.setVerified(input.getVerified());
-		String path = input.getDocumentData().getAbsolutePath();
-		documentt.setDocumentData(path);
-		logger.info("Moving to EmploymentInductionDocumentService to Add induction document");
-		// moves to the EmploymentInductionDocumentService class to insert document
-		docServ.addCandidateInductionDocument(documentt);
-		logger.info("Added induction document so returning Success");
+		boolean dt;
+		try {
+			dt = docServ.getDocType(input.getEmploymentOfferId(), input.getDocumentTypeId());
+			if (dt) {
+				documentt.setEmplid(input.getEmploymentOfferId());
+				documentt.setEmplidty(input.getDocumentTypeId());
+				documentt.setIndcProcessedAusrId(input.getProcessedUserId());
+				documentt.setVerified(input.getVerified());
+				String path = input.getDocumentData().getAbsolutePath();
+				documentt.setDocumentData(path);
+				logger.info("Moving to EmploymentInductionDocumentService to Add induction document");
+				// moves to the EmploymentInductionDocumentService class to insert document
+				docServ.addCandidateInductionDocument(documentt);
+				logger.info("Added induction document so returning Success");
+			}
+		} catch (CustomException e) {
+			logger.error("An error occurred: {}", e.getMessage());
+			model.addAttribute("errorMessage", e.getMessage());
+			return "ErrorInduction";
+		}
 		return "success";
 	}
 }

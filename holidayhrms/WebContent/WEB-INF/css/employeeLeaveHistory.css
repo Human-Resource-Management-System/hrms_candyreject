@@ -27,11 +27,7 @@
             font-weight: bold;
             color: #333;
         }
-        
-        tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-        
+       
         .rejected {
             background-color: #FFCCCC;
         }

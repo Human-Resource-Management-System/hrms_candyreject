@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,8 +24,8 @@ import models.Candidate;
 import models.Employee;
 import models.HrmsEmploymentOffer;
 import models.OfferModel;
-import service.OfferLetterMailService;
 import service.OfferLetterService;
+import service_interfaces.MailServiceInterface;
 
 @Controller
 public class OfferLetterController {
@@ -34,11 +35,14 @@ public class OfferLetterController {
 	private OfferLetterDAO offerLetterDAO;
 	private OfferModel of;
 	private OfferLetterService offerservice;
+	private MailServiceInterface mailService;
 
 	@Autowired
-	public OfferLetterController(OfferLetterDAO offerLetterDAO, OfferLetterService offerservice) {
+	public OfferLetterController(OfferLetterDAO offerLetterDAO, OfferLetterService offerservice,
+			MailServiceInterface mailService) {
 		this.offerLetterDAO = offerLetterDAO;
 		this.offerservice = offerservice;
+		this.mailService = mailService;
 	}
 
 	// getting data of candidates whose offerletters are already provided
@@ -63,12 +67,12 @@ public class OfferLetterController {
 
 	// getting a form for issuing offerletter with details of candidates and respective admin automatically
 	@RequestMapping("/get-candidate-details")
-	public String getCandidateDetails(@RequestParam("id") int candidateId, Model model) {
+	public String getCandidateDetails(@RequestParam("id") int candidateId, Model model, HttpSession session) {
 		logger.info(
 				"after selection of a candidate for issue offerletter getting candidate details or candidate object");
 
 		Candidate candidate = offerLetterDAO.getCandidateById(candidateId);
-		int HR_id = 301;
+		int HR_id = (int) session.getAttribute("adminId");
 		Employee emp = offerLetterDAO.getHrById(HR_id);
 		logger.info(
 				"getting hr details for specifing the hr details on the offerletter (nothing but the admin who has logged in)");
@@ -122,7 +126,8 @@ public class OfferLetterController {
 		logger.info("setting all the data to HrmsEmploymentOffer for inserting into employmentoffers table");
 
 		try {
-			OfferLetterMailService.sendEmail(request, response, of);
+			Candidate can = offerLetterDAO.getCandidateById(Integer.parseInt(of.getCandidateId().trim()));
+			mailService.sendOfferEmail(request, response, of, can.getCandEmail());
 			logger.info("Email sent successfully to the candidate");
 
 		} catch (Exception e) {

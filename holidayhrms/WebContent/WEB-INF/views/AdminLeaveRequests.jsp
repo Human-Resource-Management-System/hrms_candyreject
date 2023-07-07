@@ -1,10 +1,3 @@
-
-
-            
-          
-            
-   
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -14,27 +7,20 @@
 <script src="https://code.jquery.com/jquery-3.7.0.min.js"
 	integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g="
 	crossorigin="anonymous"></script>
-	
 
-  <link rel="stylesheet" type="text/css" href="./css/AdminLeaveRequests.css">
-            <script src="./js/AdminLeaveRequests.js"></script>
+
+<link rel="stylesheet" type="text/css"
+	href="./css/AdminLeaveRequests.css">
+<script src="./js/AdminLeaveRequests.js"></script>
 </head>
 <body>
 	<%@ page
 		import="java.util.List,java.util.ArrayList,models.EmployeeLeaveModel"%>
 
-	
-	<h1>Leave Requests</h1><br>
+
+	<h1>Leave Requests</h1>
+	<br>
 	<table>
-		<tr>
-			<th>Employee ID</th>
-			<th>Employee Name</th>
-			<th>Leave Type</th>
-			<th>Start Leave Date</th>
-			<th>End Leave Date</th>
-			<th>Reason</th>
-			<th>Action</th>
-		</tr>
 		<!--  type safety -->
 		<%
 		List<EmployeeLeaveModel> data = new ArrayList<>();
@@ -48,6 +34,20 @@
 				}
 			}
 		}
+		
+		%>
+		<%
+		 if(data.size()!=0){
+			 %>
+			 <tr>
+			<th>Employee ID</th>
+			<th>Employee Name</th>
+			<th>Leave Type</th>
+			<th>Start Leave Date</th>
+			<th>End Leave Date</th>
+			<th>Reason</th>
+			<th>Action</th>
+		</tr><% 
 		for (int i = 0; i < data.size(); i++) {
 			EmployeeLeaveModel model = data.get(i);
 		%>
@@ -63,13 +63,15 @@
 					<button class="button"
 						onclick="showLeaveModal('<%=model.getEmpId()%>','<%=model.getName()%>','<%=model.getLeaveType()%>','<%=model.getLeaveStartDate()%>','<%=model.getLeaveEndDate()%>','<%=model.getReason()%>','<%=model.getLeaveRequestIndex()%>')">Accept</button>
 					<button class="button reject"
-						onclick="rejectLeave('<%=model.getEmpId()%>','<%=model.getLeaveRequestIndex()%>')">Reject</button>
+						onclick="showRejectModal('<%=model.getEmpId()%>','<%=model.getLeaveRequestIndex()%>')">Reject</button>
 				</div>
 			</td>
 		</tr>
 		<%
-		}
+		}  } else {
 		%>
+		<h3 style="text-align:center">No Leave Requests Found</h3>
+		<%} %>
 	</table>
 
 	<!-- The modal -->
@@ -100,12 +102,12 @@
 
 				<div class="form-row">
 					<label for="startDate">Start Leave Date:</label> <input type="date"
-						id="startDate" name="leaveStartDate">
+						id="startDate" name="leaveStartDate" readonly>
 				</div>
 
 				<div class="form-row">
 					<label for="endDate">End Leave Date:</label> <input type="date"
-						id="endDate" name="leaveEndDate">
+						id="endDate" name="leaveEndDate" readonly>
 				</div>
 
 				<div class="form-row">
@@ -117,13 +119,39 @@
 					<label for="remarks">Remarks:</label>
 					<textarea id="remarks" name="remarks"></textarea>
 				</div>
-				
+
 				<div class="form-row">
 					<input type="button" class="button" value="Accept"
 						onclick="acceptLeave()">
 				</div>
 			</form>
 
+		</div>
+	</div>
+
+	<!-- reject modal -->
+
+	<div id="rejectModal" class="modal">
+		<div id="rejectModalContent" class="modal-content">
+		<span class="close">&times;</span>
+			<form id="rejectform">
+				<div class="form-row">
+					<label for=""rejectemployeeId">Employee ID:</label> <input type="text"
+						id="rejectemployeeId" name="employeeId" readonly>
+				</div>
+				<div class="form-row">
+					<label for="rejectleaveId">Leave Request ID:</label> <input type="text"
+						id="rejectleaveId" name="leaveRequestIndex" readonly>
+				</div>
+				<div class="form-row">
+					<label for="rejectremarks">Remarks:</label>
+					<textarea id="rejectremarks" name="remarks"></textarea>
+				</div>
+				<div class="form-row">
+					<input type="button" class="button" value="Reject"
+						onclick="rejectLeave()">
+				</div>
+			</form>
 		</div>
 	</div>
 </body>

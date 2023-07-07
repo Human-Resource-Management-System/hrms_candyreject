@@ -1,15 +1,11 @@
 package controllers;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,8 +26,6 @@ import DAO_Interfaces.EmployeeDAO;
 import models.AttendanceEvent;
 import models.AttendanceRequest;
 import models.Employee;
-import models.EmployeeAttendance;
-import models.EmployeeAttendanceId;
 import models.EmployeeRequestResult;
 import service_interfaces.EmployeeAttendanceServiceInterface;
 
@@ -45,8 +39,7 @@ public class AttendanceController {
 	private EmployeeAttendanceDAO employeeAttendanceDAO;
 
 	@Autowired
-	public AttendanceController(Gson gson,
-			EmployeeDAO employeeDAO, EmployeeAttendanceDAO employeeAttendanceDAO,
+	public AttendanceController(Gson gson, EmployeeDAO employeeDAO, EmployeeAttendanceDAO employeeAttendanceDAO,
 			EmployeeAttendanceServiceInterface employeeAttendanceService) {
 		this.gson = gson;
 		this.employeeDAO = employeeDAO;
@@ -125,9 +118,6 @@ public class AttendanceController {
 			if (results == null || results.isEmpty()) {
 
 				logger.warn("No attendance data found for year,month,employee ID");
-
-				// Handle case where no attendance data is found
-				return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No attendance data found.");
 			}
 
 			EmployeeRequestResult response = employeeAttendanceService.calculateAttendance(results);
@@ -180,12 +170,11 @@ public class AttendanceController {
 			employeeAttendanceService.processExcelFile(file);
 			logger.info("successfully processed the Excel File");
 			return ResponseEntity.ok("success");
-		}
-		catch(IOException e) {
+		} catch (IOException e) {
 			logger.error("Failed to process the excel file");
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred.");
 		}
-	
+
 	}
 
 	// gets the list of years starting from the employee join date

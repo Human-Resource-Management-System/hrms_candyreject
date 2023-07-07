@@ -128,7 +128,7 @@
      
       height: 100vh;
       padding: 20px;
-      background: #e7f2fd;
+      
       overflow: auto;
       max-width: 100%;
       max-height: 100%;
@@ -807,8 +807,6 @@
     
 </div>
 
-   
-  </body>
        <script>
        const sidebar = document.querySelector(".sidebar");
        const sidebarClose = document.querySelector("#sidebar-close");
@@ -838,6 +836,7 @@
 
 </script>
 
+</body>
  
 </html>
 

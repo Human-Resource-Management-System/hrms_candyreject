@@ -77,10 +77,13 @@ public interface InductionDAO {
 	 * @return A mapping of employment induction document count.
 	 */
 	int getEmploymentInductionDocCount(int id);
+
 	/**
 	 * Retrieves the employment induction document count for a given ID.
 	 *
 	 * @param id The ID of the employment induction document.
 	 * @return The employment induction document count.
 	 */
+
+	String getEmployeeOfferName(Integer id);
 }

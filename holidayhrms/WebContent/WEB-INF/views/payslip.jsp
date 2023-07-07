@@ -5,7 +5,101 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Employee Payslip</title>
- <link rel="stylesheet" type="text/css" href="./css/paySlip.css">
+
+<style>
+
+    h1 {
+        text-align: center;
+        color: #333;
+    }
+
+    h2 {
+        margin-bottom: 10px;
+        color: #666;
+    }
+
+    .container {
+        display: flex;
+        height: 100%;
+    }
+
+    .container1 {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        border-right: 1px solid #ccc;
+        padding-right: 20px;
+        margin-right: 20px;
+    }
+
+    .container2 {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .sub-container {
+        flex: 1;
+        margin-bottom: 20px;
+    }
+
+    p {
+        margin: 5px 0;
+    }
+
+    strong {
+        font-weight: bold;
+    }
+
+    .details {
+        color: #333;
+    }
+
+    .deductions {
+        color: #cc0000;
+    }
+
+    .pay {
+        color: #009933;
+    }
+
+    .total {
+        margin-top: 20px;
+        color: #333;
+        font-weight: bold;
+    }
+
+    .netpay {
+        margin-top: 10px;
+        color: #009933;
+        font-size: 20px;
+    }
+
+    hr {
+        border-top: 1px solid #ccc;
+        margin-top: 20px;
+    }
+
+    .center-align {
+        display: flex;
+        justify-content: center;
+        margin-top: 30px;
+    }
+
+    .button {
+        padding: 10px 20px;
+        background-color: #009933;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    .button:hover {
+        background-color: #008026;
+    }
+</style>
      
 </head>
 <body>
@@ -47,4 +141,3 @@
     </div>
 </body>
 </html>
-

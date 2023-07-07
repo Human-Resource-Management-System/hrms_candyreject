@@ -34,18 +34,21 @@ public class EmploymentInductionService implements EmploymentInductionServiceInt
 	@Override
 	public List<OfferDiffModel> getAllEmploymentOffers() {
 		List<Integer> hd = idao.getAllEmploymentOffers();
+		logger.info("------------Getting the list count ----------");
 		Map<Integer, Integer> cntOfferTypeDocMap = idao.getEmployeeOfferedIdMaxMap(hd);
 		Map<Integer, Integer> cntInductionDocTypeMap = idao.getEmploymentInductionDocCountMap(hd);
 		List<OfferDiffModel> offerDiffList = new ArrayList<>();
 		// Iterate over the hd list and calculate the difference between cntOfferTypeDocMap and cntInductionDocTypeMap
 		for (Integer id : hd) {
+			logger.info("------------Fetching name of the candidate----------");
+			String name = idao.getEmployeeOfferName(id);
 			OfferDiffModel offerDiff = new OfferDiffModel();
 			int maxCount = cntOfferTypeDocMap.getOrDefault(id, 0);
 			int cntCount = cntInductionDocTypeMap.getOrDefault(id, 0);
 			int diff = maxCount - cntCount;
 			// setting the values to the attributes
 			offerDiff.setOfferId(id);
-
+			offerDiff.setName(name);
 			if (diff == 0) {
 				offerDiff.setStatus("Submitted");
 			} else if (diff == maxCount) {
@@ -78,5 +81,4 @@ public class EmploymentInductionService implements EmploymentInductionServiceInt
 		logger.debug("----------Calculated offer difference for id {}: {}------------", indcEmofId, Status);
 		return Status;
 	}
-
 }

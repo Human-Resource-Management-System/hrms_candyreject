@@ -19,10 +19,12 @@ import java.util.List;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.web.multipart.MultipartFile;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -41,10 +43,16 @@ public class EmployeeAttendanceServiceTest {
 	private EmployeeAttendanceService employeeAttendanceService;
 
 	@Mock
-	private Cell cell;
+	private Workbook workbook;
 
 	@Mock
-	private MultipartFile mockFile;
+	private Sheet sheet;
+
+	@Mock
+	private Row row;
+
+	@Mock
+	private Cell cell;
 
 	@BeforeMethod
 	public void setUp() {

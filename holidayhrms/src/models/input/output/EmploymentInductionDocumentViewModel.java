@@ -5,12 +5,15 @@ public class EmploymentInductionDocumentViewModel {
 	private int emid_idty_id;
 	private String documentData;
 	private String verified;
+	private String title;
 
-	public EmploymentInductionDocumentViewModel(int emplid, int emid_idty_id, String documentData, String verified) {
+	public EmploymentInductionDocumentViewModel(int emplid, int emid_idty_id, String documentData, String verified,
+			String title) {
 		this.emplid = emplid;
 		this.emid_idty_id = emid_idty_id;
 		this.documentData = documentData;
 		this.verified = verified;
+		this.title = title;
 	}
 
 	public int getEmplid() {
@@ -43,5 +46,13 @@ public class EmploymentInductionDocumentViewModel {
 
 	public void setVerified(String verified) {
 		this.verified = verified;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
 	}
 }

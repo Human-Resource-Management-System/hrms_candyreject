@@ -4,28 +4,42 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import DAO_Interfaces.EmployeeDAO;
+import models.Employee;
 import models.EmployeeLeaveRequest;
 import models.JobGradeWiseLeaves;
 import models.LeaveValidationModel;
+import models.input.output.EmployeeLeaveInputModel;
 import service_interfaces.EmployeeLeaveServiceInterface;
+import service_interfaces.MailServiceInterface;
 
 public class EmployeeLeaveService implements EmployeeLeaveServiceInterface {
-	
+
 	private static Logger logger = LoggerFactory.getLogger(EmployeeLeaveService.class);
+	private EmployeeDAO ed;
+	private MailServiceInterface mailService;
+
+	@Autowired
+	public EmployeeLeaveService(EmployeeDAO ed, MailServiceInterface mailService) {
+		this.ed = ed;
+		this.mailService = mailService;
+	}
 
 	public EmployeeLeaveService() {
 	}
 
-
 	private LeaveValidationModel leaveValidation;
 
 	public static long calculateLeavesTakenBetwwenDates(LocalDate startDate, LocalDate endDate) {
-	    // Calculate the number of days between the start and end dates, inclusive of both dates
-		if(startDate==null || endDate==null)
+		// Calculate the number of days between the start and end dates, inclusive of both dates
+		if (startDate == null || endDate == null)
 			return 0;
 		logger.info("calculating the leaves taken between dates");
 		return ChronoUnit.DAYS.between(startDate, endDate) + 1;
@@ -50,11 +64,11 @@ public class EmployeeLeaveService implements EmployeeLeaveServiceInterface {
 			long pendingOtherLeaves = 0;
 
 			leaveValidation = new LeaveValidationModel();
-			
+
 			for (EmployeeLeaveRequest leave : leaves) {
 
 				if (leave.getApprovedLeaveStartDate() == null || leave.getApprovedLeaveEndDate() == null) {
-	                // Calculate leaves count for pending leave requests
+					// Calculate leaves count for pending leave requests
 					long leavesCount = EmployeeLeaveService.calculateLeavesTakenBetwwenDates(leave.getLeaveStartDate(),
 							leave.getLeaveEndDate());
 					pendingTotalNoOfLeaves += leavesCount;
@@ -67,7 +81,7 @@ public class EmployeeLeaveService implements EmployeeLeaveServiceInterface {
 					}
 
 				} else {
-	                // Calculate leaves count for approved leave requests
+					// Calculate leaves count for approved leave requests
 					long leavesCount = EmployeeLeaveService.calculateLeavesTakenBetwwenDates(
 							leave.getApprovedLeaveStartDate(), leave.getApprovedLeaveEndDate());
 					System.out.println(leavesCount);
@@ -82,7 +96,7 @@ public class EmployeeLeaveService implements EmployeeLeaveServiceInterface {
 				}
 			}
 
-	        // Set the calculated leaves information in the leave validation model
+			// Set the calculated leaves information in the leave validation model
 			leaveValidation.setTakenCasualLeaves(casualLeaves);
 			leaveValidation.setTakenOtherLeaves(otherLeaves);
 			leaveValidation.setTakenSickLeaves(sickLeaves);
@@ -101,10 +115,22 @@ public class EmployeeLeaveService implements EmployeeLeaveServiceInterface {
 		}
 
 		logger.info("successfully calculated the leaves taken.");
-		
-	System.out.println("helo"+leaveValidation.getTakenCasualLeaves());
-		
+
 		return leaveValidation;
+	}
+
+	@Override
+	public void sendEmail(HttpServletRequest request, HttpServletResponse respone, EmployeeLeaveInputModel leave)
+			throws Exception {
+		Employee employee = ed.getEmployeeById(leave.getEmployeeId());
+		Employee manager = ed.getEmployeeById(employee.getEmplRmanagerEmplId());
+		Employee hr = ed.getEmployeeById(employee.getEmplHrEmplId());
+
+		try {
+			mailService.sendLeaveRequestMail(request, respone, leave, manager.getEmplOffemail(), hr.getEmplOffemail());
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 
 }

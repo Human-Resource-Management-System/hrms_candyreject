@@ -94,7 +94,8 @@ public class ApplyPermissionDAOImpl implements ApplyPermissionDAO {
 		logger.info("Executing getEmployeeAndPermissionRequestDataCountPerDay method");
 
 		String jpqlQuery = "SELECT COUNT(elrq) FROM ApplyPermissions elrq " + "WHERE elrq.id.empl_id = :employeeIds "
-				+ "AND elrq.current_date = :currentdate";
+				+ "AND elrq.current_date = :currentdate " + "AND elrq.eprq_status = 'accept'";
+
 		TypedQuery<Long> query = em.createQuery(jpqlQuery, Long.class);
 		query.setParameter("employeeIds", id);
 		query.setParameter("currentdate", current);
@@ -108,8 +109,9 @@ public class ApplyPermissionDAOImpl implements ApplyPermissionDAO {
 	public long getEmployeeAndPermissionRequestDataCountPerMonth(int id, int month, int year) {
 		logger.info("Executing getEmployeeAndPermissionRequestDataCountPerMonth method");
 		String jpqlQuery = "SELECT COUNT(elrq) FROM ApplyPermissions elrq " + "WHERE elrq.id.empl_id = :employeeIds "
-				+ "AND EXTRACT(MONTH FROM elrq.current_date) = :month "
+				+ "AND elrq.eprq_status = 'accept' " + "AND EXTRACT(MONTH FROM elrq.current_date) = :month "
 				+ "AND EXTRACT(YEAR FROM elrq.current_date) = :year";
+
 		TypedQuery<Long> query = em.createQuery(jpqlQuery, Long.class);
 		query.setParameter("employeeIds", id);
 		query.setParameter("month", month);

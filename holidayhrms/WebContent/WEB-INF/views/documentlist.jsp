@@ -5,14 +5,96 @@
 <!DOCTYPE html>
 <html>
 <head>
- <link rel="stylesheet" type="text/css" href="./css/documentlist.css">
     
-  
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        
+        h1 {
+            text-align: center;
+        }
+        
+        .category-select {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .category-select label {
+            font-weight: bold;
+        }
+        
+        .category-select select {
+            padding: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        
+        .category {
+            margin-bottom: 20px;
+        }
+        
+        .category-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .document {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .document-name {
+            flex-grow: 1;
+            font-style: italic;
+        }
+        
+        .document-actions {
+            margin-left: 10px;
+        }
+        
+        .view-button, .delete-button {
+            padding: 5px 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .delete-button{
+    background-color: #f44336; /* Dark red color */
+        
+        }
+        .add-button {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .add-button a {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        #box {
+  margin: 0 auto;
+  width: 80%;
+  padding: 20px;
+  background-color: #f4f4f4;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Add box shadow */
+}
+        
+    </style>
             <script src="./js/documentlist.js"></script>
    
 </head>
 <body>
   <h1>Reference Documents</h1>
+  <br><br>
   <div class="category-select">
     <label for="category">Select Category:</label>
     <select id="category" name="category" onchange="filterDocumentsByCategory()">
@@ -28,7 +110,7 @@
 <%
   List<EmployeeRefDocuments> document = (List<EmployeeRefDocuments>) request.getAttribute("refdocs");
 %>
-
+<div id="box">
   <div class="category" id="employee-handbook">
     <div class="category-title">Employee Handbook</div>
     <% 
@@ -122,7 +204,7 @@
       <% } 
     } %>
   </div>
-  
+  </div>
 
   <div class="add-button">
     <a href="addReferenceDocument">Add Document</a>

@@ -1,7 +1,6 @@
 package models;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 public class EmployeeLeaveModel {
 
@@ -21,22 +20,32 @@ public class EmployeeLeaveModel {
 	private String leaveType;
 	private LocalDate leaveStartDate;
 	private LocalDate leaveEndDate;
-	private LocalDateTime leaveRequestDate;
+	private LocalDate leaveRequestDate;
 	private int status;
+	private String remarks;
 
 	public EmployeeLeaveModel() {
 	}
 
-	public LocalDateTime getLeaveRequestDate() {
+	public String getRemarks() {
+		return remarks;
+	}
+
+	public void setRemarks(String remarks) {
+		this.remarks = remarks;
+	}
+
+	public LocalDate getLeaveRequestDate() {
 		return leaveRequestDate;
 	}
 
-	public void setLeaveRequestDate(LocalDateTime leaveRequestDate) {
+	public void setLeaveRequestDate(LocalDate leaveRequestDate) {
 		this.leaveRequestDate = leaveRequestDate;
 	}
 
 	public EmployeeLeaveModel(int empId, String name, int leaveRequestIndex, String reason, String leaveType,
-			LocalDate leaveStartDate, LocalDate leaveEndDate, LocalDateTime leaveRequestDate, int status) {
+			LocalDate leaveStartDate, LocalDate leaveEndDate, LocalDate leaveRequestDate, int status, String remarks) {
+		super();
 		this.empId = empId;
 		this.name = name;
 		this.leaveRequestIndex = leaveRequestIndex;
@@ -46,6 +55,7 @@ public class EmployeeLeaveModel {
 		this.leaveEndDate = leaveEndDate;
 		this.leaveRequestDate = leaveRequestDate;
 		this.status = status;
+		this.remarks = remarks;
 	}
 
 	public int getEmpId() {

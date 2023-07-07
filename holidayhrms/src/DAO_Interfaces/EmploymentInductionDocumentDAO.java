@@ -21,4 +21,13 @@ public interface EmploymentInductionDocumentDAO {
 	 */
 	List<EmploymentInductionDocumentViewModel> getAllDocuments();
 
+	/**
+	 * Retrieves a list of all employment induction documents types to be submitted by the employee.
+	 * 
+	 * @param employmentOfferId
+	 *
+	 * @return the list of all employment induction document types
+	 */
+	List<Integer> getDocTypeList(int employmentOfferId);
+
 }

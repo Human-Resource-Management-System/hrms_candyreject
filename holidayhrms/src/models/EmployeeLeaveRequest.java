@@ -48,21 +48,6 @@ public class EmployeeLeaveRequest {
 		// Default constructor
 	}
 
-	public EmployeeLeaveRequest(EmployeeLeaveRequestId leaveRequestId, LocalDateTime requestDateTime, String leaveType,
-			String reason, LocalDate leaveStartDate, LocalDate leaveEndDate, int approvedBy, String approvedRemarks,
-			LocalDate approvedLeaveStartDate, LocalDate approvedLeaveEndDate) {
-		this.leaveRequestId = leaveRequestId;
-		this.requestDateTime = requestDateTime;
-		this.leaveType = leaveType;
-		this.reason = reason;
-		this.leaveStartDate = leaveStartDate;
-		this.leaveEndDate = leaveEndDate;
-		this.approvedBy = approvedBy;
-		this.approvedRemarks = approvedRemarks;
-		this.approvedLeaveStartDate = approvedLeaveStartDate;
-		this.approvedLeaveEndDate = approvedLeaveEndDate;
-	}
-
 	// Getters and Setters
 
 	public EmployeeLeaveRequestId getLeaveRequestId() {

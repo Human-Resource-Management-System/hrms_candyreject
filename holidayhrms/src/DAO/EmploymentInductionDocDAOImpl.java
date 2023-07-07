@@ -37,7 +37,8 @@ public class EmploymentInductionDocDAOImpl implements EmploymentInductionDocumen
 	@Override
 	public List<EmploymentInductionDocumentViewModel> getAllDocuments() {
 		// to get all the Documents submitted at induction from the EmploymentInductionDocument table
-		String queryString = "SELECT e.emplid, e.emplidty, e.documentData, e.verified FROM EmploymentInductionDocument e WHERE e.emplid IS NOT NULL AND e.emplidty IS NOT NULL AND e.documentData IS NOT NULL AND e.verified IS NOT NULL";
+		String queryString = "SELECT e.emplid, e.emplidty, e.documentData, e.verified, i.idtyTitle FROM EmploymentInductionDocument e JOIN InductionDocumentTypes i ON e.emplidty = i.idtyId WHERE e.emplid IS NOT NULL AND e.emplidty IS NOT NULL AND e.documentData IS NOT NULL AND e.verified IS NOT NULL ORDER BY e.emplid, e.emplidty";
+
 		Query query = entityManager.createQuery(queryString);
 		// return (List<EmploymentInductionDocumentViewModel>) query.getResultList();
 
@@ -49,13 +50,20 @@ public class EmploymentInductionDocDAOImpl implements EmploymentInductionDocumen
 			int emid_idty_id = (int) result[1];
 			String documentData = (String) result[2];
 			String verified = (String) result[3];
-
+			String Title = (String) result[4];
 			EmploymentInductionDocumentViewModel document = new EmploymentInductionDocumentViewModel(emplid,
-					emid_idty_id, documentData, verified);
+					emid_idty_id, documentData, verified, Title);
 			documents.add(document);
 		}
 		logger.info("Retrieved {} induction documents", documents.size());
 		return documents;
+	}
+
+	@Override
+	public List<Integer> getDocTypeList(int employmentOfferId) {
+		String query = "SELECT e.offeridentity FROM EmploymentOfferDocument e WHERE e.empoff.offerid = :employmentOfferId";
+		return entityManager.createQuery(query, Integer.class).setParameter("employmentOfferId", employmentOfferId)
+				.getResultList();
 	}
 
 }

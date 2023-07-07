@@ -88,7 +88,8 @@ public class OfferLetterDAOImpl implements OfferLetterDAO {
 	@Transactional
 	public void updateCandidateStatus(String cand_status, String newValue) {
 		logger.info(" update the candidate status from NA to AC after offerletter given ");
-
+		System.out.println(cann.getCandId());
+		cann = getCandidateById(cann.getCandId());
 		cann.setCandStatus(newValue); // Modify the desired column value
 		entityManager.merge(cann); // Save the changes to the database
 	}

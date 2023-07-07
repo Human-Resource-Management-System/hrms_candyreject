@@ -135,4 +135,11 @@ public class InductionDAOImpl implements InductionDAO {
 		return result;
 	}
 
+	@Override
+	public String getEmployeeOfferName(Integer id) {
+		logger.info("Getting name of the candiate of  ID: {}", id);
+		String query = "SELECT c.candFirstName FROM Candidate c WHERE c.candId = :id";
+		return entityManager.createQuery(query, String.class).setParameter("id", id).getSingleResult();
+	}
+
 }

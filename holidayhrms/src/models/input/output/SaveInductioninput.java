@@ -48,6 +48,4 @@ public class SaveInductioninput {
 	public void setIndcStatus(String indcStatus) {
 		IndcStatus = indcStatus;
 	}
-
-	// getters setters
 }

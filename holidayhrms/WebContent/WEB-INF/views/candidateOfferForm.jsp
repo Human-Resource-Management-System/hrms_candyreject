@@ -90,14 +90,14 @@
 
 
  <div class="form-group">
-    <label for="candidate-name">Candidate Name:</label>
+   
 <input type="hidden" id="candidateId" name="candidateId" value="<%= candidate.getCandId() %>" readonly>
   </div>
   
 
    <div class="form-group">
     <label for="candidate-name">Candidate Name:</label>
-<input type="text" id="candidateName" name="candidateName" value="<%= candidate.getCandFirstName() + candidate.getCandLastName() %>" readonly>
+<input type="text" id="candidateName" name="candidateName" value="<%= candidate.getCandFirstName() + " " + candidate.getCandLastName() %>" readonly>
   </div>
 <div class="form-group">
     <label for="hr-mobile">Admin Mobile:</label>

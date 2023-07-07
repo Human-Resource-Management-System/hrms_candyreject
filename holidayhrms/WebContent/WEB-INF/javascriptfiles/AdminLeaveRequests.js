@@ -10,11 +10,7 @@ function showLeaveModal(employeeId, employeeName, leaveType,
 	document.getElementById("employeeId").value = employeeId;
 	document.getElementById("employeeName").value = employeeName;
 	document.getElementById("leaveType").value = leaveType;
-	document.getElementById("startDate").min = startLeaveDate;
-	document.getElementById("startDate").max = endLeaveDate;
 	document.getElementById("startDate").value = startLeaveDate;
-	document.getElementById("endDate").min = startLeaveDate;
-	document.getElementById("endDate").max = endLeaveDate;
 	document.getElementById("endDate").value = endLeaveDate;
 	document.getElementById("reason").value = reason;
 	document.getElementById("leaveId").value = leaveId;
@@ -25,6 +21,27 @@ function showLeaveModal(employeeId, employeeName, leaveType,
 		modal.style.display = "none";
 	};
 }
+
+function showRejectModal(employeeId, leaveId) {
+	 var modal = $("#rejectModal");
+    var modalContent = $("#rejectModalContent");
+
+    // Display the modal
+    modal.show();
+
+    console.log(employeeId);
+    console.log(leaveId);
+    console.log("hello");
+
+    $("#rejectemployeeId").val(employeeId);
+    $("#rejectleaveId").val(leaveId);
+
+    // Close the modal when the close button is clicked
+    $(".close", modalContent).click(function() {
+      modal.hide();
+    });
+}
+
 
 function acceptLeave() {
 	var modal = document.getElementById("leaveModal");
@@ -46,14 +63,11 @@ function acceptLeave() {
 	});
 }
 
-function rejectLeave(id, index) {
+function rejectLeave() {
 	$.ajax({
 		url: "rejectLeave",
 		type: "POST",
-		data: {
-			"empId": id,
-			"leaveRequestIndex": index
-		},
+		data: $("#rejectform").serialize(),
 		success: function(response) {
 			console.log(response);
 			alert("leave rejected.");
