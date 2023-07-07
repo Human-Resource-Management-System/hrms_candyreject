@@ -148,6 +148,10 @@
                 modal.style.display = "none";
             }
         };
+        
+        function goBack() {
+            window.history.back();
+        }
     </script>
 </head>
 <body>

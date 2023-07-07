@@ -247,9 +247,7 @@
                         <div class="form-group">
                             <label for="documentData">Document Data:</label>
                             <input type="file" id="documentData" name="documentData[]" required>
-                      </div>
-                    <button type="button" onclick="addFileInput()">Add More Files</button>
-                </div>
+                    
                         <div class="form-group">
                             <label for="processedUser">Processed User:</label>
                             <input type="text" id="processedUser" name="processedUserId" required>

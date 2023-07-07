@@ -1,5 +1,3 @@
-
-
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" %>
 <%@ page import="models.Candidate" %>
 <%@ page import="java.util.List" %>
@@ -9,9 +7,50 @@
 <head>
     <meta charset="UTF-8">
     <title>List of Candidates</title>
- <link rel="stylesheet" type="text/css" href="./css/OfferProvidedCandidates.css">
-     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-            <script src="./js/OfferProvidedCandidates.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        
+        #tableContainer {
+            width: 80%;
+            margin: 20px auto;
+        }
+        
+        #filterInput {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        
+        #dataTable {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        #dataTable th,
+        #dataTable td {
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+        
+        #dataTable th {
+            background-color: #f2f2f2;
+        }
+        
+        .view-link {
+            display: inline-block;
+            padding: 5px 10px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="./js/OfferProvidedCandidates.js"></script>
 </head>
 <body>
     <div id="tableContainer">
@@ -40,19 +79,7 @@
                             <td><%= candidate.getCandRDate() %></td>
                             <td><%= candidate.getCandStatus() %></td>
                             <td><a class="view-link" href="#" onclick="loadContent('<%= candidate.getCandId() %>')">View</a></td>
-
-                            
-            				<td>
-            
-<td>
-    <form action="get-candidate-details" method="GET">
-        <input type="hidden" name="id" value="<%= candidate.getCandId() %>">
-    </form>
-</td>
-            				</td>
-            				
                         </tr>
-                        
                     <% }
                 } %>
             </tbody>
@@ -60,6 +87,5 @@
     </div>
 
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-
 </body>
 </html>
