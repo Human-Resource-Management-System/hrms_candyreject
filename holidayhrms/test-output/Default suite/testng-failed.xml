@@ -3,14 +3,37 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
+      <class name="test.OfferLetterDAOImplTest">
+        <methods>
+          <include name="setUp"/>
+          <include name="testUpdateCandidateStatus"/>
+        </methods>
+      </class> <!-- test.OfferLetterDAOImplTest -->
+      <class name="test.HolidayDAOImplTest">
+        <methods>
+          <include name="testFindAllHolidays"/>
+          <include name="setup"/>
+        </methods>
+      </class> <!-- test.HolidayDAOImplTest -->
+      <class name="test.EmployeeLeaveServiceTest">
+        <methods>
+          <include name="setup"/>
+          <include name="testSendEmail"/>
+        </methods>
+      </class> <!-- test.EmployeeLeaveServiceTest -->
       <class name="test.TestInductionDAOImpl">
         <methods>
           <include name="setup"/>
-          <include name="testUpdateEmploymentOfferStatus"/>
           <include name="testGetEmploymentInductionDocCountMap"/>
           <include name="testGetEmployeeOfferedIdMaxMap"/>
         </methods>
       </class> <!-- test.TestInductionDAOImpl -->
+      <class name="test.TestEmploymentInductionService">
+        <methods>
+          <include name="testGetStatusById"/>
+          <include name="setup"/>
+        </methods>
+      </class> <!-- test.TestEmploymentInductionService -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
