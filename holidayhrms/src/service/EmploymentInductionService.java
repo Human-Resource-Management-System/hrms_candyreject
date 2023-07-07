@@ -19,7 +19,7 @@ public class EmploymentInductionService implements EmploymentInductionServiceInt
 	private static final Logger logger = LoggerFactory.getLogger(EmploymentInductionService.class);
 
 	@Autowired
-	EmploymentInductionService(InductionDAO idao, OfferDiffModel offerDiff) {
+	public EmploymentInductionService(InductionDAO idao, OfferDiffModel offerDiff) {
 		this.offerDiff = offerDiff;
 		this.idao = idao;
 	}

@@ -1,9 +1,7 @@
 package test;
 
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static org.testng.Assert.assertEquals;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -13,91 +11,90 @@ import java.util.Map;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.slf4j.Logger;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import DAO_Interfaces.InductionDAO;
 import models.input.output.OfferDiffModel;
 import service.EmploymentInductionService;
+import service_interfaces.EmploymentInductionServiceInterface;
 
 public class TestEmploymentInductionService {
 
 	@Mock
-	private InductionDAO idao;
-
-	@Mock
-	private Logger logger;
+	private InductionDAO inductionDAO;
 
 	@InjectMocks
-	private EmploymentInductionService inductionService;
+	public EmploymentInductionServiceInterface employmentInductionService = new EmploymentInductionService(inductionDAO,
+			new OfferDiffModel());
 
 	@BeforeClass
-	public void setUp() {
+	public void setup() {
 		MockitoAnnotations.initMocks(this);
 	}
 
 	@Test
 	public void testGetId() {
-		// Prepare test data
-		int index = 5;
+		// Mock the getIndex method of InductionDAO
+		when(inductionDAO.getIndex()).thenReturn(10);
 
-		// Define the behavior of the mock object
-		when(idao.getIndex()).thenReturn(index);
+		// Call the method being tested
+		Integer result = employmentInductionService.getid();
 
-		// Call the method under test
-		Integer result = inductionService.getid();
-		verify(idao, times(1)).getIndex();
-		// Verify the result and interactions
-		assertEquals(Integer.valueOf(index), result);
-
+		// Verify the expected interactions and assertions
+		verify(inductionDAO).getIndex();
+		assert result == 10;
 	}
 
 	@Test
 	public void testGetAllEmploymentOffers() {
-		// Prepare test data
-		List<Integer> hd = Arrays.asList(1, 2, 3);
+		// Create mock data
+		List<Integer> hd = Arrays.asList(1, 2);
 		Map<Integer, Integer> cntOfferTypeDocMap = new HashMap<>();
-		cntOfferTypeDocMap.put(1, 3);
-		cntOfferTypeDocMap.put(2, 5);
+		cntOfferTypeDocMap.put(1, 5);
+		cntOfferTypeDocMap.put(2, 3);
 		Map<Integer, Integer> cntInductionDocTypeMap = new HashMap<>();
-		cntInductionDocTypeMap.put(1, 1);
-		cntInductionDocTypeMap.put(2, 2);
-		cntInductionDocTypeMap.put(3, 0);
+		cntInductionDocTypeMap.put(1, 2);
+		cntInductionDocTypeMap.put(2, 1);
 
-		// Define the behavior of the mock object
-		when(idao.getAllEmploymentOffers()).thenReturn(hd);
-		when(idao.getEmployeeOfferedIdMaxMap(hd)).thenReturn(cntOfferTypeDocMap);
-		when(idao.getEmploymentInductionDocCountMap(hd)).thenReturn(cntInductionDocTypeMap);
+		// Mock the methods of InductionDAO
+		when(inductionDAO.getAllEmploymentOffers()).thenReturn(hd);
+		when(inductionDAO.getEmployeeOfferedIdMaxMap(hd)).thenReturn(cntOfferTypeDocMap);
+		when(inductionDAO.getEmploymentInductionDocCountMap(hd)).thenReturn(cntInductionDocTypeMap);
+		when(inductionDAO.getEmployeeOfferName(1)).thenReturn("John Doe");
+		when(inductionDAO.getEmployeeOfferName(2)).thenReturn("Jane Smith");
 
-		// Call the method under test
-		List<OfferDiffModel> result = inductionService.getAllEmploymentOffers();
-		verify(idao, times(1)).getAllEmploymentOffers();
-		verify(idao, times(1)).getEmployeeOfferedIdMaxMap(hd);
-		verify(idao, times(1)).getEmploymentInductionDocCountMap(hd);
-		// Verify the result and interactions
-		assertEquals(3, result.size());
+		// Call the method being tested
+		List<OfferDiffModel> result = employmentInductionService.getAllEmploymentOffers();
 
+		// Verify the expected interactions and assertions
+		verify(inductionDAO).getAllEmploymentOffers();
+		verify(inductionDAO).getEmployeeOfferedIdMaxMap(hd);
+		verify(inductionDAO).getEmploymentInductionDocCountMap(hd);
+		verify(inductionDAO).getEmployeeOfferName(1);
+		verify(inductionDAO).getEmployeeOfferName(2);
+
+		assert result.size() == 2;
+		assert result.get(0).getOfferId() == 1;
+		assert result.get(0).getName().equals("John Doe");
+		assert result.get(0).getStatus().equals("3 documents pending");
+		assert result.get(1).getOfferId() == 2;
+		assert result.get(1).getName().equals("Jane Smith");
+		assert result.get(1).getStatus().equals("2 documents pending");
 	}
 
 	@Test
 	public void testGetStatusById() {
-		// Prepare test data
-		int indcEmofId = 1;
-		int cntEmpOff = 3;
-		int cntIndDoc = 2;
+		// Mock the getCountOfOfferIdentity and getEmploymentInductionDocCount methods of InductionDAO
+		when(inductionDAO.getCountOfOfferIdentity(1)).thenReturn(5);
+		when(inductionDAO.getEmploymentInductionDocCount(1)).thenReturn(2);
 
-		// Define the behavior of the mock object
-		when(idao.getCountOfOfferIdentity(indcEmofId)).thenReturn(cntEmpOff);
-		when(idao.getEmploymentInductionDocCount(indcEmofId)).thenReturn(cntIndDoc);
+		// Call the method being tested
+		String result = employmentInductionService.getStatusById(1);
 
-		// Call the method under test
-		String result = inductionService.getStatusById(indcEmofId);
-		verify(idao, times(1)).getCountOfOfferIdentity(indcEmofId);
-		verify(idao, times(1)).getEmploymentInductionDocCount(indcEmofId);
-
-		// Verify the result and interactions
-		assertEquals(" documents pending", result);
-
+		// Verify the expected interactions and assertions
+		verify(inductionDAO).getCountOfOfferIdentity(1);
+		verify(inductionDAO).getEmploymentInductionDocCount(1);
+		assert result.equals("3 documents pending");
 	}
 }

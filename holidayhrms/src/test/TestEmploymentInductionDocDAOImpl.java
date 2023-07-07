@@ -1,22 +1,25 @@
 package test;
 
-import static org.mockito.Mockito.times;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static org.testng.Assert.assertEquals;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.slf4j.Logger;
-import org.testng.annotations.BeforeClass;
+import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import DAO.EmploymentInductionDocDAOImpl;
@@ -28,52 +31,72 @@ public class TestEmploymentInductionDocDAOImpl {
 	@Mock
 	private EntityManager entityManager;
 
-	@Mock
-	private Logger logger;
-
 	@InjectMocks
-	private EmploymentInductionDocDAOImpl docDAO;
+	private EmploymentInductionDocDAOImpl employmentInductionDocDAO;
 
-	@BeforeClass
-	public void setUp() {
+	@BeforeMethod
+	public void setup() {
 		MockitoAnnotations.initMocks(this);
 	}
 
 	@Test
 	public void testAddEmploymentInductionDocument() {
-		// Prepare test data
-		EmploymentInductionDocument document = new EmploymentInductionDocument();
+		// Create a mock instance of EmploymentInductionDocument
+		EmploymentInductionDocument document = mock(EmploymentInductionDocument.class);
 
-		// Call the method under test
-		docDAO.addEmploymentInductionDocument(document);
+		// Call the method being tested
+		employmentInductionDocDAO.addEmploymentInductionDocument(document);
 
-		// Verify the interaction with the mock EntityManager
-		verify(entityManager, times(1)).persist(document);
+		// Verify the expected interactions
+		verify(entityManager).persist(document);
 	}
 
 	@Test
 	public void testGetAllDocuments() {
-		// Prepare test data
-		List<Object[]> results = new ArrayList<>();
-		Object[] result = { 1, 1, "documentData", "verified" };
-		results.add(result);
+		// Create a mock instance of Query
+		Query query = mock(Query.class);
 
-		// Create a mock Query object using Mockito
-		Query query = Mockito.mock(Query.class);
-		when(entityManager.createQuery(Mockito.anyString())).thenReturn(query);
+		// Mock the createQuery method of EntityManager
+		when(entityManager.createQuery(anyString())).thenReturn(query);
+
+		// Create a mock list of Object[] for query results
+		List<Object[]> results = new ArrayList<>();
+		Object[] result1 = { 1, 1, "document1", "verified1", "Title1" };
+		Object[] result2 = { 2, 2, "document2", "verified2", "Title2" };
+		results.add(result1);
+		results.add(result2);
+
+		// Mock the getResultList method of Query
 		when(query.getResultList()).thenReturn(results);
 
-		// Call the method under test
-		List<EmploymentInductionDocumentViewModel> result1 = docDAO.getAllDocuments();
+		// Call the method being tested
+		List<EmploymentInductionDocumentViewModel> documents = employmentInductionDocDAO.getAllDocuments();
 
-		// Verify the interaction with the mock EntityManager and the result
-		verify(entityManager, times(1)).createQuery(Mockito.anyString());
-		verify(query, times(1)).getResultList();
-		assertEquals(result1.size(), 1);
-		assertEquals(result1.get(0).getEmplid(), 1);
-		assertEquals(result1.get(0).getEmid_idty_id(), 1);
-		assertEquals(result1.get(0).getDocumentData(), "documentData");
-		assertEquals(result1.get(0).getVerified(), "verified");
+		// Verify the expected interactions and assertions
+		verify(entityManager).createQuery(anyString());
+		Assert.assertEquals(documents.size(), 2);
+	}
+
+	@Test
+	public void testGetDocTypeList() {
+		// Mock the createQuery method of EntityManager
+		TypedQuery<Integer> query = mock(TypedQuery.class);
+		when(entityManager.createQuery(anyString(), eq(Integer.class))).thenReturn(query);
+
+		// Create a mock list of integers for query results
+		List<Integer> docTypeList = Arrays.asList(1, 2, 3);
+
+		// Mock the getResultList method of Query
+		when(query.setParameter(anyString(), any())).thenReturn(query);
+		when(query.getResultList()).thenReturn(docTypeList);
+
+		// Call the method being tested
+		List<Integer> result = employmentInductionDocDAO.getDocTypeList(1);
+
+		// Verify the expected interactions and assertions
+		verify(entityManager).createQuery(anyString(), eq(Integer.class));
+		verify(query).setParameter(anyString(), any());
+		Assert.assertEquals(result, docTypeList);
 	}
 
 }

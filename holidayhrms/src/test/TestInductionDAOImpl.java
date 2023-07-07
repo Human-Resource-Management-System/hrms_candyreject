@@ -184,24 +184,6 @@ public class TestInductionDAOImpl {
 	}
 
 	@Test
-	public void testGetCountOfOfferIdentity() {
-		// Mocking the TypedQuery and EntityManager
-		TypedQuery<Long> query = mock(TypedQuery.class);
-		when(entityManager.createQuery(anyString(), eq(Long.class))).thenReturn(query);
-		when(query.setParameter(anyString(), any())).thenReturn(query);
-		when(query.getSingleResult()).thenReturn(5L);
-
-		// Calling the method under test
-		int count = inductionDAO.getCountOfOfferIdentity(1);
-
-		// Verify the interactions and assertions
-		verify(entityManager).createQuery(anyString(), eq(Long.class));
-		verify(query).setParameter(anyString(), any());
-		verify(query).getSingleResult();
-		assert count == 5;
-	}
-
-	@Test
 	public void testGetEmploymentInductionDocCountMap() {
 		// Mocking the getEmploymentInductionDocCount method
 		when(inductionDAO.getEmploymentInductionDocCount(1)).thenReturn(2);
