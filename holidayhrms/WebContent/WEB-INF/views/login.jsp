@@ -1,3 +1,5 @@
+
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -316,6 +318,24 @@ span
             background-size: cover;
             position: absolute;
         }
+        
+        #error-messageEmp{
+    position: absolute;
+    margin-top:10px;
+    margin-left:45px;
+ /* Adjust the right value as needed */
+    color: red; /* Set the color to red */
+  }
+  
+    #error-message{
+    position: absolute;
+    margin-top:10px;
+    margin-left:45px;
+ /* Adjust the right value as needed */
+    color: red; /* Set the color to red */
+  }
+  
+  
 .popup button{
 	width:100%;
 	margin-top:50px;
@@ -363,14 +383,91 @@ span
 		    		    <button type='submit'class='submit-btn' >Log in</button>
 		    
 		      <div class="forgot-password"> <a href="forgot">Forgot Password?</a></div>
+		         <div id="error-messageEmp">
+           <span id="error-textEmp"></span>
+              </div>
 		 </form>
+		 
+		 
+		  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	         
+	         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	         <script>
+	         $(document).ready(function() {
+	        	  $('#login').submit(function(e) {
+	        	    e.preventDefault(); // Prevent form submission
+
+	        	    var form = $(this);
+	        	    var url = form.attr('action');
+	        	    var formData = form.serialize(); // Serialize form data
+
+	        	    // Send AJAX request
+	        	    $.ajax({
+	        	      type: 'POST',
+	        	      url: url,
+	        	      data: formData, // Include serialized form data
+	        	      success: function(response) {
+	        	        	console.log("logined");
+	        	            window.location.href = 'index2';
+	        	          // Redirect to another page if login is successful
+	        	      },
+	        	      error: function() {
+	        	    	  console.log("hello")
+	        	        // Show a generic error message if the request fails
+	        	        $('#error-messageEmp').text('Invalid email or password').show();
+	        	        $('#error-textEmp').css('color', 'red');
+	        	      }
+	        	    });
+	        	  });
+	        	});
+
+</script>
+		 
+		 
+		 
 		 <form id='register' class='input-group-register' action ="admin" method="POST">
                     <input type='text'id="admin_email" name ="admin_email" class='input-field'placeholder='Email Id' required >
 		    <input type='password' id="admin_password"  name ="admin_password" class='input-field'placeholder='Enter Password' required>
 		    <button type='submit'class='submit-btn' >Log in</button>
 		    <div class="forgot-password a"> <a href="forgot">Forgot Password?</a></div>
 		    
+		         <div id="error-message">
+           <span id="error-text"></span>
+              </div>
 	         </form>
+	         
+	                 <script>
+	         $(document).ready(function() {
+	        	  $('#register').submit(function(e) {
+	        	    e.preventDefault(); // Prevent form submission
+
+	        	    var form = $(this);
+	        	    var url = form.attr('action');
+	        	    var formData = form.serialize(); // Serialize form data
+
+	        	    // Send AJAX request
+	        	    $.ajax({
+	        	      type: 'POST',
+	        	      url: url,
+	        	      data: formData, // Include serialized form data
+	        	      success: function(response) {
+	        	        	console.log("logined");
+	        	            window.location.href = 'Index_admin';
+	        	          // Redirect to another page if login is successful
+	        	      },
+	        	      error: function() {
+	        	    	  console.log("hello")
+	        	        // Show a generic error message if the request fails
+	        	        $('#error-message').text('Invalid email or password').show();
+	        	        $('#error-text').css('color', 'red');
+	        	      }
+	        	    });
+	        	  });
+	        	});
+
+</script>
+	         
+	         
             </div>
         </div>
     </div>

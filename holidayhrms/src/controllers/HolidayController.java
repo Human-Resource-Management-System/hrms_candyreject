@@ -27,6 +27,7 @@ import DAO_Interfaces.EmployeeDAO;
 import DAO_Interfaces.EmployeeOptedLeavesDAO;
 import DAO_Interfaces.HolidayDAO;
 import DAO_Interfaces.JobGradeHolidaysDAO;
+import exceptions.EmployeeNotFoundException;
 import models.Employee;
 import models.EmployeeOptedLeaves;
 import models.EmployeeOptedLeavesId;

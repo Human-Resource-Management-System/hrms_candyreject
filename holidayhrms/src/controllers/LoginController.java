@@ -1,5 +1,8 @@
 package controllers;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -11,23 +14,28 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import DAO.ForgotPasswordDAOImpl;
 import models.Employee;
 import models.EntityForgotPassword;
 import models.input.output.MailOtpModel;
 import service.EmployeeLoginService;
-import service_interfaces.MailServiceInterface;
+import service.MailService;
 
 @Controller
 public class LoginController {
 
 	private final Logger logger = LoggerFactory.getLogger(LoginController.class);
-	private MailServiceInterface mailService;
+	private MailService mailService;
 	private ForgotPasswordDAOImpl forgotPassword;
 
 	private EntityForgotPassword entityforgot;
@@ -35,7 +43,7 @@ public class LoginController {
 	EmployeeLoginService empservice;
 
 	@Autowired
-	public LoginController(EmployeeLoginService empservice, Employee empauto, MailServiceInterface mailService,
+	public LoginController(EmployeeLoginService empservice, Employee empauto, MailService mailService,
 			ForgotPasswordDAOImpl forgotPassword, EntityForgotPassword entityforgot) {
 		this.empservice = empservice;
 		this.mailService = mailService;
@@ -52,45 +60,98 @@ public class LoginController {
 		return "login";
 	}
 
-	@RequestMapping(value = "/employee", method = RequestMethod.POST)
-	public String enterIntoMenu_employee(@RequestParam("empl_email") String email,
+	@PostMapping("/employee")
+	public ResponseEntity<String> authenticateUser(@RequestParam("empl_email") String email,
 			@RequestParam("empl_password") String password, HttpServletRequest request) {
-
-		HttpSession session = request.getSession(true);
-		System.out.println("thi9s isemployee side ");
+		Map<String, Object> response = new HashMap<>();
 
 		if (empservice.authenticateUser(email, password)) {
-
-			// Set employee ID in session
 			Employee empdetails = empservice.getByEmail(email);
 			int employeeId = empdetails.getEmplId();
+			HttpSession session = request.getSession(true);
 			session.setAttribute("employeeId", employeeId);
-			return "index2"; // Redirect to the dashboard page
+
+			response.put("success", true);
+			response.put("message", "User authenticated successfully");
+			System.out.println("User authenticated successfully");
 		} else {
-			return "login";
+			response.put("success", false);
+			response.put("message", "Invalid email or password");
+		}
+
+		System.out.println("res " + response);
+		// Convert map to JSON using Gson
+		Gson gson = new GsonBuilder().create();
+		String jsonResponse = gson.toJson(response);
+		System.out.println("jsonResponse " + jsonResponse);
+		if (response.get("success").equals(true)) {
+			return ResponseEntity.ok(jsonResponse);
+		} else {
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(jsonResponse);
 		}
 	}
 
-	@RequestMapping(value = "/admin", method = RequestMethod.POST)
-	public String enterIntoMenu_admin(@RequestParam("admin_email") String email,
+	@RequestMapping(value = "index2", method = RequestMethod.GET)
+	public String getIndex2Page() {
+
+		System.out.println("this is emportant for index2");
+		return "index2";
+	}
+
+	@PostMapping("/admin")
+	public ResponseEntity<String> enterIntoMenu_admin(@RequestParam("admin_email") String email,
 			@RequestParam("admin_password") String password, HttpServletRequest request) {
-		System.out.println("thi9s isv admin side ");
+		Map<String, Object> response = new HashMap<>();
 
-		HttpSession session = request.getSession(true);
 		if (empservice.authenticateUser_admin(email, password)) {
-
-			// Set employee ID in session
+			// Set admin ID in session
 			Employee empdetails = empservice.getByEmail(email);
 			int adminId = empdetails.getEmplId();
-			System.out.println(adminId);
-
+			HttpSession session = request.getSession(true);
 			session.setAttribute("adminId", adminId);
 
-			return "Index_admin"; // Redirect to the dashboard page
+			response.put("success", true);
+			response.put("message", "User authenticated successfully");
+			System.out.println("User authenticated successfully");
 		} else {
-			return "login";
+			response.put("success", false);
+			response.put("message", "Invalid email or password");
+		}
+
+		System.out.println("res " + response);
+		// Convert map to JSON using Gson
+		Gson gson = new GsonBuilder().create();
+		String jsonResponse = gson.toJson(response);
+		System.out.println("jsonResponse " + jsonResponse);
+		if (response.get("success").equals(true)) {
+			return ResponseEntity.ok(jsonResponse);
+		} else {
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(jsonResponse);
 		}
 	}
+
+	@GetMapping("Index_admin")
+	public String getIndex2Page1() {
+		System.out.println("this is important for index2");
+		return "Index_admin";
+	}
+
+	/*
+	 * @RequestMapping(value = "/admin", method = RequestMethod.POST) public String
+	 * enterIntoMenu_admin(@RequestParam("admin_email") String email,
+	 * 
+	 * @RequestParam("admin_password") String password, HttpServletRequest request) {
+	 * System.out.println("thi9s isv admin side ");
+	 * 
+	 * HttpSession session = request.getSession(true); if (empservice.authenticateUser_admin(email, password)) {
+	 * 
+	 * // Set employee ID in session Employee empdetails = empservice.getByEmail(email); int adminId =
+	 * empdetails.getEmplId(); System.out.println(adminId);
+	 * 
+	 * session.setAttribute("adminId", adminId);
+	 * 
+	 * return "Index_admin"; // Redirect to the dashboard page } else { return "login"; } }
+	 */
 
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public ResponseEntity<String> logout(HttpSession session) {
