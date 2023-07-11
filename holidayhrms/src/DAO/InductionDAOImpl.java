@@ -15,7 +15,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import DAO_Interfaces.InductionDAO;
 import exceptions.CustomException;
+import models.Candidate;
 import models.Induction;
+import models.input.output.CandidateDTO;
 
 @Repository
 public class InductionDAOImpl implements InductionDAO {
@@ -140,6 +142,41 @@ public class InductionDAOImpl implements InductionDAO {
 		logger.info("Getting name of the candiate of  ID: {}", id);
 		String query = "SELECT c.candFirstName FROM Candidate c WHERE c.candId = :id";
 		return entityManager.createQuery(query, String.class).setParameter("id", id).getSingleResult();
+	}
+
+	@Override
+	public List<CandidateDTO> getCandidatesForRejected() {
+		logger.info("Getting all the Candidates to be rejected");
+		String query = "SELECT NEW models.input.output.CandidateDTO(r.candId, r.candFirstName) FROM Candidate r WHERE r.candId IN (SELECT o.candidateId FROM HrmsEmploymentOffer o WHERE o.status ='INPR' AND o.candidateId = r.candId) ORDER BY r.candId DESC";
+		logger.info("Retrieved Candidates for rejection");
+		return entityManager.createQuery(query, CandidateDTO.class).getResultList();
+	}
+
+	@Override
+	@Transactional
+	public void updateCandiateStatus(int candidateId) {
+		logger.info("Updating the status for candidate table as suspended for the gievn id  ; {}", candidateId);
+		String jpql = "UPDATE Candidate c SET c.candStatus = :status WHERE c.candId = :candidateId";
+		entityManager.createQuery(jpql).setParameter("status", "SU").setParameter("candidateId", candidateId)
+				.executeUpdate();
+	}
+
+	@Override
+	@Transactional
+	public void updateOfferStatus(int candidateId) {
+		logger.info("Updating the status for EmploymentOffer table as OfferRejected for the gievn id  ; {}",
+				candidateId);
+		String jpql = "UPDATE HrmsEmploymentOffer o SET o.status = :status WHERE o.candidateId = :candidateId";
+		entityManager.createQuery(jpql).setParameter("status", "OFRJ").setParameter("candidateId", candidateId)
+				.executeUpdate();
+	}
+
+	@Override
+	@Transactional
+	public List<Candidate> getRejectList() {
+		logger.info("Getting the Rejection List");
+		String query = "SELECT c FROM Candidate c WHERE c.candStatus = 'SU' ";
+		return entityManager.createQuery(query, Candidate.class).getResultList();
 	}
 
 }

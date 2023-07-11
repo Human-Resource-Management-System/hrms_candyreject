@@ -20,8 +20,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import DAO_Interfaces.InductionDAO;
 import exceptions.CustomException;
+import models.Candidate;
 import models.EmploymentInductionDocument;
 import models.Induction;
+import models.input.output.CandidateDTO;
 import models.input.output.EmploymentInductionDocumentViewModel;
 import models.input.output.OfferDiffModel;
 import models.input.output.SaveInductioninput;
@@ -85,6 +87,29 @@ public class InductionController {
 		model.addAttribute("diffmodel", diffmodel);
 		logger.info("Opening the Form to Create induction");
 		return "createInduction"; // opens the createInduction.jsp page
+	}
+
+	@RequestMapping("/rejectedOfferList") // view the list of candidates to be rejected
+	public String getRejectedCandidates(Model model) {
+		logger.info("Showing  Candidates to be Rejected.");
+		// logger.debug("Retrieving all inductions from the InductionDAO.");
+		List<CandidateDTO> rejected = idao.getCandidatesForRejected();
+		model.addAttribute("rejected", rejected);
+		logger.info("Moved to the RejectedCandidates jsp page.");
+		return "rejectedCandidates"; // opens the inductions.jsp page
+	}
+
+	@RequestMapping(value = "/reject", method = RequestMethod.POST) // view the list of inductions conducted
+	public String getRejectedList(@RequestParam("candidateId") int candidateId, Model model) {
+		logger.info("Showing OfferRejected/Suspended Canidates .");
+		List<Candidate> rejectedList = indServ.getRejecetedList(candidateId);
+		// for(Candidate c : rejectedList) {
+		// System.out.println(c.getCandId());
+		// }
+		System.out.println(rejectedList.toString());
+		model.addAttribute("rejectedList", rejectedList);
+		logger.info("Moved to the Reject jsp page.");
+		return "reject";
 	}
 
 	@RequestMapping(value = "/inductionsave", method = RequestMethod.POST) // for saving the induction

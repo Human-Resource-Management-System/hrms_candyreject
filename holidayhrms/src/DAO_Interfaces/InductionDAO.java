@@ -4,7 +4,9 @@ import java.util.List;
 import java.util.Map;
 
 import exceptions.CustomException;
+import models.Candidate;
 import models.Induction;
+import models.input.output.CandidateDTO;
 
 public interface InductionDAO {
 	List<Integer> getAllInductions();
@@ -86,4 +88,29 @@ public interface InductionDAO {
 	 */
 
 	String getEmployeeOfferName(Integer id);
+
+	/**
+	 * Retrieves all Candidates to be rejected.
+	 *
+	 * @return A list of all Candidates for rejection.
+	 */
+	List<CandidateDTO> getCandidatesForRejected();
+
+	/**
+	 * updates the status at candidates table as suspended
+	 */
+	void updateCandiateStatus(int candidateId);
+
+	/**
+	 * updates the status at EmploymentOffer table as offerRejected
+	 */
+	void updateOfferStatus(int candidateId);
+
+	/**
+	 * Retrieves all Rejected candidates.
+	 *
+	 * @return A list of all Rejected candiates.
+	 */
+	List<Candidate> getRejectList();
+
 }

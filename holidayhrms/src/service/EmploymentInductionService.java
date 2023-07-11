@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import DAO_Interfaces.InductionDAO;
+import models.Candidate;
 import models.input.output.OfferDiffModel;
 import service_interfaces.EmploymentInductionServiceInterface;
 
@@ -80,5 +81,14 @@ public class EmploymentInductionService implements EmploymentInductionServiceInt
 		}
 		logger.debug("----------Calculated offer difference for id {}: {}------------", indcEmofId, Status);
 		return Status;
+	}
+
+	@Override
+	public List<Candidate> getRejecetedList(int candidateId) {
+
+		List<Candidate> rejectedList = idao.getRejectList();
+		idao.updateCandiateStatus(candidateId);
+		idao.updateOfferStatus(candidateId);
+		return rejectedList;
 	}
 }

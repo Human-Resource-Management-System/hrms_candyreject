@@ -70,6 +70,14 @@ public class Candidate {
 
 	// Getters and setters
 
+	@Override
+	public String toString() {
+		return "Candidate [candId=" + candId + ", candFirstName=" + candFirstName + ", candMiddleName=" + candMiddleName
+				+ ", candLastName=" + candLastName + ", candRDate=" + candRDate + ", candGender=" + candGender
+				+ ", candDOB=" + candDOB + ", candEmail=" + candEmail + ", candMobile=" + candMobile + ", candAddress="
+				+ candAddress + ", candLUDate=" + candLUDate + ", candStatus=" + candStatus + "]";
+	}
+
 	public Integer getCandId() {
 		return candId;
 	}
