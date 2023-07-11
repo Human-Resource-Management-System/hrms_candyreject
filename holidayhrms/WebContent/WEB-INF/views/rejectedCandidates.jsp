@@ -1,4 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+ 
+    
+    <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.List" %>
 <%@ page import="models.input.output.CandidateDTO" %>
 <!DOCTYPE html>
@@ -63,7 +65,7 @@
                     <td><%= candidate.getCandidateId() %></td>
                     <td><%= candidate.getCandidateFirstName() %></td>
                     <td>
-                        <form method="POST" action="reject">
+                        <form method="GET" action="rejectedOfferList">
                             <input type="hidden" name="candidateId" value="<%= candidate.getCandidateId() %>">
                             <input type="submit" value="Reject">
                         </form>

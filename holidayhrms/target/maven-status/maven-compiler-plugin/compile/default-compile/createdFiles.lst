@@ -20,6 +20,7 @@ models\EmployeeLeaveRequest.class
 DAO\PayRollDAOImpl.class
 models\EmployeeAttendanceId.class
 models\input\output\OfferDiffModel.class
+models\input\output\CandidateDTO.class
 DAO\EmploymentInductionDocDAOImpl.class
 models\EmployeeAttendance.class
 models\input\output\SaveInductioninput.class
